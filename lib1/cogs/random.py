@@ -69,7 +69,7 @@ class Random(commands.Cog):
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
         await message.edit(embed=discord.Embed(description=f"**{user}** ate the cookie in ```{end - start:.3f}``` seconds!"))
-        await user.send("Well Done!")
+        await user.send(f"Well Done! You completed it in ```{end - start:.3f}``` seconds.")
         
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
