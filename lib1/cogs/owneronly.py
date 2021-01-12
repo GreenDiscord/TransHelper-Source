@@ -139,7 +139,7 @@ class OwnerOnly(commands.Cog):
     @commands.is_owner()
     async def sync(self, ctx):
         """Sync with GitHub and reload all the cogs"""
-        embed = discord.Embed(title="Syncing...", description="<a:loading:798600720470507600> Syncing and reloading cogs.")
+        embed = discord.Embed(title="Syncing...", description="<a:lol:798600720470507600> Syncing and reloading cogs.")
         msg = await ctx.send(embed=embed)
         async with ctx.channel.typing():
             output = sp.getoutput('git pull')
