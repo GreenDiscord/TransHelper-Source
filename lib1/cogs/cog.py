@@ -44,7 +44,7 @@ class Info(commands.Cog):
 
       embed = discord.Embed(colour=user.top_role.colour.value)
       embed.set_thumbnail(url=user.avatar_url)
-      embed.description = f'**{user}** joined **{ctx.guild.name}**\n{date(user.joined_at)}'
+      embed.description = f'**{user}** joined **{ctx.guild.name}**\n{user.joined_at}'
       await ctx.send(embed=embed)
 
     @commands.command()
