@@ -46,8 +46,7 @@ class Random(commands.Cog):
         Yum yum.
         """
         cookies = ["🍪", "🥠"]
-        reaction = rand
-        om.choices(cookies, weights=[0.9, 0.1], k=1)[0]
+        reaction = random.choices(cookies, weights=[0.9, 0.1], k=1)[0]
         embed = discord.Embed(description=f"First one to eat the {reaction} wins!")
         message = await ctx.send(embed=embed)
         await asyncio.sleep(4)
