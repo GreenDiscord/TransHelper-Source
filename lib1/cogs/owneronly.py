@@ -89,7 +89,7 @@ class OwnerOnly(commands.Cog):
             self.bot.load_extension(f"cogs.{name}")
         except Exception as e:
             return await ctx.send(f"```py\n{e}```")
-        await ctx.send(f"📥 Loaded extension **`cogs/{name}.py`**")
+        await ctx.send(f"Loaded extension **`cogs/{name}.py`**")
 
     @commands.is_owner()
     @dev.group(aliases=['r'])
@@ -133,7 +133,7 @@ class OwnerOnly(commands.Cog):
                 f"however the following failed...\n\n{output}"
             )
 
-        await ctx.send("**🔁 `Reloaded All Extentions`**")
+        await ctx.send("**`Reloaded All Extentions`**")
 
     @dev.group(aliases=['s'])
     @commands.is_owner()
