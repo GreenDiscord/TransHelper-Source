@@ -39,7 +39,8 @@ class Info(commands.Cog):
     @commands.command()
     async def joinedat(self, ctx, *, user: discord.Member = None):
       """ Check when a user joined the current server """
-      user = user or ctx.author
+      if user is None:
+          user = ctx.message.author
 
       embed = discord.Embed(colour=user.top_role.colour.value)
       embed.set_thumbnail(url=user.avatar_url)
