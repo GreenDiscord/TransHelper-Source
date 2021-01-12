@@ -2,7 +2,25 @@ from discord.ext import commands
 import random
 import discord
 import psutil
+import discord
+
+from discord.user import User
+from discord.utils import get
+from discord.ext import commands
+from discord.shard import ShardInfo
+from discord.ext.commands import bot
+
+import os, io, json, psutil, aiohttp, collections, time, datetime, random, requests, asyncio
+
+from datetime import datetime
+
+from multiprocessing.connection import Client
+
 import subprocess as sp
+
+from jishaku import codeblocks
+from tools.paginator import Simple
+
 import contextlib
 import inspect
 import time
