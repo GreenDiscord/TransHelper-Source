@@ -62,7 +62,7 @@ class OwnerOnly(commands.Cog):
         """Sync with GitHub and reload all the cogs"""
         embed = discord.Embed(title="Syncing...", description="<a:loading:737722827112972449> Syncing and reloading cogs.")
         msg = await ctx.send(embed=embed)
-        output = sp.getoutput('git pull origin main')
+        await os.system("git pull origin master")
         embed = discord.Embed(title="Synced", description="<a:Animated_Checkmark:726140204045303860> Synced with GitHub and reloaded all the cogs.")
         # Reload Cogs as well
         error_collection = []
