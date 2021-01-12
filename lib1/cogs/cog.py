@@ -43,7 +43,7 @@ class Info(commands.Cog):
           user = ctx.message.author
 
       embed.set_thumbnail(url=user.avatar_url)
-      embed.description = f'**{user}** joined **{ctx.guild.name}**\n{user.joined_at}'
+      embed = discord.Embed(title = f'**{user}**' description=f'{user} joined **{ctx.guild.name}** at \n{user.joined_at}')
       await ctx.send(embed=embed)
 
     @commands.command()
