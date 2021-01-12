@@ -33,6 +33,7 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 from psutil import Process, virtual_memory 
 import hypixel
+import random
 
 class Random(commands.Cog):
     def __init__(self, bot):
@@ -45,7 +46,8 @@ class Random(commands.Cog):
         Yum yum.
         """
         cookies = ["🍪", "🥠"]
-        reaction = random.choices(cookies, weights=[0.9, 0.1], k=1)[0]
+        reaction = rand
+        om.choices(cookies, weights=[0.9, 0.1], k=1)[0]
         embed = discord.Embed(description=f"First one to eat the {reaction} wins!")
         message = await ctx.send(embed=embed)
         await asyncio.sleep(4)
@@ -68,6 +70,7 @@ class Random(commands.Cog):
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
         await message.edit(embed=discord.Embed(description=f"**{user}** ate the cookie in ```{end - start:.3f}``` seconds!"))
+        await user.send("Well Done!")
         
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
