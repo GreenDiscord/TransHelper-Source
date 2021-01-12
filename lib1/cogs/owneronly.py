@@ -63,6 +63,90 @@ class OwnerOnly(commands.Cog):
     async def dev(self, ctx):
       await ctx.send("commands for my owner only lol")
     
+    
+    @commands.is_owner()
+    @dev.group()
+    async def load(self, ctx, name: str):
+        """Loads an extension. """
+        try:
+            self.bot.load_extension(f"cogs.{name}")
+        except Exception as e:
+            return await ctx.send(f"```py\n{e}```")
+        await ctx.send(f"📥 Loaded extension **`cogs/{name}.py`**")
+
+    @commands.is_owner()
+    @dev.group(aliases=['r'])
+    async def reload(self, ctx, name: str):
+        """Reloads an extension. """
+
+        try:
+            self.bot.reload_extension(f"cogs.{name}")
+            await ctx.message.add_reaction('🔄')
+
+        except Exception as e:
+            return await ctx.send(f"```py\n{e}```")
+
+    @commands.is_owner()
+    @dev.group()
+    async def unload(self, ctx, name: str):
+        """Unloads an extension. """
+        try:
+            self.bot.unload_extension(f"cogs.{name}")
+        except Exception as e:
+            return await ctx.send(f"```py\n{e}```")
+        await ctx.send(f"📤 Unloaded extension **`cogs/{name}.py`**")
+    
+    @commands.is_owner()
+    @dev.group(aliases=['ra'])
+    async def reloadall(self, ctx):
+        """Reloads all extensions. """
+        error_collection = []
+        for file in os.listdir("cogs"):
+            if file.endswith(".py"):
+                name = file[:-3]
+                try:
+                    self.bot.reload_extension(f"cogs.{name}")
+                except Exception as e:
+                    return await ctx.send(f"```py\n{e}```")
+
+        if error_collection:
+            output = "\n".join([f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
+            return await ctx.send(
+                f"Attempted to reload all extensions, was able to reload, "
+                f"however the following failed...\n\n{output}"
+            )
+
+        await ctx.send("**🔁 `Reloaded All Extentions`**")
+
+    @dev.group(aliases=['s'])
+    @commands.is_owner()
+    async def sync(self, ctx):
+        """Sync with GitHub and reload all the cogs"""
+        embed = discord.Embed(title="Syncing...", description="<a:loading:737722827112972449> Syncing and reloading cogs.", color=color)
+        msg = await ctx.send(embed=embed)
+        async with ctx.channel.typing():
+            output = sp.getoutput('git pull')
+        embed = discord.Embed(title="Synced", description="<a:Animated_Checkmark:726140204045303860> Synced with GitHub and reloaded all the cogs.", color=color)
+        # Reload Cogs as well
+        error_collection = []
+        for file in os.listdir("cogs"):
+            if file.endswith(".py"):
+                name = file[:-3]
+                try:
+                    self.bot.reload_extension(f"cogs.{name}")
+                except Exception as e:
+                    return await ctx.send(f"```py\n{e}```")
+
+        if error_collection:
+            err = "\n".join([f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
+            return await ctx.send(
+                f"Attempted to reload all extensions, was able to reload, "
+                f"however the following failed...\n\n{err}"
+            )
+
+        await msg.edit(embed=embed)
+    
+    
     @dev.group(name='eval')
     @commands.check(owners)
     async def _eval(self, ctx, *, body):
