@@ -5,6 +5,11 @@ import psutil
 import subprocess as sp
 import contextlib
 import inspect
+from jishaku.codeblocks import Codeblock, codeblock_converter
+from jishaku.exception_handling import ReplResponseReactor
+from jishaku.features.baseclass import Feature
+from jishaku.paginators import PaginatorInterface, WrappedPaginator
+from jishaku.shell import ShellReader
 import time
 import copy
 import os
@@ -56,23 +61,6 @@ class OwnerOnly(commands.Cog):
     def owners(ctx):
       return ctx.author.id == 787800565512929321
 
-    @commands.command(aliases=['s'])
-    @commands.is_owner()
-    async def sync(self, ctx):
-        """Sync with GitHub and reload all the cogs"""
-        embed = discord.Embed(title="Syncing...", description="<a:loading:737722827112972449> Syncing and reloading cogs.")
-        msg = await ctx.send(embed=embed)
-        await os.system("git pull origin master")
-        embed = discord.Embed(title="Synced", description="<a:Animated_Checkmark:726140204045303860> Synced with GitHub and reloaded all the cogs.")
-        # Reload Cogs as well
-        error_collection = []
-        for file in os.listdir("cogs"):
-            if file.endswith(".py"):
-                name = file[:-3]
-                try:
-                    self.bot.reload_extension(f"cogs.{name}")
-                except Exception as e:
-                    return await ctx.send(f"```py\n{e}```")
     @commands.group(invoke_without_command=True)
     @commands.check(owners)
     async def dev(self, ctx):
@@ -167,6 +155,42 @@ class OwnerOnly(commands.Cog):
         else:
             await ctx.message.add_reaction('\u2705')
       
+    @dev.group(name="shell", aliases=["bash", "sh", "powershell", "ps1", "ps", "cmd"])
+    @commands.check(owners)
+    async def jsk_shell(self, ctx: commands.Context, *, argument: codeblock_converter):
+        """
+        Executes statements in the system shell.
+        This uses the system shell as defined in $SHELL, or `/bin/bash` otherwise.
+        Execution can be cancelled by closing the paginator.
+        """
+
+        async with ReplResponseReactor(ctx.message):
+            with self.submit(ctx):
+                with ShellReader(argument.content) as reader:
+                    prefix = "```" + reader.highlight
+
+                    paginator = WrappedPaginator(prefix=prefix, max_size=1975)
+                    paginator.add_line(f"{reader.ps1} {argument.content}\n")
+
+                    interface = PaginatorInterface(ctx.bot, paginator, owner=ctx.author)
+                    self.bot.loop.create_task(interface.send_to(ctx))
+
+                    async for line in reader:
+                        if interface.closed:
+                            return
+                        await interface.add_line(line)
+
+                await interface.add_line(f"\n[status] Return code {reader.close_code}")
+
+    @dev.group(name="git")
+    @commands.check(owners)
+    async def jsk_git(self, ctx: commands.Context, *, argument: codeblock_converter):
+        """
+        Shortcut for 'jsk sh git'. Invokes the system shell.
+        """
+
+        return await ctx.invoke(self.jsk_shell, argument=Codeblock(argument.language, "git " + argument.content))
+    
     @dev.group(invoke_without_command=True, name="as")
     @commands.check(owners)
     async def dev_as(self, ctx: commands.Context, target: discord.User, *, command_string: str):
