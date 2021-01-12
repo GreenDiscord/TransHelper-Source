@@ -143,7 +143,7 @@ class OwnerOnly(commands.Cog):
         msg = await ctx.send(embed=embed)
         async with ctx.channel.typing():
             output = sp.getoutput('git pull')
-        embed = discord.Embed(title="Synced", description="<:checkmark:> Synced with GitHub and reloaded all the cogs.")
+        embed = discord.Embed(title="Synced", description="Synced with GitHub and reloaded all the cogs.")
         # Reload Cogs as well
         error_collection = []
         for file in os.listdir("cogs"):
