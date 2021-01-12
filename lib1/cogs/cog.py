@@ -40,10 +40,10 @@ class Info(commands.Cog):
     async def joinedat(self, ctx, *, user: discord.Member = None):
       """ Check when a user joined the current server """
       if user is None:
-          user = ctx.message.author
+          user = ctx.author
 
-      embed.set_thumbnail(url=user.avatar_url)
       embed = discord.Embed(title = f'**{user}**' description=f'{user} joined **{ctx.guild.name}** at \n{user.joined_at}')
+      embed.set_image(url=user.avatar_url)
       await ctx.send(embed=embed)
 
     @commands.command()
