@@ -5,13 +5,9 @@ import psutil
 import subprocess as sp
 import contextlib
 import inspect
-from jishaku.codeblocks import Codeblock, codeblock_converter
-from jishaku.exception_handling import ReplResponseReactor
-from jishaku.features.baseclass import Feature
-from jishaku.paginators import PaginatorInterface, WrappedPaginator
-from jishaku.shell import ShellReader
 import time
 import copy
+import collections
 import os
 import inspect
 import io
@@ -39,7 +35,8 @@ def insert_returns(body):
         insert_returns(body[-1].body)
 
 
-
+        
+        
 async def copy_context_with(ctx: commands.Context, *, author=None, channel=None, **kwargs):
 
     alt_message: discord.Message = copy.copy(ctx.message)
@@ -155,63 +152,9 @@ class OwnerOnly(commands.Cog):
         else:
             await ctx.message.add_reaction('\u2705')
       
-    @dev.group(name="shell", aliases=["bash", "sh", "powershell", "ps1", "ps", "cmd"])
-    @commands.check(owners)
-    async def jsk_shell(self, ctx: commands.Context, *, argument: codeblock_converter):
-        """
-        Executes statements in the system shell.
-        This uses the system shell as defined in $SHELL, or `/bin/bash` otherwise.
-        Execution can be cancelled by closing the paginator.
-        """
+ 
 
-        async with ReplResponseReactor(ctx.message):
-            with self.submit(ctx):
-                with ShellReader(argument.content) as reader:
-                    prefix = "```" + reader.highlight
-
-                    paginator = WrappedPaginator(prefix=prefix, max_size=1975)
-                    paginator.add_line(f"{reader.ps1} {argument.content}\n")
-
-                    interface = PaginatorInterface(ctx.bot, paginator, owner=ctx.author)
-                    self.bot.loop.create_task(interface.send_to(ctx))
-
-                    async for line in reader:
-                        if interface.closed:
-                            return
-                        await interface.add_line(line)
-
-                await interface.add_line(f"\n[status] Return code {reader.close_code}")
-
-    @dev.group(name="git")
-    @commands.check(owners)
-    async def jsk_git(self, ctx: commands.Context, *, argument: codeblock_converter):
-        """
-        Shortcut for 'jsk sh git'. Invokes the system shell.
-        """
-
-        return await ctx.invoke(self.jsk_shell, argument=Codeblock(argument.language, "git " + argument.content))
     
-    @dev.group(invoke_without_command=True, name="as")
-    @commands.check(owners)
-    async def dev_as(self, ctx: commands.Context, target: discord.User, *, command_string: str):
-   
-        if ctx.guild:
-            target_member = None
-
-            with contextlib.suppress(discord.HTTPException):
-                target_member = ctx.guild.get_member(target.id) or await ctx.guild.fetch_member(target.id)
-
-            target = target_member or target
-
-        alt_ctx = await copy_context_with(ctx, author=target, content=ctx.prefix + command_string)
-
-        if alt_ctx.command is None:
-            if alt_ctx.invoked_with is None:
-                return await ctx.send('This bot has been hard-configured to ignore this user.')
-            return await ctx.send(f'Command "{alt_ctx.invoked_with}" is not found')
-
-        return await alt_ctx.command.invoke(alt_ctx)
-      
     @dev.group(invoke_without_command=True)
     @commands.check(owners)
     async def chnick(self,ctx,*,name):
