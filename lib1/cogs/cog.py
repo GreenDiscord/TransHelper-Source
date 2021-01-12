@@ -42,7 +42,7 @@ class Info(commands.Cog):
       if user is None:
           user = ctx.author
 
-      embed = discord.Embed(title = f'**{user}**' description=f'{user} joined **{ctx.guild.name}** at \n{user.joined_at}')
+      embed = discord.Embed(title = f'**{user}**', description=f'{user} joined **{ctx.guild.name}** at \n{user.joined_at}')
       embed.set_image(url=user.avatar_url)
       await ctx.send(embed=embed)
 
