@@ -42,7 +42,6 @@ class Info(commands.Cog):
       if user is None:
           user = ctx.message.author
 
-      embed = discord.Embed(colour=user.top_role.colour.value)
       embed.set_thumbnail(url=user.avatar_url)
       embed.description = f'**{user}** joined **{ctx.guild.name}**\n{user.joined_at}'
       await ctx.send(embed=embed)
