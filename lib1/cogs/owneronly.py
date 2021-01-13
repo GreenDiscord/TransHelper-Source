@@ -324,7 +324,7 @@ class OwnerOnly(commands.Cog):
 
     @dev.group(invoke_without_command=True)
     @commands.check(owners)
-    async def send(self, ctx, idd=None, *, message):
+    async def send(self, ctx, *, message, idd=None):
         if idd is None:
             idd = ctx.channel.id
         channel = self.bot.get_channel(int(idd))
