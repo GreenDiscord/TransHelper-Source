@@ -327,9 +327,10 @@ class OwnerOnly(commands.Cog):
     async def send(self, ctx, *, message, idd=None):
         if idd is None:
             idd = ctx.channel.id
-        channel = self.bot.get_channel(int(idd))
-        await channel.send(f"{message}")
-        await ctx.send(f"Your message {message} was sent!")
+        else:
+            channel = self.bot.get_channel(int(idd))
+            await channel.send(f"{message}")
+            await ctx.send(f"Your message {message} was sent!")
 
 
 def setup(bot):
