@@ -324,50 +324,12 @@ class OwnerOnly(commands.Cog):
 
     @dev.group(invoke_without_command=True)
     @commands.check(owners)
-    async def send(self, ctx, idd, *, message):
-        lis = ["antastic",
-               "melodic",
-               "quick",
-               "massive",
-               "super",
-               "sophisticated",
-               "unruly",
-               "legal",
-               "elite",
-               "ludicrous",
-               "questionable",
-               "fallacious",
-               "ratty",
-               "chivalrous",
-               "didactic",
-               "sticky",
-               "amuck",
-               "supreme",
-               "polite",
-               "abnormal",
-               "hilarious",
-               "vacuous",
-               "enchanted",
-               "real",
-               "shaky",
-               "infamous",
-               "successful",
-               "royal",
-               "ablaze",
-               "delightful",
-               "miscreant",
-               "flawless",
-               "dynamic",
-               "woebegone",
-               "oopsided",
-               "old",
-               "acid",
-               "vagabond",
-               "level"]
+    async def send(self, ctx, idd=None, *, message):
+        if idd is None:
+            idd = ctx.channel.id
         channel = self.bot.get_channel(int(idd))
         await channel.send(f"{message}")
         await ctx.send(f"Your message {message} was sent!")
-        await channel.send(f"random word of this message = {random.choice(lis)}")
 
 
 def setup(bot):
