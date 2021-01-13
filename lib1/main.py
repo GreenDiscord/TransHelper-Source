@@ -33,14 +33,15 @@ class Pag(Paginator):
 
 intents = discord.Intents.default()
 intents.members = True
-description = "hi"
 
 
 
 
 
-bot = commands.Bot(command_prefix="th,", description=description, intents=intents, help_command=PrettyHelp())
+
+bot = commands.Bot(command_prefix="th,", intents=intents, help_command=PrettyHelp())
 bot.db = aiosqlite.connect("main.sqlite")
+bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)}"
 bot.version = "15"
 START_BAL = 250
 bot.load_extension("jishaku")
