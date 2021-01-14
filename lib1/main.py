@@ -112,7 +112,7 @@ async def on_message(message:discord.Member):
 @bot.event
 async def on_command_error(ctx, error):
   guild = ctx.guild
-  member = bot.get_user(787800565512929321)
+  member = bot.get_channel(799118181972836363)
   if isinstance(error, commands.CommandOnCooldown):
       e1 = discord.Embed(title="Command Error!", description=f"`{error}`")
       e1.set_footer(text=f"{ctx.author.name}")
