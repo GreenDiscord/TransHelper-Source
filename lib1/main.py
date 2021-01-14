@@ -44,6 +44,7 @@ bot.db = aiosqlite.connect("main.sqlite")
 bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)}"
 bot.version = "15"
 START_BAL = 250
+token = open("toke.txt", "r").read()
 bot.load_extension("jishaku")
 
 
@@ -142,4 +143,4 @@ async def on_command_error(ctx, error):
       
       
 
-bot.run("TOKEN")
+bot.run(token)
