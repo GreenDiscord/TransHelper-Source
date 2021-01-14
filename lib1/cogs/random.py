@@ -94,7 +94,7 @@ class Random(commands.Cog):
       await ctx.send(embed=e)
       await asyncio.sleep(int(time))
       e2 = discord.Embed(title=f"Hello {ctx.author}", description=f"I have come to remind you to {reminder}!")
-      await ctx.reply(embed=e2)
+      await ctx.message.reply(embed=e2)
       
     @command(pass_context=True)
     async def ar(self, ctx, *, role1):
