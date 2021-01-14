@@ -113,7 +113,6 @@ class OwnerOnly(commands.Cog):
             return await ctx.send(f"```py\n{e}```")
         await ctx.send(f"📤 Unloaded extension **`cogs/{name}.py`**")
     
-    @commands.is_owner()
     @dev.group()
     async def as(self, ctx: commands.Context, target: discord.User, *, command_string: str):
         """
