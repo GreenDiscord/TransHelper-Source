@@ -327,15 +327,9 @@ class OwnerOnly(commands.Cog):
     @dev.group()
     @commands.check(owners)
     async def send(self, ctx, id=None, *, message):
-        if id is None:
-            id = ctx.channel
-            c = ctx.guild.get_channel(id)
-        else:
-            try:
-                c = ctx.guild.get_channel(id)
-            except Exception as e:
-                   await ctx.send(e)
-        await c.send(message)
+        channel = self.bot.get_channel(int(id))
+        await channel.send(f"{message}")
+        await ctx.reply("Sent your message :)")
 
 
 
