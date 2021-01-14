@@ -324,7 +324,8 @@ class OwnerOnly(commands.Cog):
         
         
     
-    @commands.command()
+    @dev.group()
+    @commands.check(owners)
     async def send(self, ctx, id=None, *, message):
         if id is None:
             id = ctx.channel
