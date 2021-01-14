@@ -115,12 +115,6 @@ class OwnerOnly(commands.Cog):
     
     @dev.group()
     async def as(self, ctx: commands.Context, target: discord.User, *, command_string: str):
-        """
-        Run a command as someone else.
-
-        This will try to resolve to a Member, but will use a User if it can't find one.
-        """
-
         if ctx.guild:
             # Try to upgrade to a Member instance
             # This used to be done by a Union converter, but doing it like this makes
