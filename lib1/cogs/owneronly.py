@@ -321,15 +321,24 @@ class OwnerOnly(commands.Cog):
         message = ctx.message
         await message.add_reaction(emoji)
         await ctx.bot.logout()
+        
+        
+    
+    @commands.command()
+    async def send(self, ctx, id=None, *, message):
+        if id is None:
+            id = ctx.channel
+            c = ctx.guild.get_channel(id)
+        else:
+            try:
+                c = ctx.guild.get_channel(id)
+            except Exception as e:
+                   await ctx.send(e)
+        await c.send(message)
 
-    @dev.group(invoke_without_command=True)
-    @commands.check(owners)
-    async def send(self, ctx, *, message, idd=None):
-        if idd is None:
-            idd = ctx.channel.id
-        channel = self.bot.get_channel(int(idd))
-        await channel.send(f"{message}")
-        await ctx.send(f"Your message {message} was sent!")
+
+
+    
 
 
 def setup(bot):
