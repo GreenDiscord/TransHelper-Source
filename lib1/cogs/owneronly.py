@@ -6,6 +6,8 @@ import discord
 
 from datetime import datetime
 
+import json
+
 from discord.user import User
 from discord.utils import get
 from discord.ext import commands
@@ -78,6 +80,39 @@ class OwnerOnly(commands.Cog):
         
     def owners(ctx):
       return ctx.author.id == 787800565512929321
+   
+    @commands.command()
+    async def reddit(self, ctx, *, subreddit):
+        """
+        Gets a random post from a Reddit Community
+        """
+        async with ctx.bot.session.get(f"https://www.reddit.com/r/{subreddit}/new.json") as resp:
+            r = await resp.json()
+        if r.get("error", None) is not None:
+            return await ctx.send("Couldn't find a subreddit with that name.")
+
+        posts = r["data"]["children"]
+        random_post = random.choice(posts)["data"]
+        posted_when = datetime.datetime.now() - datetime.datetime.fromtimestamp(random_post["created"])
+
+        embed = discord.Embed(
+            title=random_post["title"], url=random_post["url"],
+            description=f"Posted by `u/{random_post['author']}` {humanize.naturaldelta(posted_when)} ago\n"
+            f"{ctx.bot.emoji_dict['upvote']} {random_post['ups']} {ctx.bot.emoji_dict['downvote']} {random_post['downs']}",
+            colour=ctx.bot.embed_colour)
+        embed.set_author(name=random_post["subreddit_name_prefixed"])
+        embed.set_image(url=random_post["url"])
+        embed.set_footer(text=f"{random_post['num_comments']} comment{'s' if random_post['num_comments'] > 1 else ''} • {random_post['upvote_ratio'] * 100}% upvote ratio")
+
+        if random_post["over_18"]:
+            cembed = discord.Embed(
+                title="This post has been marked as nsfw. Are you sure that you want to view it?",
+                description="If you agree, it will be sent to your dms.", colour=ctx.bot.embed_colour)
+            confirm = await ctx.bot.utils.EmbedConfirm(cembed).prompt(ctx)
+            if confirm:
+                await ctx.author.send(embed=embed)
+            return
+        await ctx.send(embed=embed)
 
     @commands.group(invoke_without_command=True)
     @commands.check(owners)
