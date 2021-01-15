@@ -54,10 +54,9 @@ class Moderation(commands.Cog):
     async def error_handler(ctx, error):
         if isinstance(error, BotMissingPermissions):
             await ctx.send(f"I need the permissions: {' '.join(error.missing_perms)}")
-                           raise CustomException() from error
+            
         else:
-                           raise error
-
+            raise error
     @commands.command(
         name="ban",
         description="A command which bans a given user",
@@ -79,9 +78,10 @@ class Moderation(commands.Cog):
     async def error_handler(ctx, error):
         if isinstance(error, BotMissingPermissions):
             await ctx.send(f"I need the permissions: {' '.join(error.missing_perms)}")
-                           raise CustomException() from error
+            
         else:
-                           raise error
+            raise error
+
     @commands.command(
         name="unban",
         description="A command which unbans a given user",
