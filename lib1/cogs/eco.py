@@ -19,8 +19,10 @@ class Economy(commands.Cog):
               
     @commands.command()
     async def balance(self, ctx, member : discord.Member=None):
+          tewq = "You"
           if member is None:
             member = ctx.message.author
+            tewq = "They"
          
           cursor = await self.bot.db.cursor()
           res = cursor.fetchone()
@@ -39,10 +41,10 @@ class Economy(commands.Cog):
               result_userBal = await cursor.fetchone()
               
               if result_userBal[0] < 0:
-                e2 = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"You have got 0")
+                e2 = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got 0")
                 await ctx.send(embed=e2)
               else:
-                e = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"You have got {result_userBal[0]}")
+                e = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got {result_userBal[0]}")
                 await ctx.send(embed=e)
         
    
