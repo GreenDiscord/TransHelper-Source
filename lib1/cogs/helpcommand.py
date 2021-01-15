@@ -45,7 +45,7 @@ class HelpMenu(ListPageSource):
 		fields = []
 
 		for entry in entries:
-			fields.append((entry.brief or "No Descripiton", syntax(entry)))
+			fields.append((entry.brief or "‎", syntax(entry)))
 
 		return await self.write_page(menu, fields)
 
