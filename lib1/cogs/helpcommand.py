@@ -70,9 +70,9 @@ class Help(commands.Cog, name="Help command"):
                 subcommand = "Has subcommands" if hasattr(cmd, "all_commands") else ""
 
                 commands_entry += (
-                    f"• **__{cmd.name}__**\n```\n{signature}\n```\n{desc}\n"
+                    f"• **{cmd.name}**\n```\n{signature}\n```\n{desc or "None"}\n"
                     if isinstance(entity, commands.Command)
-                    else f"• **__{cmd.name}__**\n{desc}\n    {subcommand}\n"
+                    else f"• **{cmd.name}**\n{desc or "None"}\n    {subcommand}\n"
                 )
             pages.append(commands_entry)
 
