@@ -1,88 +1,101 @@
-from typing import Optional
+from discord.ext import commands
 
-from discord import Embed
-from discord.utils import get
-from discord.ext.menus import MenuPages, ListPageSource
-from discord.ext.commands import Cog
-from discord.ext.commands import command
+from utils.util import Pag
 
+class Help(commands.Cog, name="Help command"):
+    def __init__(self, bot):
+        self.bot = bot
+        self.cmds_per_page = 6
 
-def syntax(command):
-	cmd_and_aliases = "|".join([str(command), *command.aliases])
-	params = []
+    def get_command_signature(self, command: commands.Command, ctx: commands.Context):
+        aliases = "|".join(command.aliases)
+        cmd_invoke = f"[{command.name}|{aliases}]" if command.aliases else command.name
 
-	for key, value in command.params.items():
-		if key not in ("self", "ctx"):
-			params.append(f"[{key}]" if "NoneType" in str(value) else f"<{key}>")
+        full_invoke = command.qualified_name.replace(command.name, "")
 
-	params = " ".join(params)
+        signature = f"{ctx.prefix}{full_invoke}{cmd_invoke} {command.signature}"
+        return signature
 
-	return f"`{cmd_and_aliases} {params}`"
+    async def return_filtered_commands(self, walkable, ctx):
+        filtered = []
 
+        for c in walkable.walk_commands():
+            try:
+                if c.hidden:
+                    continue
 
-class HelpMenu(ListPageSource):
-	def __init__(self, ctx, data):
-		self.ctx = ctx
+                elif c.parent:
+                    continue
 
-		super().__init__(data, per_page=3)
+                await c.can_run(ctx)
+                filtered.append(c)
+            except commands.CommandError:
+                continue
 
-	async def write_page(self, menu, fields=[]):
-		offset = (menu.current_page*self.per_page) + 1
-		len_data = len(self.entries)
-		use23 = self.ctx.guild.me
-		embed = Embed(title="Help",
-					  description="Welcome to the TransHelper help page!",
-					  colour=self.ctx.author.colour)
-		embed.set_thumbnail(url=use23.avatar_url)
-		embed.set_footer(text=f"{offset:,} - {min(len_data, offset+self.per_page-1):,} of {len_data:,} commands.")
+        return self.return_sorted_commands(filtered)
 
-		for name, value in fields:
-			embed.add_field(name=name, value=value, inline=False)
+    def return_sorted_commands(self, commandList):
+        return sorted(commandList, key=lambda x: x.name)
 
-		return embed
+    async def setup_help_pag(self, ctx, entity=None, title=None):
+        entity = entity or self.bot
+        title = title or self.bot.description
 
-	async def format_page(self, menu, entries):
-		fields = []
+        pages = []
 
-		for entry in entries:
-			fields.append((entry.brief or "blank", syntax(entry)))
+        if isinstance(entity, commands.Command):
+            filtered_commands = (
+                list(set(entity.all_commands.values()))
+                if hasattr(entity, "all_commands")
+                else []
+            )
+            filtered_commands.insert(0, entity)
 
-		return await self.write_page(menu, fields)
+        else:
+            filtered_commands = await self.return_filtered_commands(entity, ctx)
 
+        for i in range(0, len(filtered_commands), self.cmds_per_page):
+            next_commands = filtered_commands[i : i + self.cmds_per_page]
+            commands_entry = ""
 
-class Help(Cog):
-	def __init__(self, bot):
-		self.bot = bot
-		self.bot.remove_command("help")
+            for cmd in next_commands:
+                desc = cmd.short_doc or cmd.description
+                signature = self.get_command_signature(cmd, ctx)
+                subcommand = "Has subcommands" if hasattr(cmd, "all_commands") else ""
 
-	async def cmd_help(self, ctx, command):
-		embed = Embed(title=f"Help with `{command}`",
-					  description=syntax(command),
-					  colour=ctx.author.colour)
-		embed.add_field(name="Command description", value=command.help)
-		await ctx.send(embed=embed)
+                commands_entry += (
+                    f"• **__{cmd.name}__**\n```\n{signature}\n```\n{desc}\n"
+                    if isinstance(entity, commands.Command)
+                    else f"• **__{cmd.name}__**\n{desc}\n    {subcommand}\n"
+                )
+            pages.append(commands_entry)
 
-	@command(name="help")
-	async def show_help(self, ctx, cmd: Optional[str]):
-		"""Shows this message."""
-		if cmd is None:
-			menu = MenuPages(source=HelpMenu(ctx, list(self.bot.commands)),
-							 delete_message_after=True,
-							 timeout=60.0)
-			await menu.start(ctx)
+        await Pag(title=title, color=0xCE2029, entries=pages, length=1).start(ctx)
 
-		else:
-			if (command := get(self.bot.commands, name=cmd)):
-				await self.cmd_help(ctx, command)
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print(f"{self.__class__.__name__} cog has been loaded\n-----")
 
-			else:
-				await ctx.send("That command does not exist.")
+    @commands.command(
+        name="help", aliases=["h", "commands"], description="The help command!"
+    )
+    async def help_command(self, ctx, *, entity=None):
+        if not entity:
+            await self.setup_help_pag(ctx)
 
-	@Cog.listener()
-	async def on_ready(self):
-		if not self.bot.ready:
-			self.bot.cogs_ready.ready_up("help")
+        else:
+            cog = self.bot.get_cog(entity)
+            if cog:
+                await self.setup_help_pag(ctx, cog, f"{cog.qualified_name}'s commands")
+
+            else:
+                command = self.bot.get_command(entity)
+                if command:
+                    await self.setup_help_pag(ctx, command, command.name)
+
+                else:
+                    await ctx.send("Entity not found.")
 
 
 def setup(bot):
-	bot.add_cog(Help(bot))
+    bot.add_cog(Help(bot))
