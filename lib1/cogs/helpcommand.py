@@ -29,7 +29,7 @@ class HelpMenu(ListPageSource):
 	async def write_page(self, menu, fields=[]):
 		offset = (menu.current_page*self.per_page) + 1
 		len_data = len(self.entries)
-                use23 = self.bot.get_user(787820448913686539)
+		use23 = self.bot.get_user(787820448913686539)
 		embed = Embed(title="Help",
 					  description="Welcome to the TransHelper help page!",
 					  colour=self.ctx.author.colour)
