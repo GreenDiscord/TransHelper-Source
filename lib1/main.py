@@ -1,22 +1,10 @@
 import threading
-import random
-import dashcord
-from jishaku import voice
-from ffmpeg import audio
 import discord
-import jishaku
 import json
 import os
 import cogs
-import spotify
 from discord.ext import commands
-from pretty_help import PrettyHelp
-from gtts import gTTS
-from time import sleep as bedtime
 import os
-import discord.voice_client
-import ffmpeg
-from AntiSpam import AntiSpamHandler
 import aiosqlite
 from discord.ext.buttons import Paginator
 
