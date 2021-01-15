@@ -154,7 +154,7 @@ class Economy(commands.Cog):
           await self.bot.db.commit()
           e = discord.Embed(title=f"**Account Created**", description=f"I have made a account for you {ctx.message.author.mention}")         
           await ctx.send(embed=e)
-        else:
+      else:
             addup = random.randint(0,1000)
             await cursor.execute("UPDATE mai SET balance = balance + ? WHERE user_id=?", (addup,USER_ID))
             await self.bot.db.commit()
