@@ -4,6 +4,8 @@ import discord
 import psutil
 import discord
 
+from datetime import datetime
+
 from discord.user import User
 from discord.utils import get
 from discord.ext import commands
@@ -85,12 +87,14 @@ class OwnerOnly(commands.Cog):
     @commands.is_owner()
     @dev.group(aliases = ["ss"])
     async def screenshot(self, ctx, url):
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
         embed = discord.Embed(title = f"Screenshot of {url}")
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://image.thum.io/get/width/1920/crop/675/maxAge/1/noanimate/{url}') as r:
                 res = await r.read()
             embed.set_image(url="attachment://ss.png")
-            embed.set_footer(text=self.bot.footer)
+            embed.set_footer(text=f"{ctx.author} | TransHelper | {current_time} )
             await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
             
     @commands.is_owner()
