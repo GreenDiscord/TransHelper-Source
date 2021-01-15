@@ -33,15 +33,15 @@ class Economy(commands.Cog):
           await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
           result_userID = await cursor.fetchone()
           
-        await cursor.execute(f"SELECT balance FROM mail WHERE user_id={USER_ID}")
+          await cursor.execute(f"SELECT balance FROM mail WHERE user_id={USER_ID}")
           result_userBal = await cursor.fetchone()
               
-        if result_userBal[0] < 0:
-            e2 = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got 0")
-            await ctx.send(embed=e2)
-        else:
-            e = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got {result_userBal[0]}")
-            await ctx.send(embed=e)
+          if result_userBal[0] < 0:
+              e2 = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got 0")
+              await ctx.send(embed=e2)
+          else:
+              e = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got {result_userBal[0]}")
+              await ctx.send(embed=e)
         
    
           
