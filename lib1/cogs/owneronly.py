@@ -92,7 +92,7 @@ class OwnerOnly(commands.Cog):
         """
         Gets a random post from a Reddit Community
         """
-        async with ctx.bot.session.get(f"https://www.reddit.com/r/{subreddit}/new.json") as resp:
+        async with aiohttp.ClientSession(f"https://www.reddit.com/r/{subreddit}/new.json") as resp:
             r = await resp.json()
         if r.get("error", None) is not None:
             return await ctx.send("Couldn't find a subreddit with that name.")
