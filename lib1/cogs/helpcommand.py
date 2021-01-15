@@ -29,11 +29,11 @@ class HelpMenu(ListPageSource):
 	async def write_page(self, menu, fields=[]):
 		offset = (menu.current_page*self.per_page) + 1
 		len_data = len(self.entries)
-
+                use23 = self.bot.get_user(787820448913686539)
 		embed = Embed(title="Help",
 					  description="Welcome to the TransHelper help page!",
 					  colour=self.ctx.author.colour)
-		embed.set_thumbnail(url=self.ctx.guild.me.avatar_url)
+		embed.set_thumbnail(url=use23.avatar_url)
 		embed.set_footer(text=f"{offset:,} - {min(len_data, offset+self.per_page-1):,} of {len_data:,} commands.")
 
 		for name, value in fields:
