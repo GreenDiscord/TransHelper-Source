@@ -125,8 +125,9 @@ class OwnerOnly(commands.Cog):
             return await ctx.send(f"```py\n{e}```")
         await ctx.send(f"📤 Unloaded extension **`cogs/{name}.py`**")
     
-    @dev.group()
-    async def as(self, ctx: commands.Context, target: discord.User, *, command_string: str):
+    @commands.is_owner()
+    @dev.group(name="as")
+    async def foddd(self, ctx: commands.Context, target: discord.User, *, command_string: str):
         if ctx.guild:
             # Try to upgrade to a Member instance
             # This used to be done by a Union converter, but doing it like this makes
