@@ -19,10 +19,10 @@ class Economy(commands.Cog):
               
     @commands.command()
     async def balance(self, ctx, member : discord.Member=None):
-          tewq = "You"
+          tewq = "They"
           if member is None:
             member = ctx.message.author
-            tewq = "They"
+            tewq = "You"
          
           cursor = await self.bot.db.cursor()
           res = cursor.fetchone()
