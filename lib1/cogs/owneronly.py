@@ -14,6 +14,8 @@ import os, io, json, psutil, aiohttp, collections, time, datetime, random, reque
 
 from datetime import datetime
 
+import aiohttp
+
 from multiprocessing.connection import Client
 
 import subprocess as sp
@@ -80,7 +82,17 @@ class OwnerOnly(commands.Cog):
     async def dev(self, ctx):
       await ctx.send("commands for my owner only lol")
     
-    
+    @commands.is_owner()
+    @dev.group(aliases = ["ss"])
+    async def screenshot(self, ctx, url):
+        embed = discord.Embed(title = f"Screenshot of {url}")
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://image.thum.io/get/width/1920/crop/675/maxAge/1/noanimate/{url}') as r:
+                res = await r.read()
+            embed.set_image(url="attachment://ss.png")
+            embed.set_footer(text=self.bot.footer)
+            await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
+            
     @commands.is_owner()
     @dev.group()
     async def load(self, ctx, name: str):
