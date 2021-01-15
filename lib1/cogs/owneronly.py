@@ -84,41 +84,7 @@ class OwnerOnly(commands.Cog):
     @commands.group(invoke_without_command=True)
     @commands.check(owners)
     async def dev(self, ctx):
-      await ctx.send("commands for my owner only lol")
-
-    @dev.group()
-    @commands.is_owner()
-    async def reddit(self, ctx, *, subreddit):
-        """
-        Gets a random post from a Reddit Community
-        """
-        async with aiohttp.ClientSession(f"https://www.reddit.com/r/{subreddit}/new.json") as resp:
-            r = await resp.json()
-        if r.get("error", None) is not None:
-            return await ctx.send("Couldn't find a subreddit with that name.")
-
-        posts = r["data"]["children"]
-        random_post = random.choice(posts)["data"]
-        posted_when = datetime.datetime.now() - datetime.datetime.fromtimestamp(random_post["created"])
-
-        embed = discord.Embed(
-            title=random_post["title"], url=random_post["url"],
-            description=f"Posted by `u/{random_post['author']}` {humanize.naturaldelta(posted_when)} ago\n"
-            f"{ctx.bot.emoji_dict['upvote']} {random_post['ups']} {ctx.bot.emoji_dict['downvote']} {random_post['downs']}",
-            colour=ctx.bot.embed_colour)
-        embed.set_author(name=random_post["subreddit_name_prefixed"])
-        embed.set_image(url=random_post["url"])
-        embed.set_footer(text=f"{random_post['num_comments']} comment{'s' if random_post['num_comments'] > 1 else ''} • {random_post['upvote_ratio'] * 100}% upvote ratio")
-
-        if random_post["over_18"]:
-            cembed = discord.Embed(
-                title="This post has been marked as nsfw. Are you sure that you want to view it?",
-                description="If you agree, it will be sent to your dms.", colour=ctx.bot.embed_colour)
-            confirm = await ctx.bot.utils.EmbedConfirm(cembed).prompt(ctx)
-            if confirm:
-                await ctx.author.send(embed=embed)
-            return
-        await ctx.send(embed=embed)
+      await ctx.send("commands for my owner only")
 
     
     @commands.is_owner()
