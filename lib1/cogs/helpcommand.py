@@ -23,6 +23,7 @@ def syntax(command):
 class HelpMenu(ListPageSource):
 	def __init__(self, ctx, data):
 		self.ctx = ctx
+		self.bot = bot
 
 		super().__init__(data, per_page=3)
 
