@@ -81,7 +81,13 @@ class OwnerOnly(commands.Cog):
     def owners(ctx):
       return ctx.author.id == 787800565512929321
    
-    @commands.command()
+    @commands.group(invoke_without_command=True)
+    @commands.check(owners)
+    async def dev(self, ctx):
+      await ctx.send("commands for my owner only lol")
+
+    @dev.group()
+    @commands.is_owner()
     async def reddit(self, ctx, *, subreddit):
         """
         Gets a random post from a Reddit Community
@@ -114,10 +120,6 @@ class OwnerOnly(commands.Cog):
             return
         await ctx.send(embed=embed)
 
-    @commands.group(invoke_without_command=True)
-    @commands.check(owners)
-    async def dev(self, ctx):
-      await ctx.send("commands for my owner only lol")
     
     @commands.is_owner()
     @dev.group(aliases = ["ss"])
