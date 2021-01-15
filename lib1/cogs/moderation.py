@@ -87,7 +87,7 @@ class Moderation(commands.Cog):
         usage="[amount]",
     )
     @commands.guild_only()
-    @commands.is_owner()
+    @commands.has_guild_permissions(ban_members=True)
     async def purge(self, ctx, amount = 5):
         await ctx.channel.purge(limit=amount + 1)
         embed = discord.Embed(
