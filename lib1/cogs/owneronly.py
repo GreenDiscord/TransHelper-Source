@@ -94,7 +94,7 @@ class OwnerOnly(commands.Cog):
             async with session.get(f'https://image.thum.io/get/width/1920/crop/675/maxAge/1/noanimate/{url}') as r:
                 res = await r.read()
             embed.set_image(url="attachment://ss.png")
-            embed.set_footer(text=f"{ctx.author} | TransHelper | {current_time} )
+            embed.set_footer(text=f"{ctx.author} | TransHelper | {current_time} ")
             await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
             
     @commands.is_owner()
