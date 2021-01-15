@@ -1,6 +1,12 @@
 from discord.ext import commands
+from discord.ext.buttons import Paginator
 
-from utils.util import Pag
+class Pag(Paginator):
+    async def teardown(self):
+        try:
+            await self.page.clear_reactions()
+        except discord.HTTPException:
+            pass
 
 class Help(commands.Cog, name="Help command"):
     def __init__(self, bot):
