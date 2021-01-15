@@ -21,7 +21,7 @@ def syntax(command):
 
 
 class HelpMenu(ListPageSource):
-	def __init__(self, ctx, data):
+	def __init__(self, ctx, bot, data):
 		self.ctx = ctx
 		self.bot = bot
 
