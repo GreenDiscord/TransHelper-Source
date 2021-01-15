@@ -32,23 +32,16 @@ class Economy(commands.Cog):
 
           await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
           result_userID = await cursor.fetchone()
-
-          if result_userId == None:
-              await cursor.execute("INSERT INTO mail(user_name, balance, user_id) values(?,?,?)",(USER_NAME, self.START_BAL, USER_ID))
-              await self.bot.db.commit()
-              e = discord.Embed(title=f"**Account Created**", description=f"I have made a account for you {ctx.message.author.mention}")         
-              await ctx.send(embed=e)
-
-          else:
-              await cursor.execute(f"SELECT balance FROM mail WHERE user_id={USER_ID}")
-              result_userBal = await cursor.fetchone()
+          
+        await cursor.execute(f"SELECT balance FROM mail WHERE user_id={USER_ID}")
+          result_userBal = await cursor.fetchone()
               
-              if result_userBal[0] < 0:
-                e2 = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got 0")
-                await ctx.send(embed=e2)
-              else:
-                e = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got {result_userBal[0]}")
-                await ctx.send(embed=e)
+        if result_userBal[0] < 0:
+            e2 = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got 0")
+            await ctx.send(embed=e2)
+        else:
+            e = discord.Embed(title=f"**{USER_NAME}'s Balance**", description=f"{tewq} have got {result_userBal[0]}")
+            await ctx.send(embed=e)
         
    
           
@@ -90,14 +83,6 @@ class Economy(commands.Cog):
         USER_NAME = str(ctx.message.author)
         list1 = ["bear", "you"]
         item = f"{item}"
-        await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
-        result_userId = await cursor.fetchone()
-
-        if result_userId == None:
-          await cursor.execute("INSERT INTO mail(user_name, balance, user_id) values(?,?,?)",(USER_NAME, self.START_BAL, USER_ID))
-          await self.bot.db.commit()
-          e = discord.Embed(title=f"**Account Created**", description=f"I have made a account for you {ctx.message.author.mention}")         
-          await ctx.send(embed=e)
 
         if item in list1:
           prices = dict([("bear" , 10000), ("you" , 1000000)])
@@ -147,20 +132,12 @@ class Economy(commands.Cog):
       USER_ID = ctx.message.author.id
       USER_NAME = str(ctx.message.author)
       FIRSTITEM = "CHOCLATE"
-      await cursor.execute(f"SELECT user_id FROM mai WHERE user_id={USER_ID}")
-      result_userId = await cursor.fetchone()
-      if result_userId == None:
-          await cursor.execute("INSERT INTO mail(user_name, balance, user_id) values(?,?,?)",(USER_NAME, self.START_BAL, USER_ID))
-          await self.bot.db.commit()
-          e = discord.Embed(title=f"**Account Created**", description=f"I have made a account for you {ctx.message.author.mention}")         
-          await ctx.send(embed=e)
-      else:
-            addup = random.randint(0,1000)
-            await cursor.execute("UPDATE mai SET balance = balance + ? WHERE user_id=?", (addup,USER_ID))
-            await self.bot.db.commit()
-            lis = ["Stan Lee", "Cat", "Trans Leader", "MrBeast", "Girl In Red"]
-            e = discord.Embed(title=f"**Beg For {USER_NAME}**", description=f"You have gotten `£{addup}` from {random.choice(lis)}")
-            await ctx.send(embed=e)
+      addup = random.randint(0,1000)
+      await cursor.execute("UPDATE mai SET balance = balance + ? WHERE user_id=?", (addup,USER_ID))
+      await self.bot.db.commit()
+      lis = ["Stan Lee", "Cat", "Trans Leader", "MrBeast", "Girl In Red"]
+      e = discord.Embed(title=f"**Beg For {USER_NAME}**", description=f"You have gotten `£{addup}` from {random.choice(lis)}")
+      await ctx.send(embed=e)
           
           
     
