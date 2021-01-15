@@ -27,7 +27,7 @@ intents.members = True
 
 
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True, help_command=PrettyHelp())
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
 bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)}"
 bot.version = "15"
