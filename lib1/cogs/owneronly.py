@@ -83,7 +83,7 @@ class OwnerOnly(commands.Cog):
    
     @commands.group()
     async def dev(self, ctx):
-      await ctx.send("commands for my owner only")
+          await ctx.send("commands for my owner only")
 
     
     @commands.is_owner()
