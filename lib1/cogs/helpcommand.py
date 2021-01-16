@@ -15,9 +15,9 @@ class HelpCommand(commands.Cog):
         self.bot = bot
         self.bot.remove_command("help")
 
-        @commands.command()
-        async def help(self, ctx):
-            await ctx.send(embed=MyNewHelp.send_pages)
+    @commands.command()
+    async def help(self, ctx):
+        await ctx.send(embed=MyNewHelp.send_pages)
 
     
 
