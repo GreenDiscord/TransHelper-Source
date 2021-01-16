@@ -106,33 +106,33 @@ async def on_command_error(ctx, error):
   if ctx.guild.id == 336642139381301249:
     pass
   else:
-          if isinstance(error, commands.CommandOnCooldown):
-              e1 = discord.Embed(title="Command Error!", description=f"`{error}`")
-              e1.set_footer(text=f"{ctx.author.name}")
-              await ctx.send(embed=e1)
+        if isinstance(error, commands.CommandOnCooldown):
+            e1 = discord.Embed(title="Command Error!", description=f"`{error}`")
+            e1.set_footer(text=f"{ctx.author.name}")
+            await ctx.send(embed=e1)
+            await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
+            print("They not patient")
+        elif isinstance(error, commands.CommandNotFound):
+              e2 = discord.Embed(title="Command Error!", description=f"`{error}`")
+              e2.set_footer(text=f"{ctx.author.name}")
+              await ctx.send(embed=e2)
+              print(f"again, use help")
               await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-              print("They not patient")
-          elif isinstance(error, commands.CommandNotFound):
-                e2 = discord.Embed(title="Command Error!", description=f"`{error}`")
-                e2.set_footer(text=f"{ctx.author.name}")
-                await ctx.send(embed=e2)
-                print(f"again, use help")
-                await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-          elif isinstance(error, commands.MissingPermissions):
-                e3 = discord.Embed(title="Command Error!", description=f"`{error}`")
-                e3.set_footer(text=f"{ctx.author.name}")
-                await ctx.send(embed=e3)
-                await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-                print(f"your probley dead, so heres the error, {error}")
-          elif isinstance(error, commands.MissingRequiredArgument):
-                e4 = discord.Embed(title="Command Error!", description=f"`{error}`")
-                e4.set_footer(text=f"{ctx.author.name}")
-                await ctx.send(embed=e4)
-                await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-                print(f"Why cant they use help :( {error}")   
-          else:
-              raise error
+        elif isinstance(error, commands.MissingPermissions):
+              e3 = discord.Embed(title="Command Error!", description=f"`{error}`")
+              e3.set_footer(text=f"{ctx.author.name}")
+              await ctx.send(embed=e3)
               await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
+              print(f"your probley dead, so heres the error, {error}")
+        elif isinstance(error, commands.MissingRequiredArgument):
+              e4 = discord.Embed(title="Command Error!", description=f"`{error}`")
+              e4.set_footer(text=f"{ctx.author.name}")
+              await ctx.send(embed=e4)
+              await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
+              print(f"Why cant they use help :( {error}")   
+        else:
+            raise error
+            await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
       
       
 
