@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class MyNewHelp(commands.MinimalHelpCommand):
+class NewHelp(commands.MinimalHelpCommand):
     async def send_pages(self):
         destination = self.get_destination()
         for page in self.paginator.pages:
