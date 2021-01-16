@@ -15,7 +15,7 @@ class HelpCommand(commands.Cog):
     
     @commands.command()
     async def help(self, ctx):
-        await ctx.send(MyNewHelp.send_pages)
+        await ctx.send(f"{MyNewHelp.send_pages}")
     
 
 def setup(bot):
