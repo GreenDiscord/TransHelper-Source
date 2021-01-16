@@ -35,6 +35,8 @@ bot.version = "15"
 START_BAL = 250
 token = open("toke.txt", "r").read()
 bot.load_extension("jishaku")
+hce = bot.get_command("help")
+hce.hidden = True
 
 
 
