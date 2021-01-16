@@ -16,7 +16,7 @@ class HelpCommand(commands.Cog):
     
     @commands.command()
     async def help(self, ctx):
-        await ctx.send(embed=MyNewHelp.send_bot_help)
+        await ctx.send(self.bot.help.invoke)
     
 
 def setup(bot):
