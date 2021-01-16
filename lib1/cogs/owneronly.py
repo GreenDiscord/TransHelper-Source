@@ -82,7 +82,7 @@ class OwnerOnly(commands.Cog):
       return ctx.author.id == 787800565512929321
    
     @commands.group(invoke_without_command=True)
-    @commands.check(owners)
+    @commands.is_owner()
     async def dev(self, ctx):
       await ctx.send("commands for my owner only")
 
@@ -207,7 +207,7 @@ class OwnerOnly(commands.Cog):
     
     
     @dev.group(name='eval')
-    @commands.check(owners)
+    @commands.is_owner()
     async def _eval(self, ctx, *, body):
         """Evaluates python code"""
         env = {
