@@ -7,7 +7,7 @@ from discord.ext import commands
 import os
 import aiosqlite
 from discord.ext.buttons import Paginator
-
+import helpe
 
 class Pag(Paginator):
     async def teardown(self):
@@ -28,7 +28,7 @@ intents.reactions = True
 
 
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, help_command=helpe(),  allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
 bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)}"
 bot.version = "15"
