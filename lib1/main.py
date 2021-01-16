@@ -22,7 +22,7 @@ class Pag(Paginator):
 intents = discord.Intents.default()
 intents.members = True
 intents.reactions = True
-
+intents.guilds = True
 
 
 
