@@ -3,13 +3,14 @@ from datetime import date
 from io import BytesIO
 import time
 from discord.ext import commands
-
+from utils import check
 
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
+    @check
     async def who(self, ctx):
       e = discord.Embed(title=f"Hi, I'm {self.bot.user}", color=discord.colour.Color.from_rgb(231,84,128)or discord.colour.Color.from_rgb(173,216,230))
       await ctx.send(embed=e)
