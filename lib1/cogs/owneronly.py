@@ -81,8 +81,7 @@ class OwnerOnly(commands.Cog):
     def owners(ctx):
       return ctx.author.id == 787800565512929321
    
-    @commands.command()
-    @commands.is_owner()
+    @commands.group()
     async def dev(self, ctx):
       await ctx.send("commands for my owner only")
 
