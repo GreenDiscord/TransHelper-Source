@@ -106,9 +106,6 @@ async def on_command_error(ctx, error):
   if ctx.guild.id == 336642139381301249:
     pass
   else:
-      if isinstance(ctx.channel, discord.channel.DMChannel):
-        await ctx.send(f"Im Sorry, But you can't use commands in DMs! Maybe Go Into A Sever Which Has Me?")
-      else:
           if isinstance(error, commands.CommandOnCooldown):
               e1 = discord.Embed(title="Command Error!", description=f"`{error}`")
               e1.set_footer(text=f"{ctx.author.name}")
