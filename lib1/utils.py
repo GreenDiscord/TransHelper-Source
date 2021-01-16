@@ -1,11 +1,8 @@
 import discord
 from discord.ext import commands
 
-def check():
+def check(ctx):
+        if isinstance(ctx.channel, discord.channel.DMChannel):
+            await ctx.send("Im Sorry, But you can't use commands in DMs! Maybe Go Into A Sever Which Has Me?")
 
-    def predicate(ctx):
-        if ctx.guild is None:
-            raise NoPrivateMessage()
-        return True and ctx.send("Im Sorry, But you can't use commands in DMs! Maybe Go Into A Sever Which Has Me?")
-
-    return check(predicate)
+    return check(check)
