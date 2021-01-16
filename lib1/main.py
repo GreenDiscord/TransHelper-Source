@@ -30,7 +30,6 @@ intents.guilds = True
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
-bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)}"
 bot.version = "15"
 START_BAL = 250
 token = open("toke.txt", "r").read()
@@ -58,7 +57,7 @@ async def on_ready():
   cursor = await bot.db.cursor()   
   await cursor.execute("""CREATE TABLE IF NOT EXISTS mail(num INTEGER NOT NULL PRIMARY KEY,     user_name TEXT, balance INTEGER, user_id INTEGER)""")
   await bot.db.commit()
-  
+  bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
   print('bot ready')
 
 
