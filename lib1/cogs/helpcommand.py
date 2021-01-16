@@ -81,7 +81,7 @@ class Help(commands.Cog, name="Help command"):
     @commands.Cog.listener()
     async def on_ready(self):
         print(f"{self.__class__.__name__} cog has been loaded\n-----")
-
+        await self.bot.remove_command("help")
     @commands.command(
         name="help", aliases=["h", "commands"], description="The help command!"
     )
