@@ -98,7 +98,7 @@ async def on_message(message:discord.Member):
 
 @bot.event
 async def on_guild_join(guild):
-    await guild.system_channel.send(f'Hey there! do `{bot.when_mentioned_or("th,")(bot, message)}help` for commands!')
+    await guild.system_channel.send(f'Hey there! do th,help or <@787820448913686539> help for commands!')
  
 
 
