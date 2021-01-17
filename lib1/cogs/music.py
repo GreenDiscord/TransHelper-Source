@@ -191,7 +191,7 @@ class MusicCog(commands.Cog):
       player.add(requester=ctx.author.id, track=track)
       if not player.is_playing:
         await player.play()
-        await ctx.send(f"Playing {query} - {}")
+        await ctx.send(f"Playing {query}")
 
     except Exception as error:
       print(error)
