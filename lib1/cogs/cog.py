@@ -3,7 +3,7 @@ from datetime import date
 from io import BytesIO
 import time
 from discord.ext import commands
-from random import choice
+import random
 
 class Info(commands.Cog):
     def __init__(self, bot):
@@ -11,8 +11,7 @@ class Info(commands.Cog):
 
     @commands.command()
     async def who(self, ctx):
-      lis = ["discord.colour.Color.from_rgb(231,84,128)", "discord.colour.Color.from_rgb(173,216,230)"]
-      e = discord.Embed(title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this]() link!", color = choice(lis))
+      e = discord.Embed(title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this]() link!", color = discord.Colour.from_hsv(random.random(), 1, 1)))
       await ctx.send(embed=e)
 
 
