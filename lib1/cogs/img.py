@@ -5,6 +5,18 @@ import os
 from discord.ext import commands
 from asyncdagpi import ImageFeatures
 
+class BetterMemberConverter(commands.Converter):
+    async def convert(self, ctx, argument):
+        with suppress(Exception):
+            mem = await member_converter.convert(ctx, argument)
+            return mem
+        with suppress(discord.HTTPException):
+            mem = await ctx.bot.fetch_user(argument)
+            return mem
+        raise NoMemberFound(str(argument))
+
+
+
 class ImageManipulation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -47,7 +59,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
     
     @commands.command(cooldown_after_parsing=True)
-    async def tweet(self, ctx, member: discord.Member=None, *, text):
+    async def tweet(self, ctx, member: BetterMemberConverter=None, *, text):
         if member is None:
             member = ctx.author
             
