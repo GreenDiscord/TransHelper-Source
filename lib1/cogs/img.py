@@ -73,8 +73,8 @@ class ImageManipulation(commands.Cog):
         img = await self.bot.dagpi.image_process(ImageFeatures.gay(), url)
         e2file = discord.File(fp=img.image,filename=f"rainbow.{img.format}")
         e = discord.Embed(title="Here You Go! Filter used is gay!")
-        e.set_image(url=e2file)
-        await ctx.send(embed=e)
+        e.set_image(url=f"attachment://rainbow.{img.format}")
+        await ctx.send(embed=e, file=e2file)
         
         
     @commands.command()
