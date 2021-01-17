@@ -38,6 +38,8 @@ bot.load_extension("jishaku")
 hce = bot.get_command("help")
 hce.hidden = True
 dagpitoken = open("asy.txt", "r").read()
+topastoken = open("top.txt", "r").read()
+bot.topken = f"{topastoken}"
 bot.dagpi = Client(dagpitoken)
 
 
