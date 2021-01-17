@@ -3,11 +3,12 @@ import discord
 from asyncio import sleep
 import os
 from discord.ext import commands
-
+from asyncdagpi import ImageFeatures
 
 class ImageManipulation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.bot.dagpi = bot.dagpi
 
     @commands.command()
     async def wni(self, ctx, *, name):
@@ -32,6 +33,15 @@ class ImageManipulation(commands.Cog):
       await ctx.send(file=discord.File("wi.png"))
       await sleep(3)
       os.remove("wi.png")
+    
+    @commands.command()
+    async def pixel(self, ctx, member: discord.Member=None):
+        if member is None:
+            member = ctx.author
+            
+        url = str(member.avatar_url_as(format="png", static_format="gif", size=1024))
+        img = await dagpi.image_process(ImageFeatures.pixel(), url)
+        file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
 
     @commands.command()
     async def pan(self, ctx, *, name):
