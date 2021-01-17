@@ -37,7 +37,7 @@ class ImageManipulation(commands.Cog):
     @commands.command()
     async def captcha(self, ctx, member: discord.Member=None, *, text):
         url = str(member.avatar_url_as(format="png", size=1024))
-        img = await self.bot.dagpi.image_process(ImageFeatures.pixel(), url, text)
+        img = await self.bot.dagpi.image_process(ImageFeatures.pixel(), text, url)
         e2file = discord.File(fp=img.image,filename=f"captcha.{img.format}")
         e = discord.Embed(title="Here You Go! Filter used is captcha!")
         e.set_image(url=f"attachment://captcha.{img.format}")
