@@ -11,7 +11,7 @@ class Info(commands.Cog):
 
     @commands.command()
     async def who(self, ctx):
-      e = discord.Embed(title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this]() link!", color = discord.Colour.from_hsv(random.random(), 1, 1))
+      e = discord.Embed(title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this](https://greendiscord.github.io/TransHelper-Source/resources.html \"privacy policy\")) link!", color = discord.Colour.from_hsv(random.random(), 1, 1))
       await ctx.send(embed=e)
 
 
