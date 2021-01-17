@@ -78,8 +78,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if bot.user.mentioned_in(message):
-        l32 = bot.when_mentioned_or("th,")(bot, message)
-        await message.channel.send(f"You can type {l32}  for more info")
+        await message.channel.send(f"You can type th,help for more info")
     
     await bot.process_commands(message)
 
