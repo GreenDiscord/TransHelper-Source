@@ -67,6 +67,23 @@ class ImageManipulation(commands.Cog):
         e.set_image(url=f"attachment://tweet.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
+    @commands.command(cooldown_after_parsing=True)
+    async def captcha(self, ctx, member: discord.Member=None, *, text):
+        if member is None:
+            member = ctx.author
+            
+        text = str(text)
+        pfp = str(member.avatar_url_as(format="png", size=1024))
+        img = await self.bot.dagpi.image_process(ImageFeatures.captcha(),
+                                                    url=pfp,
+                                                    text=text)
+        e2file = discord.File(fp=img.image, filename=f"captcha.{img.format}")
+        e = discord.Embed(title="Here You Go! Another Captcha?")
+        e.set_image(url=f"attachment://captcha.{img.format}")
+        await ctx.send(file=e2file, embed=e)
+    
+    
+    
     @commands.command()
     async def pixel(self, ctx, member: discord.Member=None):
         if member is None:
