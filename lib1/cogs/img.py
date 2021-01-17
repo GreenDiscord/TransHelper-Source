@@ -13,8 +13,12 @@ class ImageManipulation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.dagpi = bot.dagpi
+     
+    @commands.group(invoke_without_command=True)
+    async def img(self, ctx):
+        await ctx.send("These commands are for images, send ```th,help ImageManipulation``` for all commands!")
 
-    @commands.command()
+    @img.command()
     async def wni(self, ctx, *, name):
       text = f"{name} was not the imposter"
       img = Image.open("amongus.png")
@@ -26,7 +30,7 @@ class ImageManipulation(commands.Cog):
       await sleep(3)
       os.remove("wni.png")
 
-    @commands.command()
+    @img.command()
     async def wi(self, ctx, *, name):
       text = f"{name} was the imposter"
       img = Image.open("amongus.png")
@@ -38,7 +42,7 @@ class ImageManipulation(commands.Cog):
       await sleep(3)
       os.remove("wi.png")
     
-    @commands.command()
+    @img.command()
     async def triggered(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
@@ -50,7 +54,7 @@ class ImageManipulation(commands.Cog):
         e.set_image(url=f"attachment://triggered.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
-    @commands.command(cooldown_after_parsing=True)
+    @img.command(cooldown_after_parsing=True)
     async def message(self, ctx, member: discord.Member=None, *, text):
         if member is None:
             member = ctx.author
@@ -69,7 +73,7 @@ class ImageManipulation(commands.Cog):
         
     
     
-    @commands.command(cooldown_after_parsing=True)
+    @img.command(cooldown_after_parsing=True)
     async def captcha(self, ctx, member: discord.Member=None, *, text):
         if member is None:
             member = ctx.author
@@ -86,7 +90,7 @@ class ImageManipulation(commands.Cog):
     
     
     
-    @commands.command()
+    @img.command()
     async def pixel(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
@@ -98,7 +102,7 @@ class ImageManipulation(commands.Cog):
         e.set_image(url=f"attachment://pixel.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
-    @commands.command()
+    @img.command()
     async def magik(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
@@ -110,7 +114,7 @@ class ImageManipulation(commands.Cog):
         e.set_image(url=f"attachment://magik.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
-    @commands.command()
+    @img.command()
     async def wanted(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
@@ -122,7 +126,7 @@ class ImageManipulation(commands.Cog):
         e.set_image(url=f"attachment://wanted.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
-    @commands.command()
+    @img.command()
     async def rainbow(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
@@ -135,7 +139,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(embed=e, file=e2file)
         
         
-    @commands.command()
+    @img.command()
     async def pan(self, ctx, *, name):
       text = f"Yay! {name} Has come out as pan! :)"
       img = Image.open("pan1.jpg")
@@ -148,7 +152,7 @@ class ImageManipulation(commands.Cog):
       os.remove("enby.png")
       
      
-    @commands.command()
+    @img.command()
     async def enby(self, ctx, *, name):
       text = f"Yay! {name} Has come out as enby!"
       img = Image.open("enby1.png")
@@ -161,7 +165,7 @@ class ImageManipulation(commands.Cog):
       os.remove("enby.png")
 
      
-    @commands.command()
+    @img.command()
     async def bi(self, ctx, *, name):
       text = f"Yay! {name} Has come out as bisexual! Well done!"
       img = Image.open("bi1.jfif")
