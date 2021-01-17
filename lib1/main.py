@@ -73,7 +73,9 @@ async def on_member_join(member : discord.Member):
     else:
       await feedback.send(f"Guild {member.guild.name} is trying to use auto-role! Contact {member.guild.owner}")
 
-
+@bot.event
+async def on_guild_join(guild):
+    await 
 
 @bot.event
 async def on_message(message:discord.Member):
@@ -92,7 +94,11 @@ async def on_message(message:discord.Member):
   
 
 
-
+async def on_guild_join(guild):
+    for channel in guild.text_channels:
+        if channel.permissions_for(guild.me).send_messages:
+            await channel.send(f'Hey there! do `{bot.command_prefix}help` for commands!')
+        break
 
 
 
