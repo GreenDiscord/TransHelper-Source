@@ -11,8 +11,8 @@ class TopGG(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.bot.token = bot.token
-        self.dblpy = dbl.DBLClient(self.bot, self.bot.token)
+        self.bot.topken = bot.topken
+        self.dblpy = dbl.DBLClient(self.bot, self.bot.topken)
 
 
     @tasks.loop(minutes=30.0)
