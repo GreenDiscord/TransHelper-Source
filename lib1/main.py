@@ -97,18 +97,7 @@ async def on_member_join(member : discord.Member):
 
 
 
-@bot.event
-async def on_message(message:discord.Member):
-    lis = ["fuck", "shit", "bastard", "faggot", "Fuck", "Shit", "Bastard", "Faggot"]
-    if message.author.bot:
-        pass
-    else:
-        if message.content in lis:
-            await message.delete()
-            await message.channel.send(f"{message.author.mention} please stop :)")
-      
- 
-  await bot.process_commands(message)
+
     
   
 
