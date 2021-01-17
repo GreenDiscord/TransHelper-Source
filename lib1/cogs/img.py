@@ -43,7 +43,27 @@ class ImageManipulation(commands.Cog):
         img = await self.bot.dagpi.image_process(ImageFeatures.pixel(), url)
         e2file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
         await ctx.send(file=e2file)
-
+    
+    @commands.command()
+    async def wanted(self, ctx, member: discord.Member=None):
+        if member is None:
+            member = ctx.author
+            
+        url = str(member.avatar_url_as(format="png", size=1024))
+        img = await self.bot.dagpi.image_process(ImageFeatures.wanted(), url)
+        e2file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
+        await ctx.send(file=e2file)
+    @commands.command()
+    async def rainbow(self, ctx, member: discord.Member=None):
+        if member is None:
+            member = ctx.author
+            
+        url = str(member.avatar_url_as(format="png", size=1024))
+        img = await self.bot.dagpi.image_process(ImageFeatures.gay(), url)
+        e2file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
+        await ctx.send(file=e2file)
+        
+        
     @commands.command()
     async def pan(self, ctx, *, name):
       text = f"Yay! {name} Has come out as pan! :)"
