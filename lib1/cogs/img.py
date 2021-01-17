@@ -41,8 +41,8 @@ class ImageManipulation(commands.Cog):
             
         url = str(member.avatar_url_as(format="png", size=1024))
         img = await self.bot.dagpi.image_process(ImageFeatures.pixel(), url)
-        file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
-        await ctx.send(file)
+        e2file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
+        await ctx.send(file=e2file)
 
     @commands.command()
     async def pan(self, ctx, *, name):
