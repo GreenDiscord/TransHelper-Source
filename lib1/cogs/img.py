@@ -35,12 +35,15 @@ class ImageManipulation(commands.Cog):
       os.remove("wi.png")
     
     @commands.command()
-    async def captcha(self, ctx, member: discord.Member=None, *, text):
+    async def triggered(self, ctx, member: discord.Member=None):
+        if member is None:
+            member = ctx.author
+            
         url = str(member.avatar_url_as(format="png", size=1024))
-        img = await self.bot.dagpi.image_process(ImageFeatures.captcha(), text, url)
-        e2file = discord.File(fp=img.image,filename=f"captcha.{img.format}")
-        e = discord.Embed(title="Here You Go! Filter used is captcha!")
-        e.set_image(url=f"attachment://captcha.{img.format}")
+        img = await self.bot.dagpi.image_process(ImageFeatures.triggered(), url)
+        e2file = discord.File(fp=img.image,filename=f"triggered.{img.format}")
+        e = discord.Embed(title="Here You Go! Filter used is triggered!")
+        e.set_image(url=f"attachment://triggered.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
     @commands.command()
