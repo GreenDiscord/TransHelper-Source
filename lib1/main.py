@@ -73,7 +73,10 @@ async def on_member_join(member : discord.Member):
     if member.guild.id == 787825469391241217:
         await member.add_roles(role)
     else:
-      await feedback.send(f"Guild {member.guild.name} is trying to use auto-role! Contact {member.guild.owner}")
+        if member.guild.id == 336642139381301249:
+            pass
+        else:
+            await feedback.send(f"Guild {member.name} is trying to use auto-role! Contact {member.guild.owner} to get this fixed!")
 
 
 
