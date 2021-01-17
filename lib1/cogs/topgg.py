@@ -23,11 +23,12 @@ class TopGG(commands.Cog):
         await self.channel.send("Starting to attempt server count update!")
         try:
             await self.dblpy.post_guild_count()
-            await self.channel.send('Posted server count ({})'.format(self.dblpy.guild_count())
             logger.info('Posted server count ({})'.format(self.dblpy.guild_count()))
+            await self.channel.send(f'Updated server count to {len(self.bot.guilds)}')
         except Exception as e:
-            await self.channel.send('Failed to post server count\n{}: {}'.format(type(e).__name__, e)")
             logger.exception('Failed to post server count\n{}: {}'.format(type(e).__name__, e))
+            await self.channel.send('Failed to post server count\n{}: {}'.format(type(e).__name__, e)")
+            
 
 
         await asyncio.sleep(1800)
