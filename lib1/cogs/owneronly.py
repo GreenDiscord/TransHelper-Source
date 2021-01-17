@@ -181,6 +181,8 @@ class OwnerOnly(commands.Cog):
     async def sync(self, ctx):
         """Sync with GitHub and reload all the cogs"""
         embed = discord.Embed(title="Syncing...", description="<a:lol:798600720470507600> Syncing and reloading cogs.")
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
         embed.set_footer(text=f"{ctx.author} | TransHelper | {current_time} ")
         msg = await ctx.send(embed=embed)
         async with ctx.channel.typing():
