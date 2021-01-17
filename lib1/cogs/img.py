@@ -3,7 +3,18 @@ import discord
 from asyncio import sleep
 import os
 from discord.ext import commands
+from contextlib import suppress
 from asyncdagpi import ImageFeatures
+
+member_converter = commands.UserConverter()
+
+class NoMemberFound(Exception):
+    def __init__(self, arg):
+        self.arg = arg
+
+    def __str__(self):
+        rest = random.choice(data.notfoundelist)
+        return f"{rest}\n\nThe Member {self.arg} was not found"
 
 class BetterMemberConverter(commands.Converter):
     async def convert(self, ctx, argument):
