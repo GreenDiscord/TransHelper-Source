@@ -8,11 +8,17 @@ import random
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
+    
     @commands.command()
     async def who(self, ctx):
       e = discord.Embed(title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this](https://greendiscord.github.io/TransHelper-Source/resources.html \"privacy policy\") link!", color = discord.Colour.from_hsv(random.random(), 1, 1))
       await ctx.send(embed=e)
+        
+    @commands.command()
+    async def vote(self,ctx):
+        e = discord.Embed(title=f"Hi, You can vote for me using the link below!", description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color = discord.Colour.from_hsv(random.random(), 1, 1))
+        await ctx.send(embed=e)
+        
 
 
     @commands.command()
