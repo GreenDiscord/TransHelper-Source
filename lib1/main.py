@@ -8,6 +8,7 @@ import os
 import aiosqlite
 from discord.ext.buttons import Paginator
 from helpe import NewHelp
+from asyncdagpi import Client
 
 class Pag(Paginator):
     async def teardown(self):
@@ -36,7 +37,7 @@ token = open("toke.txt", "r").read()
 bot.load_extension("jishaku")
 hce = bot.get_command("help")
 hce.hidden = True
-
+bot.dagpi = Client(f"{open("asy.txt", "r").read()}")
 
 
 
