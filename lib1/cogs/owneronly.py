@@ -98,7 +98,24 @@ class OwnerOnly(commands.Cog):
             embed.set_image(url="attachment://ss.png")
             embed.set_footer(text=f"{ctx.author} | TransHelper | {current_time} ")
             await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
-            
+    
+    @commands.is_owner()
+    @dev.group()
+    async def leaveguildbecauseimmad(self, ctx):
+        message2 = ctx.message
+        owner = self.bot.get_user(787800565512929321)
+        await message2.add_reaction('\U00002705')
+        await ctx.send("um, my owners mad so im leaving lmao")
+        await asyncio.sleep(2)
+        await ctx.edit("bomb going of in : 5")
+        await asyncio.sleep(1)
+        await ctx.edit("4")
+        await asyncio.sleep(1)
+        await ctx.edit("3")
+        await asyncio.sleep(1)
+        await ctx.edit("I'm bored now, good bye suckers lmao")
+        await owner.send("Finnaly. You have escaped level one")
+        
     @commands.is_owner()
     @dev.group()
     async def load(self, ctx, name: str):
