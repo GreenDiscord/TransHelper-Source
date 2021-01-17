@@ -29,7 +29,7 @@ intents.guilds = True
 
 
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,")(bot, message), intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
 bot.version = "15"
 START_BAL = 250
@@ -98,7 +98,7 @@ async def on_message(message:discord.Member):
 
 @bot.event
 async def on_guild_join(guild):
-    await guild.system_channel.send(f'Hey there! do `{bot.command_prefix}help` for commands!')
+    await guild.system_channel.send(f'Hey there! do `{bot.when_mentioned_or("th,")(bot, message)}help` for commands!')
  
 
 
