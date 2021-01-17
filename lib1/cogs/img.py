@@ -46,6 +46,22 @@ class ImageManipulation(commands.Cog):
         e.set_image(url=f"attachment://triggered.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
+    @commands.command(cooldown_after_parsing=True)
+    async def tweet(self, ctx, user: BetterMemberConverter = None, *, text):
+        if user is None:
+            user = ctx.author
+        uname = user.display_name
+        text = str(text)
+        pfp = str(user.avatar_url_as(format="png", size=1024))
+        img = await self.client.dagpi.image_process(ImageFeatures.tweet(),
+                                                    url=pfp,
+                                                    username=uname,
+                                                    text=text)
+        e2file = discord.File(fp=img.image, filename=f"tweet.{img.format}")
+        e = discord.Embed(title="Here You Go! Tweet Posted!")
+        e.set_image(url=f"attachment://tweet.{img.format}")
+        await ctx.send(file=e2file, embed=e)
+    
     @commands.command()
     async def pixel(self, ctx, member: discord.Member=None):
         if member is None:
