@@ -27,9 +27,20 @@ intents.guilds = True
 
 
 
+def get_prefix(bot, message):
+    """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
 
+    
+    prefixes = ['th,', 'th ', 'please dont find this one,']
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("th,"), intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
+    # Check to see if we are outside of a guild. e.g DM's etc.
+    if not message.guild:
+        
+        return 'th,'
+
+    return commands.when_mentioned_or(*prefixes)(bot, message)
+
+bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=True, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
 bot.version = "15"
 START_BAL = 250
