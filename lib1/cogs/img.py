@@ -45,14 +45,25 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file)
     
     @commands.command()
+    async def magik(self, ctx, member: discord.Member=None):
+        if member is None:
+            member = ctx.author
+            
+        url = str(member.avatar_url_as(format="png", size=1024))
+        img = await self.bot.dagpi.image_process(ImageFeatures.magik(), url)
+        e2file = discord.File(fp=img.image,filename=f"magik.{img.format}")
+        await ctx.send(file=e2file)
+    
+    @commands.command()
     async def wanted(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
             
         url = str(member.avatar_url_as(format="png", size=1024))
         img = await self.bot.dagpi.image_process(ImageFeatures.wanted(), url)
-        e2file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
+        e2file = discord.File(fp=img.image,filename=f"wanted .{img.format}")
         await ctx.send(file=e2file)
+    
     @commands.command()
     async def rainbow(self, ctx, member: discord.Member=None):
         if member is None:
@@ -60,8 +71,10 @@ class ImageManipulation(commands.Cog):
             
         url = str(member.avatar_url_as(format="png", size=1024))
         img = await self.bot.dagpi.image_process(ImageFeatures.gay(), url)
-        e2file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
-        await ctx.send(file=e2file)
+        e2file = discord.File(fp=img.image,filename=f"rainbow.{img.format}")
+        e = discord.Embed(title="Here You Go! Filter used is gay!")
+        e.set_image(url=e2file)
+        await ctx.send(embed=e)
         
         
     @commands.command()
