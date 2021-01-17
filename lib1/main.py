@@ -37,7 +37,8 @@ token = open("toke.txt", "r").read()
 bot.load_extension("jishaku")
 hce = bot.get_command("help")
 hce.hidden = True
-bot.dagpi = Client(f"{open("asy.txt", "r").read()}")
+dagpitoken = open("asy.txt", "r").read()
+bot.dagpi = Client(dagpitoken)
 
 
 
