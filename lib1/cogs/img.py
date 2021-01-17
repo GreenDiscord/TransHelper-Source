@@ -3,28 +3,9 @@ import discord
 from asyncio import sleep
 import os
 from discord.ext import commands
-from contextlib import suppress
 from asyncdagpi import ImageFeatures
 
-member_converter = commands.UserConverter()
 
-class NoMemberFound(Exception):
-    def __init__(self, arg):
-        self.arg = arg
-
-    def __str__(self):
-        rest = random.choice(data.notfoundelist)
-        return f"{rest}\n\nThe Member {self.arg} was not found"
-
-class BetterMemberConverter(commands.Converter):
-    async def convert(self, ctx, argument):
-        with suppress(Exception):
-            mem = await member_converter.convert(ctx, argument)
-            return mem
-        with suppress(discord.HTTPException):
-            mem = await ctx.bot.fetch_user(argument)
-            return mem
-        raise NoMemberFound(str(argument))
 
 
 
@@ -70,14 +51,14 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
     
     @commands.command(cooldown_after_parsing=True)
-    async def tweet(self, ctx, member: BetterMemberConverter=None, *, text):
+    async def tweet(self, ctx, member: discord.Member=None, *, text):
         if member is None:
             member = ctx.author
             
         uname = member.display_name
         text = str(text)
         pfp = str(member.avatar_url_as(format="png", size=1024))
-        img = await self.client.dagpi.image_process(ImageFeatures.tweet(),
+        img = await self.bot.dagpi.image_process(ImageFeatures.tweet(),
                                                     url=pfp,
                                                     username=uname,
                                                     text=text)
