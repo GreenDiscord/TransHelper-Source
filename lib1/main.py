@@ -64,7 +64,10 @@ async def on_ready():
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
   print('bot ready')
 
-
+@client.event
+async def on_message(message):
+    if bot.user.mentioned_in(message):
+        await message.channel.send(f"You can type {bot.when_mentioned_or("th,")(bot, message)}  for more info")
 
 @bot.event
 async def on_member_join(member : discord.Member):
