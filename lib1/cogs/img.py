@@ -51,21 +51,23 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
     
     @commands.command(cooldown_after_parsing=True)
-    async def tweet(self, ctx, member: discord.Member=None, *, text):
+    async def message(self, ctx, member: discord.Member=None, *, text):
         if member is None:
             member = ctx.author
             
         uname = member.display_name
         text = str(text)
         pfp = str(member.avatar_url_as(format="png", size=1024))
-        img = await self.bot.dagpi.image_process(ImageFeatures.tweet(),
+        img = await self.bot.dagpi.image_process(ImageFeatures.discord(),
                                                     url=pfp,
                                                     username=uname,
                                                     text=text)
-        e2file = discord.File(fp=img.image, filename=f"tweet.{img.format}")
-        e = discord.Embed(title="Here You Go! Tweet Posted!")
-        e.set_image(url=f"attachment://tweet.{img.format}")
+        e2file = discord.File(fp=img.image, filename=f"message.{img.format}")
+        e = discord.Embed(title="Here You Go! Message Sent!")
+        e.set_image(url=f"attachment://message.{img.format}")
         await ctx.send(file=e2file, embed=e)
+        
+    
     
     @commands.command(cooldown_after_parsing=True)
     async def captcha(self, ctx, member: discord.Member=None, *, text):
