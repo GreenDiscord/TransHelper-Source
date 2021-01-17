@@ -64,7 +64,7 @@ async def on_ready():
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
   print('bot ready')
 
-@client.event
+@bot.event
 async def on_message(message):
     if bot.user.mentioned_in(message):
         l32 = bot.when_mentioned_or("th,")(bot, message)
