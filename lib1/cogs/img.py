@@ -47,12 +47,13 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
     
     @commands.command(cooldown_after_parsing=True)
-    async def tweet(self, ctx, user: BetterMemberConverter = None, *, text):
-        if user is None:
-            user = ctx.author
-        uname = user.display_name
+    async def tweet(self, ctx, member: discord.Member=None, *, text):
+        if member is None:
+            member = ctx.author
+            
+        uname = member.display_name
         text = str(text)
-        pfp = str(user.avatar_url_as(format="png", size=1024))
+        pfp = str(member.avatar_url_as(format="png", size=1024))
         img = await self.client.dagpi.image_process(ImageFeatures.tweet(),
                                                     url=pfp,
                                                     username=uname,
