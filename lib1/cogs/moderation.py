@@ -31,8 +31,32 @@ class TimeConverter(commands.Converter):
 class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.bot.db = bot.db
 
-
+        
+    @commands.command(
+        name="warn",
+        description="A command which warns a given user",
+        usage="<user> [reason]",
+    )
+    @commands.bot_has_permissions(kick_members=True)
+    @commands.guild_only()
+    @commands.has_guild_permissions(kick_members=True)    
+    async def warn(self, ctx, member: discord.Member, *, reason="No Reason Provided")
+        cursor = await self.bot.db.cursor()
+        USER_ID = member.id
+        
+        await cursor.execute(f"SELECT warns FROM guilds WHERE user_id={USER_ID}")
+        result_userWarns = await cursor.fetchone()
+            if result_userWarns[0] >3:
+                await ctx.guild.kick(user=member, reason=reason)
+                embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
+                await ctx.send(embed=embed, delete_after=5)
+            else:
+                e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!" description=reason)
+                await ctx.send(embed=e, delete_after=5)
+            
+        
     @commands.command(
         name="kick",
         description="A command which kicks a given user",
@@ -44,10 +68,9 @@ class Moderation(commands.Cog):
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         await ctx.guild.kick(user=member, reason=reason)
 
-        # Using our past episodes knowledge can we make the log channel dynamic?
+
         embed = discord.Embed(
-            title=f"{ctx.author.name} kicked: {member.name}", description=reason
-        )
+            title=f"{ctx.author.name} kicked: {member.name}", description=reason)
         await ctx.send(embed=embed)
      
     @kick.error
@@ -68,7 +91,7 @@ class Moderation(commands.Cog):
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         await ctx.guild.ban(user=member, reason=reason)
 
-        # Using our past episodes knowledge can we make the log channel dynamic?
+   
         embed = discord.Embed(
             title=f"{ctx.author.name} banned: {member.name}", description=reason
         )
