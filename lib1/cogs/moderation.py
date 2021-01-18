@@ -46,7 +46,7 @@ class Moderation(commands.Cog):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
         
-        await cursor.execute(f"SELECT warns1 FROM warns WHERE user_id={USER_ID}")
+        await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
         result_userWarns = await cursor.fetchone()
         if result_userWarns[0] >3:
                 await ctx.guild.kick(user=member, reason=reason)
