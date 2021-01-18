@@ -42,7 +42,7 @@ class Moderation(commands.Cog):
     @commands.bot_has_permissions(kick_members=True)
     @commands.guild_only()
     @commands.has_guild_permissions(kick_members=True)    
-    async def warn(self, ctx, member: discord.Member, *, reason="No Reason Provided")
+    async def warn(self, ctx, member: discord.Member, *, reason="No Reason Provided"):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
         
