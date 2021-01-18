@@ -52,6 +52,8 @@ class Moderation(commands.Cog):
         if result_userID == None:
             await cursor.execute("INSERT INTO warns1(warns, user_id) values(?,?)",(1, USER_ID))
             await self.bot.db.commit()
+            e2 = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
+            await ctx.send(embed=e2, delete_after=5)
             
         else:
             await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
