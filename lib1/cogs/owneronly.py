@@ -235,7 +235,7 @@ class OwnerOnly(commands.Cog):
             'author': ctx.author,
             'guild': ctx.guild,
             'message': ctx.message,
-            'source': inspect.getsource
+            'source': inspect.getsource,
             'owner': self.bot.get_user(787800565512929321)
         }
 
