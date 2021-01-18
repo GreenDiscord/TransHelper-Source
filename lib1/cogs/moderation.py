@@ -95,7 +95,7 @@ class Moderation(commands.Cog):
           USER_ID = member.id
           lis = ['1', '2', '3']
           
-          if amount is in lis:
+          if amount in lis:
                await cursor.execute("UPDATE warns1 SET warns = warns - ? WHERE user_id=?", (amount, USER_ID))
                await self.bot.db.commit()
           else:
