@@ -77,9 +77,10 @@ class Moderation(commands.Cog):
             await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
             result_userBal = await cursor.fetchone()  
             if result_userBal[0] > 3:
-                    await ctx.guild.kick(user=member, reason=reason)
+                    await member.kick(reason=reason)
                     embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
                     await ctx.send(embed=embed, delete_after=5)
+                    await member.send(embed=embed)
             else:
                 await cursor.execute("UPDATE warns1 SET warns = warns + ? WHERE user_id=?", (1, USER_ID))
                 await self.bot.db.commit()
@@ -88,18 +89,7 @@ class Moderation(commands.Cog):
                 await ctx.send(embed=e, delete_after=5)
                 await member.send(embed=e2)
     
-    @commands.is_owner()     
-    @commands.command()
-    async def rw(self, ctx, member : discord.Member, amount):
-          cursor = await self.bot.db.cursor()
-          USER_ID = member.id
-          lis = ['1', '2', '3']
-          
-          if amount in lis:
-               await cursor.execute("UPDATE warns1 SET warns = warns - ? WHERE user_id=?", (amount, USER_ID))
-               await self.bot.db.commit()
-          else:
-               pass
+    
 
     @commands.command(
         name="kick",
