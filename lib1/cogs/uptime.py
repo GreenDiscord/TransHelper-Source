@@ -15,11 +15,11 @@ class Uptime(commands.Cog):
         text = str(datetime.timedelta(seconds=difference))
         embed = discord.Embed(colour=ctx.message.author.top_role.colour)
         embed.add_field(name="Uptime", value=text)
-        embed.set_footer(text="Sponsored by altcointrain.com - Choo!!! Choo!!!")
+        embed.set_footer(text=f"{ctx.author} | {self.bot.user}")
         try:
-            await self.bot.say(embed=embed)
+            await ctx.send(embed=embed)
         except discord.HTTPException:
-            await self.bot.say("Current uptime: " + text)
+            await ctx.send("Current uptime: " + text)
 
 
 def setup(bot):
