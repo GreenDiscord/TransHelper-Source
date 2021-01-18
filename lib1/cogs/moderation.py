@@ -46,7 +46,7 @@ class Moderation(commands.Cog):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
         
-        await cursor.execute(f"SELECT warns FROM guilds WHERE user_id={USER_ID}")
+        await cursor.execute(f"SELECT warns1 FROM warns WHERE user_id={USER_ID}")
         result_userWarns = await cursor.fetchone()
         if result_userWarns[0] >3:
                 await ctx.guild.kick(user=member, reason=reason)
@@ -55,6 +55,7 @@ class Moderation(commands.Cog):
         else:
             e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
             await ctx.send(embed=e, delete_after=5)
+            await cursor.execute("UPDATE warns1 SET warns = warns + 1 WHERE user_id=?", (USER_ID))
             
         
     @commands.command(
