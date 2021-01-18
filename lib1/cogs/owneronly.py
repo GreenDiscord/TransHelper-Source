@@ -228,7 +228,7 @@ class OwnerOnly(commands.Cog):
     async def _eval(self, ctx, *, body):
         """Evaluates python code"""
         env = {
-            'self' : self
+            'self' : self,
             'ctx': ctx,
             'bot': self.bot,
             'channel': ctx.channel,
