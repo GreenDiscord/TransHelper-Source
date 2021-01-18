@@ -33,7 +33,7 @@ class Moderation(commands.Cog):
         self.bot = bot
         self.bot.db = bot.db
 
-    @commands.commands(name="warns", description="A command which gets warns from a given user")
+    @commands.command(name="warns", description="A command which gets warns from a given user")
     async def _warns(self, ctx, member:discord.Member=None):
           tewq = "They"
           if member is None:
