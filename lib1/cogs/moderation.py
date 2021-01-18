@@ -53,8 +53,8 @@ class Moderation(commands.Cog):
                 embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
                 await ctx.send(embed=embed, delete_after=5)
         else:
-                e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!" description=reason)
-                await ctx.send(embed=e, delete_after=5)
+            e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
+            await ctx.send(embed=e, delete_after=5)
             
         
     @commands.command(
