@@ -81,7 +81,7 @@ class Moderation(commands.Cog):
                     embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
                     await ctx.send(embed=embed, delete_after=5)
             else:
-                await cursor.execute("UPDATE warns1 SET warns = warns + 1 WHERE user_id=?", (USER_ID))
+                await cursor.execute("UPDATE warns1 SET warns = warns + ? WHERE user_id=?", (1, USER_ID))
                 await self.bot.db.commit()
                 e = discord.Embed(title=f"{ctx.author} warned {member}", description=reason)
                 e2 = discord.Embed(title=f"{ctx.author} warned you for-", description=reason)
