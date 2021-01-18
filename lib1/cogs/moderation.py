@@ -70,7 +70,7 @@ class Moderation(commands.Cog):
         if result_userID == None:
             await cursor.execute("INSERT INTO warns1(warns, user_id) values(?,?)",(1, USER_ID))
             await self.bot.db.commit()
-            e2 = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
+            e2 = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned {member.name} quickly!", description=reason)
             await ctx.send(embed=e2, delete_after=5)
             
         else:
@@ -80,14 +80,14 @@ class Moderation(commands.Cog):
                     await cursor.execute("DELETE * FROM warns1 WHERE value = ?,?", (result_userBal[0], USER_ID))
                     await self.bot.db.commit()
                     await member.kick(reason=reason)
-                    embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
+                    embed = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} kicked: {member.name}", description=reason)
                     await ctx.send(embed=embed, delete_after=5)
                     await member.send(embed=embed)
             else:
                 await cursor.execute("UPDATE warns1 SET warns = warns + ? WHERE user_id=?", (1, USER_ID))
                 await self.bot.db.commit()
-                e = discord.Embed(title=f"{ctx.author} warned {member}", description=reason)
-                e2 = discord.Embed(title=f"{ctx.author} warned you for-", description=reason)
+                e = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned {member}", description=reason)
+                e2 = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned you for-", description=reason)
                 await ctx.send(embed=e, delete_after=5)
                 await member.send(embed=e2)
     
