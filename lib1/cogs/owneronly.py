@@ -228,6 +228,7 @@ class OwnerOnly(commands.Cog):
     async def _eval(self, ctx, *, body):
         """Evaluates python code"""
         env = {
+            'self' : self
             'ctx': ctx,
             'bot': self.bot,
             'channel': ctx.channel,
@@ -235,6 +236,7 @@ class OwnerOnly(commands.Cog):
             'guild': ctx.guild,
             'message': ctx.message,
             'source': inspect.getsource
+            'owner': self.bot.get_user(787800565512929321)
         }
 
         def cleanup_code(content):
