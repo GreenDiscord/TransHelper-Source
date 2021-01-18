@@ -47,8 +47,8 @@ class Moderation(commands.Cog):
         USER_ID = member.id
         
         await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
-        result_userWarns = await cursor.fetchone()
-        if result_userWarns[0] >3:
+        result_userBal = await cursor.fetchone()  
+        if result_userBal[0] < 0:
                 await ctx.guild.kick(user=member, reason=reason)
                 embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
                 await ctx.send(embed=embed, delete_after=5)
