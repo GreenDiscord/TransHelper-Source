@@ -82,10 +82,12 @@ class Moderation(commands.Cog):
                     embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
                     await ctx.send(embed=embed, delete_after=5)
             else:
-                e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
-                await ctx.send(embed=e, delete_after=5)
-                await cursor.execute("UPDATE warns1 SET warns = warns + 1 WHERE user_id=?", (USER_ID))
-                await self.db.commit()
+                ammount = 1
+                await cursor.execute("UPDATE mail SET balance = balance + ? WHERE user_id=?", (ammount,USER_ID))
+                await self.bot.db.commit()
+                e = discord.Embed(title=f"{ctx.author} warned {member}", description=reason)
+                await ctx.reply(embed=e, delete_after=5)
+                await member.send(embed=e)
             
         
     @commands.command(
