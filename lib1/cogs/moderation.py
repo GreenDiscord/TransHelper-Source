@@ -87,8 +87,20 @@ class Moderation(commands.Cog):
                 e2 = discord.Embed(title=f"{ctx.author} warned you for-", description=reason)
                 await ctx.send(embed=e, delete_after=5)
                 await member.send(embed=e2)
-            
-        
+    
+    @commands.is_owner()     
+    @commands.command()
+    async def rw(self, ctx, member : discord.Member, amount):
+          cursor = await self.bot.db.cursor()
+          USER_ID = member.id
+          lis = ['1', '2', '3']
+          
+          if amount is in lis:
+               await cursor.execute("UPDATE warns1 SET warns = warns - ? WHERE user_id=?", (amount, USER_ID))
+               await self.bot.db.commit()
+          else:
+               pass
+
     @commands.command(
         name="kick",
         description="A command which kicks a given user",
