@@ -46,16 +46,24 @@ class Moderation(commands.Cog):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
         
-        await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
-        result_userBal = await cursor.fetchone()  
-        if result_userBal[0] < 0:
-                await ctx.guild.kick(user=member, reason=reason)
-                embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
-                await ctx.send(embed=embed, delete_after=5)
+        await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
+        result_userID = await cursor.fetchone()
+        
+        if result_userID == None:
+            await cursor.execute("INSERT INTO warns1(warns, user_id) values(?,?)",(1, USER_ID))
+            await self.bot.db.commit()
+            
         else:
-            e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
-            await ctx.send(embed=e, delete_after=5)
-            await cursor.execute("UPDATE warns1 SET warns = warns + 1 WHERE user_id=?", (USER_ID))
+            await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
+            result_userBal = await cursor.fetchone()  
+            if result_userBal[0] > 3:
+                    await ctx.guild.kick(user=member, reason=reason)
+                    embed = discord.Embed(title=f"{ctx.author.name} kicked: {member.name}", description=reason)
+                    await ctx.send(embed=embed, delete_after=5)
+            else:
+                e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
+                await ctx.send(embed=e, delete_after=5)
+                await cursor.execute("UPDATE warns1 SET warns = warns + 1 WHERE user_id=?", (USER_ID))
             
         
     @commands.command(
