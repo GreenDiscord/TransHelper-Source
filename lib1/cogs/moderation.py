@@ -64,7 +64,6 @@ class Moderation(commands.Cog):
     async def warn(self, ctx, member: discord.Member, *, reason="No Reason Provided"):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
-        await member.send(f"{member.mention}")
         await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
         result_userID = await cursor.fetchone()
         
