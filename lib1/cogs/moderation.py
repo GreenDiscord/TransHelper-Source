@@ -33,7 +33,26 @@ class Moderation(commands.Cog):
         self.bot = bot
         self.bot.db = bot.db
 
-        
+    @commands.commands(name="warns", description="A command which gets warns from a given user")
+    async def _warns(self, ctx, member:discord.Member=None):
+          tewq = "They"
+          if member is None:
+            member = ctx.message.author
+            tewq = "You"
+         
+          cursor = await self.bot.db.cursor()
+          res = cursor.fetchone()
+          USER_ID = member.id
+
+          await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
+          result_userID = await cursor.fetchone()
+          if result_userID == None:
+            await ctx.send("This user has no warns")
+          else:
+             await cursor.execute(f"SELECT warns FROM warns WHERE user_id={USER_ID}")
+             result_userBal = await cursor.fetchone()
+             await ctx.send(f"{member.name}'s warns are {result_userBal[0]}")
+    
     @commands.command(
         name="warn",
         description="A command which warns a given user",
