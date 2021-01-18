@@ -1,3 +1,4 @@
+[![Badge](https://botlist.space/bot/787820448913686539/badge?property=uptime&style=for-the-badge&color=brightgreen)
 # TransHelper
  A easy to use discord.py bot
 
