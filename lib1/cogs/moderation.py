@@ -44,7 +44,7 @@ class Moderation(commands.Cog):
           res = cursor.fetchone()
           USER_ID = member.id
 
-          await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
+          await cursor.execute(f"SELECT user_id FROM warns1 WHERE user_id={USER_ID}")
           result_userID = await cursor.fetchone()
           if result_userID == None:
             await ctx.send("This user has no warns")
@@ -64,7 +64,7 @@ class Moderation(commands.Cog):
     async def warn(self, ctx, member: discord.Member, *, reason="No Reason Provided"):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
-        
+        await member.send(f"{member.mention}")
         await cursor.execute(f"SELECT user_id FROM mail WHERE user_id={USER_ID}")
         result_userID = await cursor.fetchone()
         
@@ -85,6 +85,7 @@ class Moderation(commands.Cog):
                 e = discord.Embed(title=f"{ctx.author.name} warned {member.name} quickly!", description=reason)
                 await ctx.send(embed=e, delete_after=5)
                 await cursor.execute("UPDATE warns1 SET warns = warns + 1 WHERE user_id=?", (USER_ID))
+                await self.db.commit()
             
         
     @commands.command(
