@@ -64,32 +64,34 @@ class Moderation(commands.Cog):
     async def warn(self, ctx, member: discord.Member, *, reason="No Reason Provided"):
         cursor = await self.bot.db.cursor()
         USER_ID = member.id
-        await cursor.execute(f"SELECT user_id FROM warns1 WHERE user_id={USER_ID}")
-        result_userID = await cursor.fetchone()
-        
-        if result_userID == None:
-            await cursor.execute("INSERT INTO warns1(warns, user_id) values(?,?)",(1, USER_ID))
-            await self.bot.db.commit()
-            e2 = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned {member.name} quickly!", description=reason)
-            await ctx.send(embed=e2, delete_after=5)
-            
+        if USER_ID == ctx.author.id:
+              await ctx.send("Friend, I could kick you right now, but I'm not going to. (No warnings added)")
         else:
-            await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
-            result_userBal = await cursor.fetchone()  
-            if result_userBal[0] > 3:
-                    await cursor.execute("DELETE * FROM warns1 WHERE value = ?,?", (result_userBal[0], USER_ID))
-                    await self.bot.db.commit()
-                    await member.kick(reason=reason)
-                    embed = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} kicked: {member.name}", description=reason)
-                    await ctx.send(embed=embed, delete_after=5)
-                    await member.send(embed=embed)
-            else:
-                await cursor.execute("UPDATE warns1 SET warns = warns + ? WHERE user_id=?", (1, USER_ID))
+            await cursor.execute(f"SELECT user_id FROM warns1 WHERE user_id={USER_ID}")
+            result_userID = await cursor.fetchone()
+            if result_userID == None:
+                await cursor.execute("INSERT INTO warns1(warns, user_id) values(?,?)",(1, USER_ID))
                 await self.bot.db.commit()
-                e = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned {member}", description=reason)
-                e2 = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned you for-", description=reason)
-                await ctx.send(embed=e, delete_after=5)
-                await member.send(embed=e2)
+                e2 = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned {member.name} quickly!", description=reason)
+                await ctx.send(embed=e2, delete_after=5)
+            
+            else:
+                await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
+                result_userBal = await cursor.fetchone()  
+                if result_userBal[0] > 3:
+                        await cursor.execute("DELETE * FROM warns1 WHERE value = ?,?", (result_userBal[0], USER_ID))
+                        await self.bot.db.commit()
+                        await member.kick(reason=reason)
+                        embed = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} kicked: {member.name}", description=reason)
+                        await ctx.send(embed=embed, delete_after=5)
+                        await member.send(embed=embed)
+                else:
+                    await cursor.execute("UPDATE warns1 SET warns = warns + ? WHERE user_id=?", (1, USER_ID))
+                    await self.bot.db.commit()
+                    e = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned {member}", description=reason)
+                    e2 = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} warned you for-", description=reason)
+                    await ctx.send(embed=e, delete_after=5)
+                    await member.send(embed=e2)
     
     
 
