@@ -83,7 +83,7 @@ async def on_message(message):
         await message.author.send(':x: Sorry, but I don\'t accept commands through direct messages! Please use the `#bots` channel of your corresponding server!')
         return
     if bot.user.mentioned_in(message) and message.mention_everyone is False:
-        if 'help' in message.content.lower():
+        if 'prefix' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
         else:
             pass
