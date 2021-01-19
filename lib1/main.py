@@ -79,9 +79,20 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if bot.user.mentioned_in(message):
-        await message.channel.send(f"You can type th,help for more info")
-    
+    if message.author.bot or message.author.id in loadconfig.__blacklist__:
+        return
+    if isinstance(message.channel, discord.DMChannel):
+        await message.author.send(':x: Sorry, but I don\'t accept commands through direct messages! Please use the `#bots` channel of your corresponding server!')
+        return
+    if bot.dev and not await bot.is_owner(message.author):
+        return
+    if bot.user.mentioned_in(message) and message.mention_everyone is False:
+        if 'help' in message.content.lower():
+            await  message.channel.send('A full list of all commands is available by typing ```th,help```')
+        else:
+            await message.add_reaction('<:pingsock:801097742726070292>')
+    if 'instagram.com' in message.clean_content.lower():
+        await message.add_reaction('💩')
     await bot.process_commands(message)
 
 @bot.event
