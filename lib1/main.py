@@ -79,8 +79,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if message.author.bot or message.author.id in loadconfig.__blacklist__:
-        return
     if isinstance(message.channel, discord.DMChannel):
         await message.author.send(':x: Sorry, but I don\'t accept commands through direct messages! Please use the `#bots` channel of your corresponding server!')
         return
