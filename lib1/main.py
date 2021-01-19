@@ -86,7 +86,7 @@ async def on_message(message):
         if 'help' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
         else:
-            await message.add_reaction('<:pingsock:801097742726070292>')
+            pass
     if 'instagram.com' in message.clean_content.lower():
         await message.add_reaction('💩')
     await bot.process_commands(message)
