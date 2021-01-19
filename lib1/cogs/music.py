@@ -61,7 +61,7 @@ class MusicCog(commands.Cog):
       for i in range(0, len(player.queue)):
         desc = desc + '\n' + str(i+2) + ". " + player.queue[i].title
         e = discord.Embed(title="Queue", description=f"{desc}")
-    await ctx.send(embed=e)
+        await ctx.send(embed=e)
         
   @commands.command(name='now', aliases=['np', 'n', 'playing'])
   @commands.guild_only()
