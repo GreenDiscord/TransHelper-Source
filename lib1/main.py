@@ -80,8 +80,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if isinstance(message.channel, discord.DMChannel):
-        await message.author.send(':x: Sorry, but I don\'t accept commands through direct messages! Please use the `#bots` channel of your corresponding server!')
-        return
+        pass
     if bot.user.mentioned_in(message) and message.mention_everyone is False:
         if 'prefix' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
