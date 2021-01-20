@@ -84,7 +84,7 @@ class Moderation(commands.Cog):
                         await member.kick(reason=reason)
                         embed = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} kicked: {member.name}", description=reason)
                         await ctx.send(embed=embed, delete_after=5)
-                        await member.send(embed=embed)
+                        await member.send(f"you have been kicked from {ctx.guild} for having 3 warnings")
                 else:
                     await cursor.execute("UPDATE warns1 SET warns = warns + ? WHERE user_id=?", (1, USER_ID))
                     await self.bot.db.commit()
