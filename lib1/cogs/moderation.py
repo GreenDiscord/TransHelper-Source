@@ -79,7 +79,7 @@ class Moderation(commands.Cog):
                 await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
                 result_userBal = await cursor.fetchone()  
                 if result_userBal[0] > 3:
-                        await cursor.execute("DELETE warns FROM warns1 WHERE value = ?", (USER_ID,))
+                        await cursor.execute("DELETE FROM warns1 WHERE values(?,?)", (warns, USER_ID))
                         await self.bot.db.commit()
                         await member.kick(reason=reason)
                         embed = discord.Embed(title=f"{ctx.author.name}/{ctx.author.id} kicked: {member.name}", description=reason)
