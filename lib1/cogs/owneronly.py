@@ -3,7 +3,7 @@ import random
 import discord
 import psutil
 import discord
-
+import typing
 from datetime import datetime
 # cog reloads and sync command made by isirk, link https://github.com/isirk/Sirk
 import json
@@ -396,7 +396,7 @@ class OwnerOnly(commands.Cog):
         else:
             channel = self.bot.get_channel(int(id))
             await channel.send(f"{message}")
-            await ctx.reply("Sent your message :)")
+            await ctx.author.send("Sent your message :)")
 
 
 
