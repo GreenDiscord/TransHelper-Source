@@ -12,13 +12,13 @@ class MystbinApi(commands.Cog):
 
         @commands.command()
         async def mystbin(self, ctx, *, text):
-            paste = await mystbin_client.post(f"{text}", syntax="python")
+            paste = await self.mystbin_client.post(f"{text}", syntax="python")
             e = discord.Embed("I have created a mystbin link for you!", description=f"[Click Here]({paste.url})")
             await ctx.send(embed=e)
 
         @commands.command()
         async def getmystbin(self, ctx, id):
-            get_paste = await mystbin_client.get(f"https://mystb.in/{id}")
+            get_paste = await self.mystbin_client.get(f"https://mystb.in/{id}")
             lis = ["awesome","bad","good"]
             e = discord.Embed(title=f"I have found this, is it {random.choice(lis)}?", description=f"The content is shown here:  [Link]({get_paste.url})")
 
