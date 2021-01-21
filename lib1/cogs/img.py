@@ -101,6 +101,20 @@ class ImageManipulation(commands.Cog):
         e = discord.Embed(title="Here You Go! Filter used is pixel!")
         e.set_image(url=f"attachment://pixel.{img.format}")
         await ctx.send(file=e2file, embed=e)
+        
+    @img.command()
+    async def pride(self, ctx, member: discord.Member=None, flag):
+        """Use one of these flags : asexual, bisexual, gay, genderfluid, genderqueer, intersex, lesbian, nonbinary, progress, pan or trans."""
+        if member is None:
+            member = ctx.author
+            
+        text = str(flag)
+        url = str(member.avatar_url_as(format="png", size=1024))
+        img = await self.bot.dagpi.image_process(ImageFeatures.pride(), url=url, flag=text)
+        e2file = discord.File(fp=img.image,filename=f"pride.{img.format}")
+        e = discord.Embed(title="Here You Go! Filter used is pride!")
+        e.set_image(url=f"attachment://pride.{img.format}")
+        await ctx.send(file=e2file, embed=e)
     
     @img.command()
     async def magik(self, ctx, member: discord.Member=None):
