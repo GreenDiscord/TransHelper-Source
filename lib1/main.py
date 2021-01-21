@@ -30,9 +30,9 @@ intents.guilds = True
 
 async def get_prefix(bot, message):
     if message.guild is None:
-        prefixes = ["th,", "th ", "please dont find this one, "]
+        prefixes = ["th,", "th.", "th ", "please dont find this one, "]
     elif message.author.id == 787800565512929321:
-        prefixes = ["th, ", "th.", "th ", ""]
+        prefixes = ["th,", "th.", "th ", ""]
     else:
         prefixes = ["th,", "th.", "th ", "please dont find this one,"]
 
