@@ -16,7 +16,7 @@ class ImageManipulation(commands.Cog):
      
     @commands.group(invoke_without_command=True)
     async def img(self, ctx):
-        await ctx.send("These commands are for images, send ```th,help ImageManipulation``` for all commands!")
+        await ctx.send("These commands are for images, send ```th,help img``` for all commands!")
 
     @img.command()
     async def wni(self, ctx, *, name):
