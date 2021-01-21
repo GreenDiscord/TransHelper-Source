@@ -49,9 +49,16 @@ class Moderation(commands.Cog):
           if result_userID == None:
             await ctx.send("This user has no warns")
           else:
-             await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
-             result_userBal = await cursor.fetchone()
-             await ctx.send(f"{member.name}'s warns are {result_userBal[0]}")
+             if member.id == ctx.author.I'd:
+                 name = "You"
+                 await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
+                 result_User = await cursor.fetchone()
+                 await ctx.send(f"{name}'s warns are {result_User[0]}")
+             else:
+                 name = f"{member.name}"
+                 await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
+                 result_userBal = await cursor.fetchone()
+                 await ctx.send(f"{name}'s warns are {result_userBal[0]}")
     
     @commands.command(
         name="warn",
