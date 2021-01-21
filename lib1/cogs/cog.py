@@ -108,7 +108,9 @@ class Info(commands.Cog):
         """ Get the current banner image """
         if not ctx.guild.banner:
             return await ctx.send("This server does not have a banner...")
-        await ctx.send(f"Banner of **{ctx.guild.name}**\n{ctx.guild.banner_url_as(format='png')}")
+        e = discord.Embed(title=f"ℹ Banner for {ctx.guild}")
+        e.set_image(url=ctx.guild.banner_url_as(format='png'))
+        await ctx.send(embed=e)
 
     @commands.command()
     @commands.guild_only()
