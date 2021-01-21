@@ -4,6 +4,7 @@ from io import BytesIO
 import time
 from discord.ext import commands
 import random
+import inspect
 
 class Info(commands.Cog):
     def __init__(self, bot):
@@ -19,7 +20,42 @@ class Info(commands.Cog):
         e = discord.Embed(title=f"Hi, You can vote for me using the link below!", description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color = discord.Colour.from_hsv(random.random(), 1, 1))
         await ctx.send(embed=e)
         
+    @commands.command()
+    async def source(self, ctx, *, command: str = None):
+        """ Displays source code """
+        source_url = 'https://github.com/GreenDiscord/TransHelper-Source'
+        branch = 'main'
+        if command is None:
+            e = discord.Embed(title="You didn't provide a command, so here's the source!", description=f"[Source]({source_url})")
+            return await ctx.send(embed=e)
 
+        if command == 'help':
+            src = type(self.bot.help_command)
+            module = src.__module__
+            filename = inspect.getsourcefile(src)
+        else:
+            obj = self.bot.get_command(command.replace('.', ' '))
+            if obj is None:
+                return await ctx.send('Could not find command.')
+
+            # since we found the command we're looking for, presumably anyway, let's
+            # try to access the code itself
+            src = obj.callback.__code__
+            module = obj.callback.__module__
+            filename = src.co_filename
+
+        lines, firstlineno = inspect.getsourcelines(src)
+        if not module.startswith('discord'):
+            # not a built-in command
+            location = os.path.relpath(filename).replace('\\', '/')
+        else:
+            location = module.replace('.', '/') + '.py'
+            source_url = 'https://github.com/Rapptz/discord.py'
+            branch = 'master'
+
+        final_url = f'<{source_url}/blob/{branch}/{location}#L{firstlineno}-L{firstlineno + len(lines) - 1}>'
+        e2 = discord.Embed(title=f"Here's The Source For Command {command}" description=f"[Click Here]({final_url})")
+        await ctx.send(embed=e2)
 
     @commands.command()
     @commands.guild_only()
