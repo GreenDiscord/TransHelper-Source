@@ -387,10 +387,16 @@ class OwnerOnly(commands.Cog):
     
     @dev.group()
     @commands.check(owners)
-    async def send(self, ctx, id=None, *, message):
-        channel = self.bot.get_channel(int(id))
-        await channel.send(f"{message}")
-        await ctx.reply("Sent your message :)")
+    async def send(self, ctx, id : typing.Optional[int] = None, *, message):
+        if id is None:
+            message = id
+            channel2 = ctx.channel
+            await channel2.send(f"{message}")
+            await ctx.reply("Sent your message :)")
+        else:
+            channel = self.bot.get_channel(int(id))
+            await channel.send(f"{message}")
+            await ctx.reply("Sent your message :)")
 
 
 
