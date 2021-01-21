@@ -28,7 +28,8 @@ class Info(commands.Cog):
         for activity in user.activities:
             if isinstance(activity, Spotify):
                 await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
- 
+            else:
+                await ctx.send("*vibing* Oh sorry, this person isn't listening to spotify")
     @commands.command()
     async def source(self, ctx, *, command: str = None):
         """ Displays source code """
