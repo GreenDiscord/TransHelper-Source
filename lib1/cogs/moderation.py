@@ -53,7 +53,7 @@ class Moderation(commands.Cog):
                  name = "You"
                  await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
                  result_User = await cursor.fetchone()
-                 await ctx.send(f"{name}'s warns are {result_User[0]}")
+                 await ctx.send(f"{name} number of warns are {result_User[0]}")
              else:
                  name = f"{member.name}"
                  await cursor.execute(f"SELECT warns FROM warns1 WHERE user_id={USER_ID}")
