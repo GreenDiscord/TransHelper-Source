@@ -109,9 +109,9 @@ class ImageManipulation(commands.Cog):
             member = ctx.author
         url = str(member.avatar_url_as(format="png", size=1024))
         img = await self.bot.dagpi.image_process(ImageFeatures.jail(), url=url)
-        e2file = discord.File(fp=img.image,filename=f"pride.{img.format}")
-        e = discord.Embed(title="Here You Go! Filter used is pride!")
-        e.set_image(url=f"attachment://pride.{img.format}")
+        e2file = discord.File(fp=img.image,filename=f"jail.{img.format}")
+        e = discord.Embed(title="Here You Go! Filter used is jail!")
+        e.set_image(url=f"attachment://jail.{img.format}")
         await ctx.send(file=e2file, embed=e)
     
     @img.command()
