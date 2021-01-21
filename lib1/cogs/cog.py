@@ -25,8 +25,8 @@ class Info(commands.Cog):
         """ Displays source code """
         source_url = 'https://github.com/GreenDiscord/TransHelper-Source'
         branch = 'main'
+        e = discord.Embed(title="You didn't provide a command, so here's the source!", description=f"[Source]({source_url})")
         if command is None:
-            e = discord.Embed(title="You didn't provide a command, so here's the source!", description=f"[Source]({source_url})")
             return await ctx.send(embed=e)
 
         if command == 'help':
