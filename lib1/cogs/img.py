@@ -103,11 +103,12 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
         
     @img.command()
-    async def pride(self, ctx, member: discord.Member, flag):
+    async def pride(self, ctx, member: discord.Member, flag, *, text):
         """Use one of these flags : asexual, bisexual, gay, genderfluid, genderqueer, intersex, lesbian, nonbinary, progress, pan or trans."""
-   
+        
+        text = str(text)
         url = str(member.avatar_url_as(format="png", size=1024))
-        img = await self.bot.dagpi.image_process(ImageFeatures.pride(), url=url, flag=f"{flag}")
+        img = await self.bot.dagpi.image_process(ImageFeatures.pride(), url=url, text=text flag=f"{flag}")
         e2file = discord.File(fp=img.image,filename=f"pride.{img.format}")
         e = discord.Embed(title="Here You Go! Filter used is pride!")
         e.set_image(url=f"attachment://pride.{img.format}")
