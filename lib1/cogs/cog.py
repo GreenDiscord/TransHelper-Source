@@ -23,13 +23,14 @@ class Info(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.command()
-    async def spotify(ctx, user: discord.Member=None):
+    async def spotify(self, ctx, user: discord.Member=None):
         user = user or ctx.author
         for activity in user.activities:
             if isinstance(activity, Spotify):
                 await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
             else:
                 await ctx.send("*vibing* Oh sorry, this person isn't listening to spotify")
+    
     @commands.command()
     async def source(self, ctx, *, command: str = None):
         """ Displays source code """
