@@ -32,41 +32,12 @@ class Info(commands.Cog):
                 await ctx.send("*vibing* Oh sorry, this person isn't listening to spotify")
     
     @commands.command()
-    async def source(self, ctx, *, command: str = None):
+    async def source(self, ctx):
         """ Displays source code """
         source_url = 'https://github.com/GreenDiscord/TransHelper-Source'
-        branch = 'main'
-        e = discord.Embed(title="You didn't provide a command, so here's the source!", description=f"[Source]({source_url})")
-        if command is None:
-            return await ctx.send(embed=e)
+        e = discord.Embed(title="You didn't provide a command (because you cant), so here's the source!", description=f"[Source]({source_url})")
+        await ctx.send(embed=e)
 
-        if command == 'help':
-            src = type(self.bot.help_command)
-            module = src.__module__
-            filename = inspect.getsourcefile(src)
-        else:
-            obj = self.bot.get_command(command.replace('.', ' '))
-            if obj is None:
-                return await ctx.send('Could not find command.')
-
-            # since we found the command we're looking for, presumably anyway, let's
-            # try to access the code itself
-            src = obj.callback.__code__
-            module = obj.callback.__module__
-            filename = src.co_filename
-
-        lines, firstlineno = inspect.getsourcelines(src)
-        if not module.startswith('discord'):
-            # not a built-in command
-            location = os.path.relpath(filename).replace('\\', '/')
-        else:
-            location = module.replace('.', '/') + '.py'
-            source_url = 'https://github.com/Rapptz/discord.py'
-            branch = 'master'
-
-        final_url = f'<{source_url}/blob/{branch}/{location}#L{firstlineno}-L{firstlineno + len(lines)}>'
-        e2 = discord.Embed(title=f"Here's The Source For Command {command}", description=f"[Click Here]({final_url})")
-        await ctx.send(embed=e2)
 
     @commands.command()
     @commands.guild_only()
@@ -77,17 +48,17 @@ class Info(commands.Cog):
       e.set_image(url=user.avatar_url)
       await ctx.send(embed=e)
 
-    @commands.command()
-    @commands.guild_only()
-    async def roles(self, ctx):
-      """ Get all roles in current server """
-      allroles = ""
+    #@commands.command()
+    #@commands.guild_only()
+    #async def roles(self, ctx):
+    #  """ Get all roles in current server """
+   #   allroles = ""
 
-      for num, role in enumerate(sorted(ctx.guild.roles, reverse=True), start=1):
-          allroles += f"[{str(num).zfill(2)}] {role.id}\t{role.name}\t[ Users: {len(role.members)} ]\r\n"
+     # for num, role in enumerate(sorted(ctx.guild.roles, reverse=True), start=1):
+     #     allroles += f"[{str(num).zfill(2)}] {role.id}\t{role.name}\t[ Users: {len(role.members)} ]\r\n"
 
-      data = BytesIO(allroles.encode('utf-8'))
-      await ctx.send(content=f"Roles in **{ctx.guild.name}**", file=discord.File(data, filename=f"Roles"))
+     # data = BytesIO(allroles.encode('utf-8'))
+     # await ctx.send(content=f"Roles in **{ctx.guild.name}**", file=discord.File(data, filename=f"Roles"))
 
     @commands.command()
     @commands.guild_only()
@@ -108,7 +79,7 @@ class Info(commands.Cog):
         if ctx.invoked_subcommand is None:
             find_bots = sum(1 for member in ctx.guild.members if member.bot)
 
-            embed = discord.Embed()
+            embed = discord.Embed(title=f"ℹ information about **{ctx.guild.name}**", description=None)
 
             if ctx.guild.icon:
                 embed.set_thumbnail(url=ctx.guild.icon_url)
@@ -121,11 +92,11 @@ class Info(commands.Cog):
             embed.add_field(name="Bots", value=find_bots, inline=True)
             embed.add_field(name="Owner", value=ctx.guild.owner, inline=True)
             embed.add_field(name="Region", value=ctx.guild.region, inline=True)
-            await ctx.send(content=f"ℹ information about **{ctx.guild.name}**", embed=embed)
+            await ctx.send(embed=embed)
 
-    @server.command(name="avatar", aliases=["icon"])
+    @server.command(name="server_icon", aliases=["icon"])
     @commands.guild_only()
-    async def server_avatar(self, ctx):
+    async def server_icon(self, ctx):
         """ Get the current server icon """
         if not ctx.guild.icon:
             return await ctx.send("This server does not have a avatar...")
@@ -148,15 +119,17 @@ class Info(commands.Cog):
         show_roles = ', '.join(
             [f"<@&{x.id}>" for x in sorted(user.roles, key=lambda x: x.position, reverse=True) if x.id != ctx.guild.default_role.id]
         ) if len(user.roles) > 1 else 'None'
-
-        embed = discord.Embed(colour=user.top_role.colour.value)
+        content2=f"ℹ About **{user.id}**"
+        embed = discord.Embed(title=content2, colour=user.top_role.colour.value)
         embed.set_thumbnail(url=user.avatar_url)
 
         embed.add_field(name="Full name", value=user, inline=True)
         embed.add_field(name="Nickname", value=user.nick if hasattr(user, "nick") else "None", inline=True)
         embed.add_field(name="Roles", value=show_roles, inline=False)
+        embed.add_field(name"Joined?", value=f"{user.joined_at}")
+        
 
-        await ctx.send(content=f"ℹ About **{user.id}**", embed=embed)
+        await ctx.send(embed=embed)
 
 
 def setup(bot):
