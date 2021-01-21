@@ -89,6 +89,8 @@ async def on_message(message):
         await message.add_reaction('💩')
     if 'instagram is good' in message.clean_content.lower():
         await message.add_reaction('❌')
+    if 'instagram is spyware' in message.clean_content.lower():
+        await message.add_reaction('✅')
     await bot.process_commands(message)
     
 
