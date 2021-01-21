@@ -54,7 +54,7 @@ class Info(commands.Cog):
             branch = 'master'
 
         final_url = f'<{source_url}/blob/{branch}/{location}#L{firstlineno}-L{firstlineno + len(lines) - 1}>'
-        e2 = discord.Embed(title=f"Here's The Source For Command {command}" description=f"[Click Here]({final_url})")
+        e2 = discord.Embed(title=f"Here's The Source For Command {command}", description=f"[Click Here]({final_url})")
         await ctx.send(embed=e2)
 
     @commands.command()
