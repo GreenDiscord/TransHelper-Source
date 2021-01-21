@@ -27,16 +27,13 @@ intents.guilds = True
 
 
 
-def get_prefix(bot, message):
-    """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
-
-    
-    prefixes = ['th,', 'th ', 'please dont find this one,']
-
-    # Check to see if we are outside of a guild. e.g DM's etc.
-    if not message.guild:
-        
-        return 'th,'
+async def get_prefix(bot, message):
+    if message.guild is None:
+        prefixes = ["th,", "th ", "please dont find this one, "]
+    elif message.author.id == 787800565512929321:
+        prefixes = ["th, ", "th.", "th ", ""]
+    else:
+        prefixes = ["th,", "th.", "th ", "please dont find this one,"]
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
