@@ -64,7 +64,7 @@ class Info(commands.Cog):
             source_url = 'https://github.com/Rapptz/discord.py'
             branch = 'master'
 
-        final_url = f'<{source_url}/blob/{branch}/{location}#L{firstlineno}-L{firstlineno + len(lines) - 1}>'
+        final_url = f'<{source_url}/blob/{branch}/{location}#L{firstlineno}-L{firstlineno + len(lines)}>'
         e2 = discord.Embed(title=f"Here's The Source For Command {command}", description=f"[Click Here]({final_url})")
         await ctx.send(embed=e2)
 
