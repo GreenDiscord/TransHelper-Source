@@ -100,29 +100,6 @@ class Info(commands.Cog):
       embed.set_image(url=user.avatar_url)
       await ctx.send(embed=embed)
 
-    @commands.command()
-    @commands.guild_only()
-    async def mods(self, ctx):
-        """ Check which mods are online on current guild """
-        message = ""
-        all_status = {
-            "online": {"users": [], "emoji": "🟢"},
-            "idle": {"users": [], "emoji": "🟡"},
-            "dnd": {"users": [], "emoji": "🔴"},
-            "offline": {"users": [], "emoji": "⚫"}
-        }
-
-        for user in ctx.guild.members:
-            idd = 790714521642860556
-            if user.roles is discord.utils.get(ctx.guild.roles, id=idd):
-                if not user.bot:
-                    all_status[str(user.status)]["users"].append(f"**{user}**")
-
-        for g in all_status:
-            if all_status[g]["users"]:
-                message += f"{all_status[g]['emoji']} {', '.join(all_status[g]['users'])}\n"
-
-        await ctx.send(f"Mods in **{ctx.guild.name}**\n{message}")
 
     @commands.group()
     @commands.guild_only()
