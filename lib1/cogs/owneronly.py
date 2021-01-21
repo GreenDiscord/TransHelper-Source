@@ -392,7 +392,7 @@ class OwnerOnly(commands.Cog):
             message = id
             channel2 = ctx.channel
             await channel2.send(f"{message}")
-            await ctx.reply("Sent your message :)")
+            await ctx.author.send("Sent your message :)")
         else:
             channel = self.bot.get_channel(int(id))
             await channel.send(f"{message}")
