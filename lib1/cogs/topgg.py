@@ -1,9 +1,6 @@
 import dbl
 import discord
-from discord.ext import commands, tasks
-
-import asyncio
-import logging
+from discord.ext import commands
 
 
 class TopGG(commands.Cog):
@@ -12,15 +9,10 @@ class TopGG(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.topken = bot.topken
-        self.dblpy = dbl.DBLClient(self.bot, self.bot.topken)
-        self.c = self.bot.get_channel(800450802174263356)
- 
-    
+        self.dblpy = dbl.DBLClient(self.bot, self.bot.topken, autopost=True) 
+
     async def on_guild_post():
         print("Server count posted successfully")
-        await self.c.send(f"Server Count Now Updated!, Current Guilds: {len(self.bot.guilds)}")
 
 def setup(bot):
-    global logger
-    logger = logging.getLogger('bot')
     bot.add_cog(TopGG(bot))
