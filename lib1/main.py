@@ -10,6 +10,7 @@ from discord.ext.buttons import Paginator
 from helpe import NewHelp
 from asyncdagpi import Client
 import time
+import mystbin
 
 class Pag(Paginator):
     async def teardown(self):
@@ -40,6 +41,7 @@ async def get_prefix(bot, message):
 
 bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=False, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
+bot.mystbin_client = mystbin.Client()
 bot.version = "15"
 START_BAL = 250
 token = open("toke.txt", "r").read()
