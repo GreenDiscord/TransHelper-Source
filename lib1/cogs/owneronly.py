@@ -5,7 +5,7 @@ import psutil
 import discord
 
 from datetime import datetime
-# cog reloads and sync command made by isirk, link will be here soon
+# cog reloads and sync command made by isirk, link https://github.com/isirk/Sirk
 import json
 
 from discord.user import User
