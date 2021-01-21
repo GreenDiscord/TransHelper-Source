@@ -87,7 +87,10 @@ async def on_message(message):
             pass
     if 'instagram.com' in message.clean_content.lower():
         await message.add_reaction('💩')
+    if 'instagram is good' in message.clean_content.lower():
+        await message.add_reaction('❌')
     await bot.process_commands(message)
+    
 
 @bot.event
 async def on_member_join(member : discord.Member):
