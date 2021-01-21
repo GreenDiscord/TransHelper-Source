@@ -9,6 +9,7 @@ import aiosqlite
 from discord.ext.buttons import Paginator
 from helpe import NewHelp
 from asyncdagpi import Client
+import time
 
 class Pag(Paginator):
     async def teardown(self):
@@ -49,6 +50,7 @@ dagpitoken = open("asy.txt", "r").read()
 topastoken = open("top.txt", "r").read()
 bot.topken = f"{topastoken}"
 bot.dagpi = Client(dagpitoken)
+bot.start_time = time.time()
 
 
 
