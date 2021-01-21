@@ -5,6 +5,7 @@ import time
 from discord.ext import commands
 import random
 import inspect
+import os
 
 class Info(commands.Cog):
     def __init__(self, bot):
