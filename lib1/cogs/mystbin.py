@@ -7,7 +7,7 @@ import random
 class MystbinApi(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.mystbin_client = mystbin.Client()
+        self.bot.mystbin_client = bot.mystbin_client
 
 
         @commands.command()
