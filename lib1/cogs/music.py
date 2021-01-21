@@ -32,17 +32,17 @@ class MusicCog(commands.Cog):
         await ctx.send("I'm already connected!")
   
   
-    @commands.command(name='skip', aliases=['s'])
-    @commands.guild_only()
-    async def _skip(self, ctx):
-        """ Skips the current track. """
-        player = self.bot.music.player_manager.get(ctx.guild.id)
+  @commands.command(name='skip', aliases=['s'])
+  @commands.guild_only()
+  async def _skip(self, ctx):
+      """ Skips the current track. """
+      player = self.bot.music.player_manager.get(ctx.guild.id)
 
-        if not player.is_playing:
-            return await ctx.send('Not playing.')
+      if not player.is_playing:
+          return await ctx.send('Not playing.')
 
-        await player.skip()
-        await ctx.send('⏭ | Skipped.')
+      await player.skip()
+      await ctx.send('⏭ | Skipped.')
       
     
   @commands.command(name="queue", aliases=["q"])
