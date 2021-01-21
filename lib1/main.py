@@ -122,8 +122,10 @@ async def on_guild_join(guild):
 @bot.event
 async def on_command_error(ctx, error):
   guild = ctx.guild
-  member = bot.get_channel(799118181972836363)
+  member = bot.get_member(787800565512929321)
   if ctx.guild.id == 336642139381301249:
+    pass
+  if member.id == ctx.author.id:
     pass
   else:
         if isinstance(error, commands.CommandOnCooldown):
