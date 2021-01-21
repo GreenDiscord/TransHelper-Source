@@ -13,7 +13,7 @@ class MystbinApi(commands.Cog):
     @commands.command()
     async def mystbin(self, ctx, *, text):
         paste = await self.bot.mystbin_client.post(f"{text}", syntax="python")
-        e = discord.Embed("I have created a mystbin link for you!", description=f"[Click Here]({paste.url})")
+        e = discord.Embed(title="I have created a mystbin link for you!", description=f"[Click Here]({paste.url})")
         await ctx.send(embed=e)
 
     @commands.command()
