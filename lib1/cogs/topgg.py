@@ -10,9 +10,11 @@ class TopGG(commands.Cog):
         self.bot = bot
         self.bot.topken = bot.topken
         self.dblpy = dbl.DBLClient(self.bot, self.bot.topken, autopost=True) 
+        self.c = self.bot.get_channel(800450802174263356)
 
     async def on_guild_post():
         print("Server count posted successfully")
+        self.c.send(f"Updated Top.gg Server Stats, Current Guild Count {len(bot.guilds)}")
 
 def setup(bot):
     bot.add_cog(TopGG(bot))
