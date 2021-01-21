@@ -5,6 +5,7 @@ import time
 from discord.ext import commands
 import random
 import inspect
+from discord import Spotify
 import os
 
 class Info(commands.Cog):
@@ -20,7 +21,14 @@ class Info(commands.Cog):
     async def vote(self,ctx):
         e = discord.Embed(title=f"Hi, You can vote for me using the link below!", description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color = discord.Colour.from_hsv(random.random(), 1, 1))
         await ctx.send(embed=e)
-        
+
+    @commands.command()
+    async def spotify(ctx, user: discord.Member=None):
+        user = user or ctx.author
+        for activity in user.activities:
+            if isinstance(activity, Spotify):
+                await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
+ 
     @commands.command()
     async def source(self, ctx, *, command: str = None):
         """ Displays source code """
