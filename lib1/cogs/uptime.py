@@ -1,17 +1,17 @@
 import discord, datetime, time
 from discord.ext import commands
 
-start_time = time.time()
 
 
 class Uptime(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.bot.start_time = bot.start_time
 
     @commands.command(pass_context=True)
     async def uptime(self, ctx):
         current_time = time.time()
-        difference = int(round(current_time - start_time))
+        difference = int(round(current_time - self.bot.start_time))
         text = str(datetime.timedelta(seconds=difference))
         embed = discord.Embed(colour=ctx.message.author.top_role.colour)
         embed.add_field(name="Uptime", value=text)
