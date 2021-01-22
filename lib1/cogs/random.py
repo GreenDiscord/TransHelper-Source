@@ -78,7 +78,8 @@ class Random(commands.Cog):
       channel = self.bot.get_channel(794164790368796672)
       e = discord.Embed(title="Sent Feedback!", description=f"Your feedback '{feed}' has been sent!")
       await ctx.send(embed=e)
-      await channel.send(f"Feedback from {ctx.author}, Feedback = {feed}")
+      e2 = discord.Embed(title=f"Oh no, is it bad or good? ({ctx.author} has sent feedback)", description=f"{feed}")
+      await channel.send(embed=e2)
     
     @feedback.error
     async def feedback_handler(self, ctx, error):
