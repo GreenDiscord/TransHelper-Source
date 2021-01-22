@@ -56,7 +56,7 @@ class Music(commands.Cog):
             vol = 0
             await ctx.send('Player is currently muted', delete_after=10)
 
-        await player.set_volume(vol)                                    region='us_central')
+        await player.set_volume(vol)                                    
 
     @commands.command(name='connect')
     async def connect_(self, ctx, *, channel: discord.VoiceChannel = None):
