@@ -45,7 +45,7 @@ class Music(commands.Cog):
     @commands.command()
     async def vol_down(self, ctx: commands.Context):
         """Command used for volume down button."""
-        player: Player = self.bot.wavelink.get_player(ctx.guild.id)
+        player = self.bot.wavelink.get_player(ctx.guild.id)
 
         if not player.is_connected():
             return
