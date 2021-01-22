@@ -41,17 +41,13 @@ class Random(commands.Cog):
     
     @commands.max_concurrency(1, per=commands.BucketType.channel) 
     @commands.command()
-    async def cookie(self, ctx):
+    async def reaction(self, ctx):
         """
-        Yum yum.
+        Yum Yum or Yuck Yuck?
         """
         cookies = ["🍪", "❤"]
         lis = ["this mighty","this weak","this amazing"]
         reaction = random.choices(cookies, weights=[0.9, 0.1], k=1)[0]
-        if reaction is ❤:
-            word = "Heart"
-        elif reaction is 🍪:
-            word = "Cookie"
         embed = discord.Embed(description=f"So, {random.choice(lis)} fighter has challenged people to a game of....Cookie? Okay then get ready!")
         message = await ctx.send(embed=embed)
         await asyncio.sleep(4)
@@ -59,7 +55,7 @@ class Random(commands.Cog):
             await message.edit(embed=discord.Embed(description=str(i)))
             await asyncio.sleep(1)
         await asyncio.sleep(random.randint(1, 3))
-        await message.edit(embed=discord.Embed(description=f"Eat the {word}!"))
+        await message.edit(embed=discord.Embed(description=f"React to the {reaction}!"))
         await message.add_reaction(reaction)
         start = time.perf_counter()
         try:
