@@ -741,7 +741,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         tts = gTTS(text=text, lang="en")
         tts.save("text.mp3")
 
-        await player.queue.put(discord.FFmpegPCMAudio('text.mp3'), after=lambda e: print(f"Finished playing: {e}"))
+        await player.play("text.mp3")
 
         await os.remove("text.mp3")    
 
