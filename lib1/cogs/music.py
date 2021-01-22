@@ -26,7 +26,37 @@ class Music(commands.Cog):
                                               rest_uri='http://lavalink.something.host:80',
                                               password='youshallnotpass',
                                               identifier='Node1',
-                                              region='us_central')
+     @commands.command()
+    async def vol_up(self, ctx: commands.Context):
+        """Command used for volume up button."""
+        player = self.bot.wavelink.get_player(ctx.guild.id)
+
+        if not player.is_connected():
+            return
+
+        vol = int(math.ceil((player.volume + 10) / 10)) * 10
+
+        if vol > 100:
+            vol = 100
+            await ctx.send('Maximum volume reached', delete_after=7)
+
+        await player.set_volume(vol)
+
+    @commands.command()
+    async def vol_down(self, ctx: commands.Context):
+        """Command used for volume down button."""
+        player: Player = self.bot.wavelink.get_player(ctx.guild.id)
+
+        if not player.is_connected():
+            return
+
+        vol = int(math.ceil((player.volume - 10) / 10)) * 10
+
+        if vol < 0:
+            vol = 0
+            await ctx.send('Player is currently muted', delete_after=10)
+
+        await player.set_volume(vol)                                    region='us_central')
 
     @commands.command(name='connect')
     async def connect_(self, ctx, *, channel: discord.VoiceChannel = None):
