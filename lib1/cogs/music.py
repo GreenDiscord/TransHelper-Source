@@ -1,7 +1,7 @@
 #FULL CREDIT TO WAVELINK EXAMPLES, UPDATING THIS SOON
 
 
-
+from gtts import GTTs
 import asyncio
 import async_timeout
 import copy
