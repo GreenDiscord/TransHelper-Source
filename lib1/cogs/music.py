@@ -725,7 +725,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             else:
                 player.dj = m
                 return await ctx.send(f'{member.mention} is now the DJ.')
-    @command()
+    
+    @commands.command()
     async def repeat(self, ctx, *, text=None):
         player: Player = self.bot.wavelink.get_player(guild_id=ctx.guild.id, cls=Player, context=ctx)
 
