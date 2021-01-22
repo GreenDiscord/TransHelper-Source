@@ -89,14 +89,6 @@ class Random(commands.Cog):
             
     @command()
     async def repeat(ctx, *, text=None):
-    """
-    A command which saves `text` into a speech file with
-    gtts and then plays it back in the current voice channel.
-
-    Params:
-     - text [Optional]
-        This will be the text we speak in the voice channel
-    """
         if text is None:
             await ctx.send(f"Hey {ctx.author.mention}, I need to know what to say please.")
             return
