@@ -45,7 +45,7 @@ class Random(commands.Cog):
         """
         Yum yum.
         """
-        cookies = ["🍪", "🥠"]
+        cookies = ["🍪", "❤"]
         reaction = random.choices(cookies, weights=[0.9, 0.1], k=1)[0]
         embed = discord.Embed(description=f"First one to eat the {reaction} wins!")
         message = await ctx.send(embed=embed)
@@ -88,7 +88,7 @@ class Random(commands.Cog):
             
             
     @command()
-    async def repeat(ctx, *, text=None):
+    async def repeat(self, ctx, *, text=None):
         if text is None:
             await ctx.send(f"Hey {ctx.author.mention}, I need to know what to say please.")
             return
