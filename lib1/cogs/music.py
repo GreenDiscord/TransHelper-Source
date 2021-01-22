@@ -25,8 +25,8 @@ class Music(commands.Cog):
                                               port=80,
                                               rest_uri='http://lavalink.something.host:80',
                                               password='youshallnotpass',
-                                              identifier='TEST',
-                                              region='us_central')
+                                              identifier='TRANSHELPER NODE',
+                                              region='europe')
     @commands.command()
     async def vol_up(self, ctx, vol):
         """Command used for volume up button."""
