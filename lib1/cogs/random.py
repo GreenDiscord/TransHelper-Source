@@ -84,7 +84,7 @@ class Random(commands.Cog):
     @feedback.error
     async def feedback_handler(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
-            l = self.bot.get_command("support")
+            l = self.bot.get_command("feedback")
             e = discord.Embed(title=f"Cooldown left - {l.get_cooldown_retry_after(ctx)}", color=discord.colour.Color.from_rgb(231, 84, 128))
             await ctx.send(embed=e)
             
