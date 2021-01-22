@@ -70,8 +70,12 @@ class Random(commands.Cog):
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
         await message.edit(embed=discord.Embed(description=f"**{user}**  ate the cookie in ```{end - start:.3f}``` seconds!"))
-        await user.send(f"Well Done! You completed it in ```{end - start:.3f}``` seconds.")
-        
+        lis3 = ["1", "2"]
+        choice = random.choice(lis3)
+        if choice is 2:
+             await user.send(f"Firstly, Random chose 2 so you get this DM, Secondly, Well Done! You completed it in ```{end - start:.3f}``` seconds.")
+        else:
+             pass
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
     async def feedback(self, ctx, *, feed):
