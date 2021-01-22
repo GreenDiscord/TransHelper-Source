@@ -46,8 +46,9 @@ class Random(commands.Cog):
         Yum yum.
         """
         cookies = ["🍪", "❤"]
+        lis = ["this mighty","this weak","this amazing"]
         reaction = random.choices(cookies, weights=[0.9, 0.1], k=1)[0]
-        embed = discord.Embed(description=f"First one to eat the {reaction} wins!")
+        embed = discord.Embed(description=f"So, {random.choice(lis)} fighter has challenged people to a game of....Cookie? Okay then get ready!")
         message = await ctx.send(embed=embed)
         await asyncio.sleep(4)
         for i in reversed(range(1, 4)):
@@ -68,7 +69,7 @@ class Random(commands.Cog):
         except asyncio.TimeoutError:
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
-        await message.edit(embed=discord.Embed(description=f"**{user}** ate the cookie in ```{end - start:.3f}``` seconds!"))
+        await message.edit(embed=discord.Embed(description=f"**{user}**  ate the cookie in ```{end - start:.3f}``` seconds!"))
         await user.send(f"Well Done! You completed it in ```{end - start:.3f}``` seconds.")
         
     @command()
@@ -80,7 +81,7 @@ class Random(commands.Cog):
       await channel.send(f"Feedback from {ctx.author}, Feedback = {feed}")
     
     @feedback.error
-    async def support_handler(self, ctx, error):
+    async def feedback_handler(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             l = self.bot.get_command("support")
             e = discord.Embed(title=f"Cooldown left - {l.get_cooldown_retry_after(ctx)}", color=discord.colour.Color.from_rgb(231, 84, 128))
