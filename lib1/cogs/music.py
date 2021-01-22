@@ -726,24 +726,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 player.dj = m
                 return await ctx.send(f'{member.mention} is now the DJ.')
     
-    @commands.command()
-    async def repeat(self, ctx, *, text=None):
-        player: Player = self.bot.wavelink.get_player(guild_id=ctx.guild.id, cls=Player, context=ctx)
-
-        if not player.is_connected:
-            await ctx.invoke(self.connect)
-            
-        if text is None:
-            await ctx.send(f"Hey {ctx.author.mention}, I need to know what to say please.")
-            return
-        
-       
-        tts = gTTS(text=text, lang="en")
-        tts.save("text.mp3")
-
-        await player.play("text.mp3")
-
-        await os.remove("text.mp3")    
+    
 
 def setup(bot: commands.Bot):
     bot.add_cog(Music(bot))
