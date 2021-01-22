@@ -87,37 +87,7 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
             
             
-    @command()
-    async def repeat(self, ctx, *, text=None):
-        if text is None:
-            await ctx.send(f"Hey {ctx.author.mention}, I need to know what to say please.")
-            return
-
-        vc = ctx.voice_client 
-        if not vc:
-            await ctx.send("I need to be in a voice channel to do this, please use the connect command.")
-            return
-
-       
-        tts = gTTS(text=text, lang="en")
-        tts.save("text.mp3")
-
-        try:
-           
-            vc.play(discord.FFmpegPCMAudio('text.mp3'), after=lambda e: print(f"Finished playing: {e}"))
-
-            # Lets set the volume to 1
-            vc.source = discord.PCMVolumeTransformer(vc.source)
-            vc.source.volume = 1
-
-
-        except ClientException as e:
-            await ctx.send(f"A client exception occured:\n`{e}`")
-        except TypeError as e:
-            await ctx.send(f"TypeError exception:\n`{e}`")
-        except OpusNotLoaded as e:
-            await ctx.send(f"OpusNotLoaded exception: \n`{e}`")
-        await os.remove("text.mp3")
+    
         
     @command()
     async def remind(self, ctx, time, *, reminder):
