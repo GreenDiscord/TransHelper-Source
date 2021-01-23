@@ -25,7 +25,7 @@ class Reactions(commands.Cog):
             if payload.emoji.name == "⭐":
                 message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
 
-                if notpayload.member.id != message.author.id:
+                if not payload.member.id != message.author.id:
 			await self.db.execute("SELECT StarMessageID, Stars FROM starboard WHERE RootMessageID = ?", (message.id) or (None, 0))
 		        msg_id, stars = cursor.fetchone()
 
