@@ -14,10 +14,7 @@ class Reactions(commands.Cog):
         self.bot.db = bot.db
         self.cur = self.db.cursor()
 
-    def record(command, *values):
-        self.cur.execute(command, tuple(values))
-
-        return cur.fetchone()
+  
 
     @Cog.listener()
     async def on_raw_reaction_add(self, payload):
@@ -26,8 +23,6 @@ class Reactions(commands.Cog):
                 message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
 
                 if not payload.member.id != message.author.id:
-			await self.db.execute("SELECT StarMessageID, Stars FROM starboard WHERE RootMessageID = ?", message.id) or (None, 0))
-		        msg_id, stars = cursor.fetchone()
 
 			embed = discord.Embed(title="Starred message",
 					      colour=message.author.colour,
@@ -45,13 +40,11 @@ class Reactions(commands.Cog):
 
 		        if not stars:
 				star_message = await self.starboard_channel.send(embed=embed)
-				cursor.execute("INSERT INTO starboard (RootMessageID, StarMessageID) VALUES (?, ?)",
-					message.id, star_message.id)
-
+				
 		        else:
 				star_message = await self.starboard_channel.fetch_message(msg_id)
 				await star_message.edit(embed=embed)
-				cursor.execute("UPDATE starboard SET Stars = Stars + 1 WHERE RootMessageID = ?", message.id)
+				
 
                 else:
                     await message.remove_reaction(payload.emoji, payload.member)
