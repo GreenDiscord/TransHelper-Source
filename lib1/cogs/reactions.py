@@ -27,7 +27,7 @@ class Reactions(commands.Cog):
 
                 if notpayload.member.id != message.author.id:
                     await self.db.execute("SELECT StarMessageID, Stars FROM starboard WHERE RootMessageID = ?", (message.id) or (None, 0))
-		   msg_id, stars = cursor.fetchone()
+		    msg_id, stars = cursor.fetchone()
 
                     embed = discord.Embed(title="Starred message",
                                 colour=message.author.colour,
