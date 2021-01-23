@@ -23,7 +23,7 @@ class Reactions(commands.Cog):
                 message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
 
                 if not payload.member.id == message.author.id:
-			embed = discord.Embed(title="Starred message", colour=message.author.colour, timestamp=datetime.utcnow())
+			embed = discord.Embed(title="Starred message")
 
 		        fields = [("Author", message.author.mention, False), ("Content", message.content or "See attachment", False), ("Stars", stars+1, False)]
 
