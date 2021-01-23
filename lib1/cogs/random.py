@@ -64,7 +64,7 @@ class Random(commands.Cog):
                  and not user.bot,
                  timeout=60,)
             if not user.id == 787800565512929321:
-               return  
+               return await ctx.send("Hahaha, Your not wining, only Green can :)")
         except asyncio.TimeoutError:
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
