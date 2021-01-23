@@ -79,7 +79,8 @@ class ImageManipulation(commands.Cog):
             member = ctx.author
  
         text = str(text)
-        if text > 13:
+        textaslen = len(text)
+        if textaslen > 13:
             await ctx.send("Maybe something smaller then 13?")
         else:
             pfp = str(member.avatar_url_as(format="png", size=1024))
