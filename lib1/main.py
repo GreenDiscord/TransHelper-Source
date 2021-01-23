@@ -5,6 +5,7 @@ import os
 import cogs
 from discord.ext import commands
 import os
+from datetime import datetime
 import aiosqlite
 from discord.ext.buttons import Paginator
 from helpe import NewHelp
@@ -58,7 +59,21 @@ bot.start_time = time.time()
 
   
 
-
+@bot.event
+async def on_reaction_add(reaction, member):
+    schannel = bot.get_channel(802489970165153812)
+    
+    if (reaction.emoji == '⭐') and (reaction.count >= 3):
+        embed = discord.Embed(color = 15105570)
+        embed.set_author(name = reaction.message.author.name, icon_url = reaction.message.author.avatar_url)
+        embed.add_field(name = "Message Content", value = f"[{reaction.message.content}]({reaction.message.jump_url})")
+        
+        if len(reaction.message.attachments) > 0:
+            embed.set_image(url = reaction.message.attachments[0].url)
+        
+        embed.set_footer(text = f" ⭐ {reaction.count} | # {reaction.message.channel.name}")
+        embed.timestamp = datetime.datetime.utcnow()
+        await schannel.send(embed = embed)
 
 @bot.event
 async def on_connect():
