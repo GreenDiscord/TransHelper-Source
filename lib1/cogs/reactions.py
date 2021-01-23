@@ -12,7 +12,7 @@ class Reactions(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.db = bot.db
-        self.bot.cur = self.db.cursor()
+  
 
   
 #breaking bot
