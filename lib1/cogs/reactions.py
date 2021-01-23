@@ -22,8 +22,7 @@ class Reactions(commands.Cog):
             if payload.emoji.name == "⭐":
                 message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
 
-                if not payload.member.id != message.author.id:
-
+                if not payload.member.id = message.author.id:
 			embed = discord.Embed(title="Starred message",
 					      colour=message.author.colour,
 					      timestamp=datetime.utcnow())
