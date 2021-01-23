@@ -19,9 +19,6 @@ from psutil import Process, virtual_memory
 from discord.utils import get
 import robloxpy
 import asyncio
-from datetime import timedelta
-from platform import python_version
-from time import time
 import os
 import time
 from gtts import gTTS
@@ -40,7 +37,7 @@ class Random(commands.Cog):
         self.bot = bot
     
     @commands.max_concurrency(1, per=commands.BucketType.channel) 
-    @commands.command()
+    @command()
     async def reaction(self, ctx):
         """
         Yum Yum or Yuck Yuck?
@@ -61,11 +58,14 @@ class Random(commands.Cog):
         try:
             _, user = await ctx.bot.wait_for(
                 "reaction_add",
-                check=lambda _reaction, user: _reaction.message.guild == ctx.guild
-                and _reaction.message.channel == ctx.message.channel
-                and _reaction.message == message and str(_reaction.emoji) == reaction and user != ctx.bot.user
-                and not user.bot,
-                timeout=60,)
+                if not user.id == 787800565512929321:
+                    pass
+                else:
+                    check=lambda _reaction, user: _reaction.message.guild == ctx.guild
+                    and _reaction.message.channel == ctx.message.channel
+                    and _reaction.message == message and str(_reaction.emoji) == reaction and user != ctx.bot.user
+                    and not user.bot,
+                    timeout=60,)
         except asyncio.TimeoutError:
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
@@ -97,7 +97,7 @@ class Random(commands.Cog):
             
     
         
-    @command()
+    @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
       e = discord.Embed(title="I will remind you!", descripition=f"I will you remind you in {time} seconds!")
       await ctx.send(embed=e)
@@ -105,7 +105,7 @@ class Random(commands.Cog):
       e2 = discord.Embed(title=f"Hello {ctx.author}", description=f"I have come to remind you to {reminder}!")
       await ctx.message.reply(embed=e2)
       
-    @command(pass_context=True)
+    @command(pass_context=True, usage="ar <role>")
     async def ar(self, ctx, *, role1):
       member = ctx.message.author
       role = discord.utils.get(member.guild.roles, name=f"{role1}")
@@ -113,20 +113,21 @@ class Random(commands.Cog):
       e = discord.Embed(title="Added Roles", description=f"I have added the roles '{role1}' for you!")
       await ctx.send(embed=e)
     
-    @command()
+    @command(usage="ru <user>")
     async def ru(self, ctx, user):
-      if robloxpy.DoesNameExist(user) == False:
-        await ctx.send(f"Member {user} does not exist")
-        pass
-      else:
-        id1 = robloxpy.NameToID(f'{user}')
-        e = discord.Embed(title=f"Stats for {robloxpy.GetName(id1)}", description=f"Are they online? {robloxpy.IsOnline(id1)}", inline=True)
-        e.add_field(name=f"Account Age (in days)? {robloxpy.AccountAgeDays(id1)}", value=f"Year Account Was Created? {robloxpy.UserCreationDate(id1,'Year')}", inline=True)
-        e.add_field(name=f"RAP? {robloxpy.GetUserRAP(id1)}", value=f"Limited Value? {robloxpy.GetUserLimitedValue(id1)}", inline=False)
-        e.set_footer(text=f"Banned User? {robloxpy.IsBanned(id1)}")
-        await ctx.send(embed=e)
+        name = robloxpy.DoesNameExist(user) 
+        if name is False:
+            await ctx.send(f"Member {user} does not exist")
+            pass
+        else:
+            id1 = robloxpy.NameToID(f'{user}')
+            e = discord.Embed(title=f"Stats for {robloxpy.GetName(id1)}", description=f"Are they online? {robloxpy.IsOnline(id1)}", inline=True)
+            e.add_field(name=f"Account Age (in days)? {robloxpy.AccountAgeDays(id1)}", value=f"Year Account Was Created? {robloxpy.UserCreationDate(id1,'Year')}", inline=True)
+            e.add_field(name=f"RAP? {robloxpy.GetUserRAP(id1)}", value=f"Limited Value? {robloxpy.GetUserLimitedValue(id1)}", inline=False)
+            e.set_footer(text=f"Banned User? {robloxpy.IsBanned(id1)}")
+            await ctx.send(embed=e)
                 
-    @command()
+    @command(usage="sn <name>")
     async def sn(self, ctx, *, name):       
         tts = gTTS(text=f"Hi! {name} is really cool!", lang='en')
         tts.save("announce.mp3")
@@ -134,7 +135,7 @@ class Random(commands.Cog):
         bedtime(5)
         os.remove("announce.mp3")
    
-    @command()
+    @command(usage="tts <text>")
     async def tts(self, ctx, *, text):
         lol = gTTS(text=f"{text}")
         lol.save("tts.mp3")
@@ -142,9 +143,7 @@ class Random(commands.Cog):
         bedtime(5)
         os.remove("tts.mp3")
 
-    @commands.command(
-        name="stats", description="A usefull command that displays bot statistics."
-    )
+    @command(name="stats", description="A usefull command that displays bot statistics.", usage="stats")
     async def stats(self, ctx):
         pythonVersion = platform.python_version()
         dpyVersion = discord.__version__
@@ -170,7 +169,7 @@ class Random(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['color', 'colour', 'sc'])
+    @command(aliases=['color', 'colour', 'sc'])
     async def show_color(self, ctx, *, color: discord.Colour):
         '''Enter a color and you will see it!'''
         file = io.BytesIO()
