@@ -71,7 +71,7 @@ async def on_reaction_add(reaction, member):
         if len(reaction.message.attachments) > 0:
             embed.set_image(url = reaction.message.attachments[0].url)
         
-        embed.set_footer(text = f" ⭐ {reaction.count} | # {reaction.message.channel.name}")
+        embed.set_footer(text = f" ⭐ {reaction.count} | # {reaction.message.channel.name} | {reaction.messagee.guild}")
         embed.timestamp = datetime.utcnow()
         await schannel.send(embed = embed)
 
