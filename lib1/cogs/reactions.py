@@ -20,7 +20,7 @@ class Reactions(commands.Cog):
         return cur.fetchone()
 
     @Cog.listener()
-	async def on_raw_reaction_add(self, payload):
+    async def on_raw_reaction_add(self, payload):
             cursor = self.bot.db.cursor()
             if payload.emoji.name == "⭐":
                 message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
