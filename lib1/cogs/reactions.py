@@ -6,12 +6,19 @@ from random import choice
 
 from discord.ext.commands import Cog
 
+
+
 class Reactions(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.db = bot.db
-    
-    
+        self.cur = self.db.cursor()
+
+    def record(command, *values):
+        self.cur.execute(command, tuple(values))
+
+        return cur.fetchone()
+
     @Cog.listener()
 	async def on_raw_reaction_add(self, payload):
             cursor = self.bot.db.cursor()
