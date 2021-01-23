@@ -72,7 +72,7 @@ async def on_reaction_add(reaction, member):
             embed.set_image(url = reaction.message.attachments[0].url)
         
         embed.set_footer(text = f" ⭐ {reaction.count} | # {reaction.message.channel.name}")
-        embed.timestamp = datetime.datetime.utcnow()
+        embed.timestamp = datetime.utcnow()
         await schannel.send(embed = embed)
 
 @bot.event
