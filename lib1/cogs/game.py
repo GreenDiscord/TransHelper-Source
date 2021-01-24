@@ -25,10 +25,10 @@ class Games(commands.Cog):
                 if m.content.lower() == lis:
                     transmit = False
                     left = await self.bot.chatbot.ask("bye")
-                    await ctx.send(f"{left.text}... Waiting... OH you said cancel, bye!)
+                    await ctx.send(f"{left.text}... Waiting... OH you said cancel, bye!")
                 else:
                     async with ctx.channel.typing():
-                        response = await self.bot.chatbot.ask(m.content) # Ask a question, returns async_cleverbot.cleverbot.Response
+                        response = await self.bot.chatbot.ask(m.content) 
                         await ctx.send(response.text)
     
     @commands.max_concurrency(1, per=commands.BucketType.channel) 
