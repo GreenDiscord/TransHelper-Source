@@ -1,6 +1,6 @@
 import discord, datetime, time, random, asyncio
 from discord.ext import commands
-
+from discord.ext.commands.cooldowns import BucketType
 
 
 class Games(commands.Cog):
