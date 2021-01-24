@@ -2,6 +2,7 @@ import threading
 import discord
 import json
 import os
+import async_cleverbot as ac
 import cogs
 from discord.ext import commands
 import os
@@ -51,7 +52,9 @@ hce = bot.get_command("help")
 hce.hidden = True
 dagpitoken = open("asy.txt", "r").read()
 topastoken = open("top.txt", "r").read()
+chatbottoken = open"chat.txt", "r").read()
 bot.topken = f"{topastoken}"
+bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
 bot.dagpi = Client(dagpitoken)
 bot.start_time = time.time()
 
