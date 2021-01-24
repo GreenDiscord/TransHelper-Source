@@ -15,7 +15,7 @@ class Games(commands.Cog):
         lis = ["cancel", "end", "im bored now bye"]
         transmit = True
         await ctx.send(f'Chatbot Started!\nType the following items `{lis}` to end.')
-        while talk is True:
+        while transmit is True:
             try:
                 m = await self.bot.wait_for('message', timeout=30, check=lambda m:(ctx.author == m.author and ctx.channel == m.channel))
             except asyncio.TimeoutError:
