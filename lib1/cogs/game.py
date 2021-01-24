@@ -12,7 +12,7 @@ class Games(commands.Cog):
     @commands.command(aliases=['cb'])
     async def chatbot(self, ctx):
         '''Talk to chatbot'''
-        lis = "cancel" or "end" or "im bored now bye"
+        lis = "cancel"
         transmit = True
         await ctx.send(f'Chatbot Started!\nType the following items `{lis}` to end.')
         while transmit is True:
