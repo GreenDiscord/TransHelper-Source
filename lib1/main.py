@@ -101,19 +101,19 @@ async def on_ready():
 async def on_message(message):
     if isinstance(message.channel, discord.DMChannel):
         pass
-    if bot.user.mentioned_in(message) and message.mention_everyone is False:
+    elif bot.user.mentioned_in(message) and message.mention_everyone is False:
         if 'prefix' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
         else:
             pass
-    if 'instagram.com' in message.clean_content.lower():
+    elif 'instagram.com' in message.clean_content.lower():
         await message.add_reaction('💩')
-    if 'Im a pro coder' in message.clean_content.lower():
+    elif 'Im a pro coder' in message.clean_content.lower():
         await message.add_reaction('✅')
         await message.add_reaction('❌')
-    if 'instagram is good' in message.clean_content.lower():
+    elif 'instagram is good' in message.clean_content.lower():
         await message.add_reaction('❌')
-    if 'instagram is spyware' in message.clean_content.lower():
+    elif 'instagram is spyware' in message.clean_content.lower():
         await message.add_reaction('✅')
     await bot.process_commands(message)
     
