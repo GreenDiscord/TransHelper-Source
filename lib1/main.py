@@ -56,7 +56,8 @@ chatbottoken = open("chat.txt", "r").read()
 bot.topken = f"{topastoken}"
 bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
 bot.dagpi = Client(dagpitoken)
-bot.start_time = time.time()
+bot.start_time = datetime.now()
+bot.thresholds = (10, 25, 50, 100)
 
 
 
@@ -107,12 +108,32 @@ async def on_message(message):
             pass
     if 'instagram.com' in message.clean_content.lower():
         await message.add_reaction('💩')
+    if 'Im a pro coder' in message.clean_content.lower():
+        await message.add_reaction('✅')
+        await message.add_reaction('❌')
     if 'instagram is good' in message.clean_content.lower():
         await message.add_reaction('❌')
     if 'instagram is spyware' in message.clean_content.lower():
         await message.add_reaction('✅')
     await bot.process_commands(message)
     
+@bot.listen()
+async def on_invite_update(member, invite):
+    await bot.wait_for_invites()
+    print(f"{member} joined {member.guild} with invite {invite}")
+    can_send = member.guild.system_channel is not None
+
+    if invite.uses in bot.thresholds and can_send:
+        try:
+            # I am sorry that rocky-wocks was all that came to mind
+            await member.guild.system_channel.send(
+                f"**Congratulations** to {invite.inviter} for reaching the "
+                f"**{invite.uses}** invite threshold! They will be "
+                f"rewarded with **{1000*invite.uses:,}** shiny rocky-wocks!"
+            )
+        except discord.Forbidden:
+            print(f"[FAILED] {invite.code} @ {invite.uses} by "
+                  f"{invite.inviter}")
 
 @bot.event
 async def on_member_join(member : discord.Member):
