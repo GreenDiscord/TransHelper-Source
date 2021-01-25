@@ -6,6 +6,7 @@ import async_cleverbot as ac
 import cogs
 from discord.ext import commands
 import os
+import asyncio
 from datetime import datetime
 import aiosqlite
 from discord.ext.buttons import Paginator
@@ -110,6 +111,7 @@ async def on_message(message):
         await message.add_reaction('💩')
     elif 'Im a pro coder' in message.clean_content.lower():
         await message.add_reaction('✅')
+        await asyncio.sleep(1)
         await message.add_reaction('❌')
     elif 'instagram is good' in message.clean_content.lower():
         await message.add_reaction('❌')
