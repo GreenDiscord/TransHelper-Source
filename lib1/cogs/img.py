@@ -20,7 +20,7 @@ class ImageManipulation(commands.Cog):
         if command2 is None:
             await ctx.send_help(ctx.command)
         else:
-            pass
+            await ctx.send("h")
 
     @img.command()
     async def wni(self, ctx, *, name):
