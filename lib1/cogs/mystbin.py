@@ -21,8 +21,14 @@ class MystbinApi(commands.Cog):
         try:
             get_paste = await self.bot.mystbin_client.get(f"https://mystb.in/{id}")
             lis = ["awesome","bad","good"]
-            e = discord.Embed(title=f"I have found this, is it {random.choice(lis)}?", description=f"The content is shown here:  [Link]({get_paste.url})")
-            await ctx.send(embed=e)
+            content = get_paste.content
+            lencontent = len(content)
+            if lencontent > 1080:
+                e = discord.Embed(title=f"I have found this, but the content is to big!", description=f"The content is shown here:  [Link]({get_paste.url})")
+                await ctx.send(embed=e)
+            else:
+                e2 = discord.Embed(title=f"I have found this, is it {random.choice(lis)}?", description=f"{content}")
+                await ctx.send(embed=e2)
         except BadPasteID:
               await ctx.send(f"Hmmm.. {id} isn't found, try again?")
 
