@@ -15,11 +15,12 @@ class ImageManipulation(commands.Cog):
         self.bot.dagpi = bot.dagpi
      
     @commands.group(invoke_without_command=True)
-    async def img(self, ctx):
-        if ctx.invoked_subcommand is None:
+    async def img(self, ctx, command):
+        command2 = self.bot.get_command(f"{command}")
+        if command2 is None:
             await ctx.send_help(ctx.command)
         else:
-            await ctx.send("These commands are for images, send ```th,help img``` for all commands!")
+            pass
 
     @img.command()
     async def wni(self, ctx, *, name):
