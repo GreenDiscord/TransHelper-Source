@@ -11,10 +11,12 @@ class Help(commands.Cog):
     async def support(self, ctx):
             channel = ctx.channel
             chan = self.bot.get_channel(787825469391241220)
-            per = ctx.author.mention
-            await chan.send(f"{per} in {channel} needs support!")
-            await ctx.send(f"General has been notifed!")
-
+            if channel.guild is chan.guild:
+                per = ctx.author.mention
+                await chan.send(f"{per} in {channel} needs support!")
+                await ctx.send(f"General has been notifed!")
+            else:
+                pass
     
 
 
