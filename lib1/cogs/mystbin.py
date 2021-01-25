@@ -30,7 +30,7 @@ class MystbinApi(commands.Cog):
                 e2 = discord.Embed(title=f"I have found this, is it {random.choice(lis)}?", description=f"{content}")
                 await ctx.send(embed=e2)
         except mystbin.BadPasteID:
-              await ctx.send(f"Hmmm.. {id} isn't found, try again?")
+              await ctx.send(f"Hmmm.. id : {id} isn't found, try again?")
 
     
 
