@@ -82,8 +82,15 @@ class OwnerOnly(commands.Cog):
       return ctx.author.id == 787800565512929321
    
     @commands.group(invoke_without_command=True)
-    async def dev(self, ctx):
-          await ctx.send("commands for my owner only")
+    async def dev(self, ctx, command=None):
+        command2 = self.bot.get_command(f"{command}")
+        if command2 is None:
+            await ctx.send_help(ctx.command)
+        else:
+            if command is None:
+                 await ctx.send_help(ctx.command)
+            else:
+                 pass
 
     
     @commands.is_owner()
