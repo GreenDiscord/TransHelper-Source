@@ -153,7 +153,7 @@ class Random(commands.Cog):
                             e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
                             await ctx.send(embed=e)
                         else:
-                            e2 = discord.Embed(title=f"Rank For Player '{player.name}'",description=f"[{player.rank.name}]")
+                            e2 = discord.Embed(title=f"Rank For Player {player.name}",description=f"{player.rank.name}")
                             await ctx.send(embed=e2)
           
           
