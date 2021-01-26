@@ -107,12 +107,11 @@ async def on_message(message):
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
         else:
             pass
-    elif 'instagram.com' in message.clean_content.lower():
-        await message.add_reaction('💩')
+    elif 'Im a pro coder' in message.clean_content.lower():
+        await message.add_reaction('❌')
     elif 'Im a pro coder' in message.clean_content.lower():
         await message.add_reaction('✅')
-        await asyncio.sleep(1)
-        await message.add_reaction('❌')
+        
     elif 'instagram is good' in message.clean_content.lower():
         await message.add_reaction('❌')
     elif 'instagram is spyware' in message.clean_content.lower():
