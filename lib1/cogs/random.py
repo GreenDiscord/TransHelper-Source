@@ -147,6 +147,13 @@ class Random(commands.Cog):
         
     @command()
     async def level(self, ctx, name):
+                        hypixel = await Hypixel(self.API_KEY)
+                        player = await hypixel.get(name=f"{name}")
+                        if player is None:
+                            e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
+                            await ctx.send(embed=e)
+                        else:
+                            e2 = discord.Embed(title=f"Rank For PLayer '{player.name}'"description=f"[{player.rank.name}]")
       
           
           
