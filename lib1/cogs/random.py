@@ -30,11 +30,13 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 from psutil import Process, virtual_memory 
 import random
+from hypixelaPY import Hypixel
 
 class Random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+        self.bot.hypixel = bot.hypixel
+        self.API_KEY = f"{self.bot.hypixel}"
    
 
     @command()
@@ -145,13 +147,7 @@ class Random(commands.Cog):
         
     @command()
     async def level(self, ctx, name):
-      level = hypixel.get_level(name) 
-      if level is None:
-        e = discord.Embed(title=f"{name}", description=f"Player {name} is not found!, Please make sure to use their **Minecraft** username.")
-        await ctx.send(embed=e)
-      else:
-        e1 = discord.Embed(title=f"Level Of User {name}", description=f"{level}")
-        await ctx.send(embed=e1)
+      
           
           
     @command()
