@@ -78,16 +78,16 @@ class Random(commands.Cog):
     
     @command(usage="ru <user>")
     async def ru(self, ctx, user):
-        id1 = robloxpy.NameToID(f'{user}')
-        name = robloxpy.DoesNameExist(id1) 
+        id1 = robloxpy.User.External.GetID(f'{user}')
+        name = robloxpy.User.External.DoesNameExist(id1) 
         if name is None:
             await ctx.send(f"Member {user} does not exist")
             pass
         else:
-            e = discord.Embed(title=f"Stats for {robloxpy.GetName(id1)}", description=f"Are they online? {robloxpy.IsOnline(id1)}", inline=True)
-            e.add_field(name=f"Account Age (in days)? {robloxpy.AccountAgeDays(id1)}", value=f"Year Account Was Created? {robloxpy.UserCreationDate(id1,'Year')}", inline=True)
-            e.add_field(name=f"RAP? {robloxpy.GetUserRAP(id1)}", value=f"Limited Value? {robloxpy.GetUserLimitedValue(id1)}", inline=False)
-            e.set_footer(text=f"Banned User? {robloxpy.IsBanned(id1)}")
+            e = discord.Embed(title=f"Stats for {robloxpy.User.External.GetName(id1)}", description=f"Are they online? {robloxpy.IsOnline(id1)}", inline=True)
+            e.add_field(name=f"Account Age (in days)? {robloxpy.User.External.AccountAgeDays(id1)}", value=f"Year Account Was Created? {robloxpy.User.External.UserCreationDate(id1,'Year')}", inline=True)
+            e.add_field(name=f"RAP? {robloxpy.User.External.GetUserRAP(id1)}", value=f"Limited Value? {robloxpy.User.External.GetUserLimitedValue(id1)}", inline=False)
+            e.set_footer(text=f"Banned User? {robloxpy.User.External.IsBanned(id1)}")
             await ctx.send(embed=e)
                 
     @command(usage="sn <name>")
