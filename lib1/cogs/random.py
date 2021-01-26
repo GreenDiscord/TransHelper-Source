@@ -3,6 +3,7 @@ from discord.ext import commands
 import datetime
 import random
 from datetime import  timedelta
+import hypixelaPY
 from platform import python_version
 from time import time
 import platform
@@ -152,7 +153,7 @@ class Random(commands.Cog):
                             player = await hypixel.player.get(name=f"{name}")
                             e2 = discord.Embed(title=f"Level For Player {player.name}",description=f"{player.level.level}")
                             await ctx.send(embed=e2)
-                        except Hypixel.NoPlayerFoundError:
+                        except hypixelaPY.NoPlayerFoundError:
                             e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
                             await ctx.send(embed=e)
       
