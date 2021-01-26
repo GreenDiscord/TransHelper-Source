@@ -29,7 +29,6 @@ from discord import __version__ as discord_version
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 from psutil import Process, virtual_memory 
-import hypixel
 import random
 
 class Random(commands.Cog):
