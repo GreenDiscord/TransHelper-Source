@@ -154,7 +154,7 @@ class Random(commands.Cog):
                             await ctx.send(embed=e)
                         else:
                             e2 = discord.Embed(title=f"Rank For Player '{player.name}'",description=f"[{player.rank.name}]")
-      
+                            await ctx.send(embed=e2)
           
           
     @command()
