@@ -152,6 +152,7 @@ class Random(commands.Cog):
                         try:
                             player = await hypixel.player.get(name=f"{name}")
                             e2 = discord.Embed(title=f"Level For Player {player.name}",description=f"{player.level.level}")
+                            e2.add_field(name=None, value=f"For a Small Info Link Click On [This Link](https://minecraftuuid.com/?search={name}")
                             await ctx.send(embed=e2)
                         except hypixelaPY.NoPlayerFoundError:
                             e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
