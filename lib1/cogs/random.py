@@ -149,13 +149,9 @@ class Random(commands.Cog):
     async def level(self, ctx, name):
                         hypixel = await Hypixel(self.API_KEY)
                         player = await hypixel.player.get(name=f"{name}")
-                        try:
-                            e2 = discord.Embed(title=f"Level For Player {player.name}",description=f"{player.level.level}")
-                            await ctx.send(embed=e2)
-                        except Hypixel.NoPlayerFoundError:
-                            e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
-                            await ctx.send(embed=e)
-          
+                        e2 = discord.Embed(title=f"Level For Player {player.name}",description=f"{player.level.level}")
+                        await ctx.send(embed=e2)
+      
     @command()
     async def gay(self, ctx):
       lis = ["1%", "58%", "32%", "85%", "37%", "48%", "50%"]
