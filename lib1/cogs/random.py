@@ -148,6 +148,7 @@ class Random(commands.Cog):
         
     @command()
     async def level(self, ctx, name):
+                        """This command shows stats for hypixel/minecraft"""
                         hypixel = await Hypixel(self.API_KEY)    
                         try:
                             player = await hypixel.player.get(name=f"{name}")
