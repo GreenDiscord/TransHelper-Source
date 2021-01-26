@@ -79,7 +79,7 @@ class Random(commands.Cog):
     async def ru(self, ctx, user):
         id1 = robloxpy.NameToID(f'{user}')
         name = robloxpy.DoesNameExist(id1) 
-        if name is False:
+        if name is None:
             await ctx.send(f"Member {user} does not exist")
             pass
         else:
@@ -153,7 +153,7 @@ class Random(commands.Cog):
                             e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
                             await ctx.send(embed=e)
                         else:
-                            e2 = discord.Embed(title=f"Rank For PLayer '{player.name}'"description=f"[{player.rank.name}]")
+                            e2 = discord.Embed(title=f"Rank For Player '{player.name}'",description=f"[{player.rank.name}]")
       
           
           
