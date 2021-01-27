@@ -84,7 +84,7 @@ class Random(commands.Cog):
         description = user.description
         lendec = len(description)
         avatar = await user.avatar()
-        games = await user.games()
+        games = await user.get_public_games()
         gamecount = len(games)
         if lendec > 40:
             description = "I can't send this, it's to big!"
