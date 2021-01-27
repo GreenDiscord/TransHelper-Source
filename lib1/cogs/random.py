@@ -99,7 +99,7 @@ class Random(commands.Cog):
         
             await msg.edit(content="", embed=e)
         except roblox_py.PlayerNotFound:
-            e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}")
+            e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
             await msg.edit(content="", embed=e2)
 
     @command(usage="sn <name>")
