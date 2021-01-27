@@ -81,8 +81,12 @@ class Random(commands.Cog):
         user = await self.roblox.get_user_by_name(name)
         id = int(user.id)
         e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
+        description = await user.description()
+        lendec = len(description)
+        if lendec > 40:
+            description = "I can't send this, it's to big!
         e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
-        e.add_field(name=f"Account Creation Time? {user.created_at}", value = f"Description? {user.description}")
+        e.add_field(name=f"Account Creation Time? {user.created_at}", value = f"Description? {description}")
         e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
         avatar = await user.avatar()
         e.set_thumbnail(url=f"{avatar}")
