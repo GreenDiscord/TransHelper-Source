@@ -88,6 +88,8 @@ class Random(commands.Cog):
                 if description is None:
                    description = None
                 lendec = len(description)
+                if lendec is None:
+                   lendec = None
                 avatar = await user.avatar()
                 games = await user.get_public_games()
                 gamecount = len(games)
