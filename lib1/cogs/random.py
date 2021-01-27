@@ -98,7 +98,7 @@ class Random(commands.Cog):
                 e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
                 e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
                 e.set_thumbnail(url=f"{avatar}")
-        
+                e.set_footer(text=f"Is banned? {user.is_banned()}")
                 await msg.edit(content="", embed=e)
 
             except roblox_py.PlayerNotFound:
