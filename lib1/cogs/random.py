@@ -89,7 +89,7 @@ class Random(commands.Cog):
             avatar = await user.avatar()
             games = await user.get_public_games()
             gamecount = len(games)
-            if lendec > 40:
+            if lendec > 180:
                 description = "I can't send this, it's to big!"
             e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
             e.add_field(name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value = f"Description? {description}")
