@@ -79,28 +79,32 @@ class Random(commands.Cog):
     
     @command(usage="ru <user>")
     async def ru(self, ctx, name):
-        try:
-            msg = await ctx.send("Getting Info Now!")
-            user = await self.roblox.get_user_by_name(name)
-            id = int(user.id) 
-            e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
-            description = user.description
-            lendec = len(description)
-            avatar = await user.avatar()
-            games = await user.get_public_games()
-            gamecount = len(games)
-            if lendec > 1080:
-                description = "I can't send this, it's to big!"
-            e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
-            e.add_field(name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value = f"Description? {description}")
-            e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
-            e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
-            e.set_thumbnail(url=f"{avatar}")
+        lenname = len(name)
+        if lenname < 3 or lenname > 20:
+          return await ctx.send("To be honest I don't know anyone with a name that's 20 or more character")
+        else:
+            try:
+                msg = await ctx.send("Getting Info Now!")
+                user = await self.roblox.get_user_by_name(name)
+                id = int(user.id) 
+                e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
+                description = user.description
+                lendec = len(description)
+                avatar = await user.avatar()
+                games = await user.get_public_games()
+                gamecount = len(games)
+                if lendec > 1080:
+                    description = "I can't send this, it's to big!"
+                e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
+                e.add_field(name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value = f"Description? {description}")
+                e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
+                e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
+                e.set_thumbnail(url=f"{avatar}")
         
-            await msg.edit(content="", embed=e)
-        except roblox_py.PlayerNotFound:
-            e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
-            await msg.edit(content="", embed=e2)
+                await msg.edit(content="", embed=e)
+            except roblox_py.PlayerNotFound:
+                e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
+                await msg.edit(content="", embed=e2)
 
     @command(usage="sn <name>")
     async def sn(self, ctx, *, name):       
