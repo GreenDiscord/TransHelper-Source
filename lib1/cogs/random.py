@@ -79,7 +79,7 @@ class Random(commands.Cog):
     @command(usage="ru <user>")
     async def ru(self, ctx, id):
         user = await self.roblox.get_user_info(int(id))
-        e = discord.Embed(title=f"Stats For {user.name}", description=f"Ammount Of Friends? {await user.friends()}", color = discord.colour.from_rgb())
+        e = discord.Embed(title=f"Stats For {user.name}", description=f"Ammount Of Friends? {await user.friends()}", color = discord.Color.red())
         e.set_image(url=user.thumbnail)
         await ctx.send(embed=e)
 
