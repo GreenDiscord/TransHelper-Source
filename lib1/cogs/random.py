@@ -78,9 +78,11 @@ class Random(commands.Cog):
     
     @command(usage="ru <user>")
     async def ru(self, ctx, id):
-        user = await self.roblox.get_user_info(id)
+        user = await self.roblox.get_user_info(int(id))
         e = discord.Embed(title=f"Stats For {user.name}", description=f"Ammount Of Friends? {await user.friends()}", color = discord.colour.from_rgb())
         e.set_image(url=user.thumbnail)
+        await ctx.send(embed=e)
+
     @command(usage="sn <name>")
     async def sn(self, ctx, *, name):       
         tts = gTTS(text=f"Hi! {name} is really cool!", lang='en')
