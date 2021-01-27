@@ -84,7 +84,7 @@ class Random(commands.Cog):
         e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
         e.add_field(name=f"Account Creation Time? {user.created_at}", value = f"Description? {user.description}")
         e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
-        e.set_thumbnail(url=f"https://tr.rbxcdn.com/{id}/352/352/Avatar/Png")
+        e.set_thumbnail(url=f"{await user.avatar}")
         await ctx.send(embed=e)
 
     @command(usage="sn <name>")
