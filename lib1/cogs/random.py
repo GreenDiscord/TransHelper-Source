@@ -86,10 +86,8 @@ class Random(commands.Cog):
                 e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
                 description = user.description
                 if description is None:
-                   description = None
+                   description = "None"
                 lendec = len(description)
-                if lendec is None:
-                   lendec = None
                 avatar = await user.avatar()
                 games = await user.get_public_games()
                 gamecount = len(games)
