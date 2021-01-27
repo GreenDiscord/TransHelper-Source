@@ -59,8 +59,6 @@ class Games(commands.Cog):
                  and _reaction.message == message and str(_reaction.emoji) == reaction and user != ctx.bot.user
                  and not user.bot,
                  timeout=60,)
-            if not user.id == 787800565512929321:
-               return await ctx.send("Hahaha, Your not wining, only Green can :)")
         except asyncio.TimeoutError:
             return await message.edit(embed=discord.Embed(description="No one ate the cookie..."))
         end = time.perf_counter()
