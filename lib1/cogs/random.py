@@ -82,7 +82,7 @@ class Random(commands.Cog):
         id = int(user.id)
         e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
         e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
-        e.add_field(name=f"Account Creation Time? {user.account_age}", value = f"Number Of Groups? {len(user.groups)}")
+        e.add_field(name=f"Account Creation Time? {user.account_age}", value = f"Last Online? {user.last_online}")
         e.set_thumbnail(url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
         await ctx.send(embed=e)
 
