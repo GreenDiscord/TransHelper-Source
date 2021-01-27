@@ -83,7 +83,7 @@ class Random(commands.Cog):
         e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
         e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
         e.add_field(name=f"Account Creation Time? {user.created_at}", value = None)
-        e.set_author(name=f"{ctx.author}", url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
+        e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
         e.set_thumbnail(url=f"https://www.roblox.com/outfit-thumbnail/image?userOutfitId={id}&width=420&height=420&format=png")
         await ctx.send(embed=e)
 
