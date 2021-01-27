@@ -81,7 +81,7 @@ class Random(commands.Cog):
         id = int(id)
         user = await self.roblox.get_user_info(id)
         e = discord.Embed(title=f"Stats For {user.name}", description=f"Ammount Of Friends? {len(await user.friends())}", color = discord.Color.red())
-        e.set_image(url=f"https://tr.rbxcdn.com/52ff3255a9772cd0e91a65cfe90c1d67/150/150/AvatarHeadshot/Png")
+        e.set_image(url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=420&height=420&format=png")
         await ctx.send(embed=e)
 
     @command(usage="sn <name>")
