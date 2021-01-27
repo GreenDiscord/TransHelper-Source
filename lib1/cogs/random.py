@@ -82,8 +82,9 @@ class Random(commands.Cog):
             try:
                 msg = await ctx.send("Getting Info Now!")
                 user = await self.roblox.get_user_by_name(name)
-                id = int(user.id) 
-                e = discord.Embed(title=f"ID? {user.id}", description=f"Oldest Friend? {user.oldest_friend}", color = discord.Color.red())
+                id = int(user.id)  
+                friend = await user.oldest_friend
+                e = discord.Embed(title=f"ID? {user.id}", description=f"Oldest Friend? {friend}", color = discord.Color.red())
                 description = user.description
                 if description is None:
                    description = "None"
