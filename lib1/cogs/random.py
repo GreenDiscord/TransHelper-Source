@@ -79,10 +79,6 @@ class Random(commands.Cog):
     
     @command(usage="ru <user>")
     async def ru(self, ctx, name):
-        lenname = len(name)
-        if lenname < 3 or lenname > 20:
-          return await ctx.send("To be honest I don't know anyone with a name that's 20 or more character")
-        else:
             try:
                 msg = await ctx.send("Getting Info Now!")
                 user = await self.roblox.get_user_by_name(name)
@@ -102,6 +98,7 @@ class Random(commands.Cog):
                 e.set_thumbnail(url=f"{avatar}")
         
                 await msg.edit(content="", embed=e)
+
             except roblox_py.PlayerNotFound:
                 e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
                 await msg.edit(content="", embed=e2)
