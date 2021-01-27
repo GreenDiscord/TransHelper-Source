@@ -78,7 +78,7 @@ class Random(commands.Cog):
     
     @command(usage="ru <user>")
     async def ru(self, ctx, name):
-        user = await self.roblox.get_user_info(name)
+        user = await self.roblox.get_user_by_name(name)
         id = int(user.id)
         e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
         e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
