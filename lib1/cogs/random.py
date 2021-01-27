@@ -83,7 +83,7 @@ class Random(commands.Cog):
                 msg = await ctx.send("Getting Info Now!")
                 user = await self.roblox.get_user_by_name(name)
                 id = int(user.id)  
-                gameid = user.latest_public_game.id
+                gameid = user.latest_public_game().id
                 game = await self.roblox.get_place_by_id(gameid)
                 e = discord.Embed(title=f"ID? {user.id}", description=f"Latest Game Visits? {game.visits}", color = discord.Color.red())
                 description = user.description
