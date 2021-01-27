@@ -18,7 +18,7 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 from psutil import Process, virtual_memory
 from discord.utils import get
-import robloxpy
+from roblox_py import Client
 import asyncio
 import os
 import time
@@ -38,7 +38,7 @@ class Random(commands.Cog):
         self.bot = bot
         self.bot.hypixel = bot.hypixel
         self.API_KEY = f"{self.bot.hypixel}"
-   
+        self.roblox = Client()
 
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
@@ -77,19 +77,10 @@ class Random(commands.Cog):
       await ctx.send(embed=e)
     
     @command(usage="ru <user>")
-    async def ru(self, ctx, user):
-        id1 = robloxpy.User.External.GetID(f'{user}')
-        name = robloxpy.User.External.DoesNameExist(id1) 
-        if name is None:
-            await ctx.send(f"Member {user} does not exist")
-            pass
-        else:
-            e = discord.Embed(title=f"Stats for {robloxpy.User.External.GetName(id1)}", description=f"Are they online? {robloxpy.IsOnline(id1)}", inline=True)
-            e.add_field(name=f"Account Age (in days)? {robloxpy.User.External.AccountAgeDays(id1)}", value=f"Year Account Was Created? {robloxpy.User.External.UserCreationDate(id1,'Year')}", inline=True)
-            e.add_field(name=f"RAP? {robloxpy.User.External.GetUserRAP(id1)}", value=f"Limited Value? {robloxpy.User.External.GetUserLimitedValue(id1)}", inline=False)
-            e.set_footer(text=f"Banned User? {robloxpy.User.External.IsBanned(id1)}")
-            await ctx.send(embed=e)
-                
+    async def ru(self, ctx, id):
+        user = await self.roblox.get_user_info(id)
+        e = discord.Embed(title=f"Stats For {user.name}", description=f"Ammount Of Friends? {await user.friends()}", color = discord.colour.from_rgb())
+        e.set_image(url=user.thumbnail)
     @command(usage="sn <name>")
     async def sn(self, ctx, *, name):       
         tts = gTTS(text=f"Hi! {name} is really cool!", lang='en')
