@@ -18,6 +18,7 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 from psutil import Process, virtual_memory
 from discord.utils import get
+import roblox_py
 from roblox_py import Client
 import asyncio
 import os
