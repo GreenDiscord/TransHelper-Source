@@ -78,23 +78,28 @@ class Random(commands.Cog):
     
     @command(usage="ru <user>")
     async def ru(self, ctx, name):
-        user = await self.roblox.get_user_by_name(name)
-        id = int(user.id)
-        e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
-        description = user.description
-        lendec = len(description)
-        avatar = await user.avatar()
-        games = await user.get_public_games()
-        gamecount = len(games)
-        if lendec > 40:
-            description = "I can't send this, it's to big!"
-        e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
-        e.add_field(name=f"Account Creation Time? {user.created_at}", value = f"Description? {description}")
-        e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
-        e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
-        e.set_thumbnail(url=f"{avatar}")
+        try:
+            msg = await ctx.send("Getting Info Now!")
+            user = await self.roblox.get_user_by_name(name)
+            id = int(user.id)
+            e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
+            description = user.description
+            lendec = len(description)
+            avatar = await user.avatar()
+            games = await user.get_public_games()
+            gamecount = len(games)
+            if lendec > 40:
+                description = "I can't send this, it's to big!"
+            e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
+            e.add_field(name=f"Account Creation Time? {user.created_at}", value = f"Description? {description}")
+            e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
+            e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
+            e.set_thumbnail(url=f"{avatar}")
         
-        await ctx.send(embed=e)
+            await msg.edit(embed=e)
+        except roblox_py.PlayerNotFound:
+            e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}")
+            await msg.edit(embed=e2)
 
     @command(usage="sn <name>")
     async def sn(self, ctx, *, name):       
