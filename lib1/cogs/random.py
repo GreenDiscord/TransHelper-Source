@@ -96,10 +96,10 @@ class Random(commands.Cog):
             e.set_author(name=f"{ctx.author}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
             e.set_thumbnail(url=f"{avatar}")
         
-            await msg.edit(embed=e)
+            await msg.edit(content="", embed=e)
         except roblox_py.PlayerNotFound:
             e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}")
-            await msg.edit(embed=e2)
+            await msg.edit(content="", embed=e2)
 
     @command(usage="sn <name>")
     async def sn(self, ctx, *, name):       
