@@ -83,7 +83,7 @@ class Random(commands.Cog):
             msg = await ctx.send("Getting Info Now!")
             user = await self.roblox.get_user_by_name(name)
             id = int(user.id)
-            age = await user.account_age()
+            age = user.account_age()
             e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
             description = user.description
             lendec = len(description)
