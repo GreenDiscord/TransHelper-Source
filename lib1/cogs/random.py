@@ -85,8 +85,7 @@ class Random(commands.Cog):
                 id = int(user.id)  
                 gameid = await user.latest_public_game()
                 gamei = gameid.id
-                game = await self.roblox.get_place_by_id(gamei)
-                e = discord.Embed(title=f"ID? {user.id}", description=f"Latest Game Visits? {game.visits}", color = discord.Color.red())
+                e = discord.Embed(title=f"ID? {user.id}", description=f"Latest Game Visits? {gamei.visits}", color = discord.Color.red())
                 description = user.description
                 if description is None:
                    description = "None"
