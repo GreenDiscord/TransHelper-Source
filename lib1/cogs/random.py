@@ -81,7 +81,7 @@ class Random(commands.Cog):
         user = await self.roblox.get_user_by_name(name)
         id = int(user.id)
         e = discord.Embed(title=f"Stats For {user.name}", color = discord.Color.red())
-        description = await user.description()
+        description = user.description()
         lendec = len(description)
         if lendec > 40:
             description = "I can't send this, it's to big!"
