@@ -94,6 +94,8 @@ class Random(commands.Cog):
                 gamecount = len(games)
                 if lendec > 1080:
                     description = "I can't send this, it's to big!"
+                if user.is_premium() is True:
+                    e.add_field(name=f"Trade Link?", value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)")
                 e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
                 e.add_field(name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value = f"Description? {description}")
                 e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
