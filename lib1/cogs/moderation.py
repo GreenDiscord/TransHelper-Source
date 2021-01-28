@@ -38,6 +38,12 @@ class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.db = bot.db
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def setdelay(self,ctx, seconds: int):
+        """Sets Slowmode Of A Channel"""
+        await ctx.channel.edit(slowmode_delay=seconds)
+        await ctx.send(f"Set the slowmode delay in this channel to {seconds} seconds!")
 
     @commands.command(name="warns", description="A command which gets warns from a given user")
     async def _warns(self, ctx, member: discord.Member = None):
