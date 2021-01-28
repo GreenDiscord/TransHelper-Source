@@ -14,7 +14,7 @@ class TopGG(commands.Cog):
 
     async def on_guild_post(self):
         print("Server count posted successfully")
-        await self.c.send(f"Updated Top.gg Server Stats, Current Guild Count {len(bot.guilds)}")
+        await self.c.send(f"Updated Top.gg Server Stats, Current Guild Count {len(self.bot.guilds)}")
 
 def setup(bot):
     bot.add_cog(TopGG(bot))
