@@ -135,13 +135,13 @@ class Random(commands.Cog):
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"[**Direct Link**](https://www.roblox.com/users/{id}/profile)",
+                value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)",
                 inline=False)
             e.set_author(
                 name=f"{user.name}",
                 icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
             e.set_thumbnail(url=f"{avatar}")
-            e.set_footer(text=f"Is banned? {user.is_banned}")
+            e.set_footer(text=f"**Is banned?** {user.is_banned}")
             await msg.edit(content="", embed=e)
 
         except roblox_py.PlayerNotFound:
