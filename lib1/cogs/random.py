@@ -107,7 +107,7 @@ class Random(commands.Cog):
             if isprem is True:
                 e.add_field(
                     name=f"\u200b",
-                    value=f"**Trade Link?** [Click Here!](https://www.roblox.com/users/{id}/trade)",
+                    value=f"**Trade Link?**\n [Click Here!](https://www.roblox.com/users/{id}/trade)",
                     inline=False)
             e.add_field(
                 name="\u200b",
