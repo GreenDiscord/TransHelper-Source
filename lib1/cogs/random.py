@@ -106,12 +106,12 @@ class Random(commands.Cog):
             isprem = await user.is_premium()
             if isprem is True:
                 e.add_field(
-                    name=f"Trade Link?",
-                    value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)",
+                    name=f"\u200b",
+                    value=f"Trade Link? [Click Here!](https://www.roblox.com/users/{id}/trade)",
                     inline=True)
             e.add_field(
-                name="Ammount Of Games?",
-                value=f"{gamecount}",
+                name="\u200b",
+                value=f"Amount Of Games? {gamecount}",
                 inline=True)
             e.add_field(
                 name=f"\u200b",
