@@ -37,8 +37,8 @@ class Info(commands.Cog):
                     embed.add_field(name="Album", value=activity.album)
                     embed.set_footer(text="Song started at {}".format(activity.created_at.strftime("%H:%M")))
                     await ctx.send(embed=embed)
-                else:
-                    await ctx.send("You have no songs playing")
+            else:
+                await ctx.send("You have no songs playing")
     
     @commands.command()
     async def source(self, ctx):
