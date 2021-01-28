@@ -8,78 +8,81 @@ import inspect
 from discord import Spotify
 import os
 
+
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.command()
     async def who(self, ctx):
-      e = discord.Embed(title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this](https://greendiscord.github.io/TransHelper-Source/resources.html \"privacy policy\") link!", color = discord.Colour.from_hsv(random.random(), 1, 1))
-      await ctx.send(embed=e)
-        
+        e = discord.Embed(
+            title=f"Hi, I'm {self.bot.user}", description=f"You can find the privacy policy at [this](https://greendiscord.github.io/TransHelper-Source/resources.html \"privacy policy\") link!", color=discord.Colour.from_hsv(random.random(), 1, 1))
+        await ctx.send(embed=e)
+
     @commands.command()
-    async def vote(self,ctx):
-        e = discord.Embed(title=f"Hi, You can vote for me using the link below!", description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color = discord.Colour.from_hsv(random.random(), 1, 1))
+    async def vote(self, ctx):
+        e = discord.Embed(title=f"Hi, You can vote for me using the link below!",
+                          description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color=discord.Colour.from_hsv(random.random(), 1, 1))
         await ctx.send(embed=e)
 
     @commands.command()
     async def spotify(self, ctx, user: discord.Member = None):
         if user is None:
-            user = ctx.author          
+            user = ctx.author
         for activity in user.activities:
             if isinstance(activity, Spotify):
-                    embed = discord.Embed(
-                        title = f"{user.name}'s Spotify",
-                        description = "Listening to {}".format(activity.title),
-                        color = 0xC902FF)
-                    embed.set_thumbnail(url=activity.album_cover_url)
-                    embed.add_field(name="Artist", value=activity.artist)
-                    embed.add_field(name="Album", value=activity.album)
-                    embed.set_footer(text="Song started at {}".format(activity.created_at.strftime("%H:%M")))
-                    await ctx.send(embed=embed)
+                embed = discord.Embed(
+                    title=f"{user.name}'s Spotify",
+                    description="Listening to {}".format(activity.title),
+                    color=0xC902FF)
+                embed.set_thumbnail(url=activity.album_cover_url)
+                embed.add_field(name="Artist", value=activity.artist)
+                embed.add_field(name="Album", value=activity.album)
+                embed.set_footer(text=f"Song started at {activity.created_at.strftime(" % H: % M")}")
+                await ctx.send(embed=embed)
             else:
                 await ctx.send("You have no songs playing")
-    
+
     @commands.command()
     async def source(self, ctx):
         """ Displays source code """
         source_url = 'https://github.com/GreenDiscord/TransHelper-Source'
-        e = discord.Embed(title="You didn't provide a command (because you cant), so here's the source!", description=f"[Source]({source_url})")
+        e = discord.Embed(title="You didn't provide a command (because you cant), so here's the source!",
+                          description=f"[Source]({source_url})")
         await ctx.send(embed=e)
-
 
     @commands.command()
     @commands.guild_only()
     async def avatar(self, ctx, *, user: discord.Member = None):
-      """ Get the avatar of you or someone else """
-      user = user or ctx.author
-      e = discord.Embed(title=f"Avatar for {user.name}")
-      e.set_image(url=user.avatar_url)
-      await ctx.send(embed=e)
+        """ Get the avatar of you or someone else """
+        user = user or ctx.author
+        e = discord.Embed(title=f"Avatar for {user.name}")
+        e.set_image(url=user.avatar_url)
+        await ctx.send(embed=e)
 
-    #@commands.command()
-    #@commands.guild_only()
-    #async def roles(self, ctx):
+    # @commands.command()
+    # @commands.guild_only()
+    # async def roles(self, ctx):
     #  """ Get all roles in current server """
-   #   allroles = ""
+     #   allroles = ""
 
-     # for num, role in enumerate(sorted(ctx.guild.roles, reverse=True), start=1):
-     #     allroles += f"[{str(num).zfill(2)}] {role.id}\t{role.name}\t[ Users: {len(role.members)} ]\r\n"
+       # for num, role in enumerate(sorted(ctx.guild.roles, reverse=True), start=1):
+       #     allroles += f"[{str(num).zfill(2)}] {role.id}\t{role.name}\t[ Users: {len(role.members)} ]\r\n"
 
-     # data = BytesIO(allroles.encode('utf-8'))
-     # await ctx.send(content=f"Roles in **{ctx.guild.name}**", file=discord.File(data, filename=f"Roles"))
+       # data = BytesIO(allroles.encode('utf-8'))
+       # await ctx.send(content=f"Roles in **{ctx.guild.name}**", file=discord.File(data, filename=f"Roles"))
 
     @commands.command()
     @commands.guild_only()
     async def joinedat(self, ctx, *, user: discord.Member = None):
-      """ Check when a user joined the current server """
-      if user is None:
-          user = ctx.author
+        """ Check when a user joined the current server """
+        if user is None:
+            user = ctx.author
 
-      embed = discord.Embed(title = f'**{user}**', description=f'{user} joined **{ctx.guild.name}** at \n{user.joined_at}')
-      embed.set_image(url=user.avatar_url)
-      await ctx.send(embed=embed)
-
+        embed = discord.Embed(
+            title=f'**{user}**', description=f'{user} joined **{ctx.guild.name}** at \n{user.joined_at}')
+        embed.set_image(url=user.avatar_url)
+        await ctx.send(embed=embed)
 
     @commands.group()
     @commands.guild_only()
@@ -88,16 +91,19 @@ class Info(commands.Cog):
         if ctx.invoked_subcommand is None:
             find_bots = sum(1 for member in ctx.guild.members if member.bot)
 
-            embed = discord.Embed(title=f"ℹ information about **{ctx.guild.name}**", description=None)
+            embed = discord.Embed(
+                title=f"ℹ information about **{ctx.guild.name}**", description=None)
 
             if ctx.guild.icon:
                 embed.set_thumbnail(url=ctx.guild.icon_url)
             if ctx.guild.banner:
                 embed.set_image(url=ctx.guild.banner_url_as(format="png"))
 
-            embed.add_field(name="Server Name", value=ctx.guild.name, inline=True)
+            embed.add_field(name="Server Name",
+                            value=ctx.guild.name, inline=True)
             embed.add_field(name="Server ID", value=ctx.guild.id, inline=True)
-            embed.add_field(name="Members", value=ctx.guild.member_count, inline=True)
+            embed.add_field(
+                name="Members", value=ctx.guild.member_count, inline=True)
             embed.add_field(name="Bots", value=find_bots, inline=True)
             embed.add_field(name="Owner", value=ctx.guild.owner, inline=True)
             embed.add_field(name="Region", value=ctx.guild.region, inline=True)
@@ -128,17 +134,19 @@ class Info(commands.Cog):
         user = user or ctx.author
 
         show_roles = ', '.join(
-            [f"<@&{x.id}>" for x in sorted(user.roles, key=lambda x: x.position, reverse=True) if x.id != ctx.guild.default_role.id]
+            [f"<@&{x.id}>" for x in sorted(user.roles, key=lambda x: x.position,
+                                           reverse=True) if x.id != ctx.guild.default_role.id]
         ) if len(user.roles) > 1 else 'None'
-        content2=f"ℹ About **{user.id}**"
-        embed = discord.Embed(title=content2, colour=user.top_role.colour.value)
+        content2 = f"ℹ About **{user.id}**"
+        embed = discord.Embed(
+            title=content2, colour=user.top_role.colour.value)
         embed.set_thumbnail(url=user.avatar_url)
 
         embed.add_field(name="Full name", value=user, inline=True)
-        embed.add_field(name="Nickname", value=user.nick if hasattr(user, "nick") else "None", inline=True)
+        embed.add_field(name="Nickname", value=user.nick if hasattr(
+            user, "nick") else "None", inline=True)
         embed.add_field(name="Roles", value=show_roles, inline=False)
         embed.add_field(name="Joined?", value=f"{user.joined_at}")
-        
 
         await ctx.send(embed=embed)
 
