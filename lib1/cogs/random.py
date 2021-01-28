@@ -25,8 +25,8 @@ import platform
 import roblox_py
 from roblox_py import Client
 
- # Others
- 
+# Others
+import random
 import asyncio
 import os
 from gtts import gTTS
