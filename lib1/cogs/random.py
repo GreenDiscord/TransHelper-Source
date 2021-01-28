@@ -111,31 +111,31 @@ class Random(commands.Cog):
                     inline=False)
             e.add_field(
                 name="\u200b",
-                value=f"Amount Of Games? {gamecount}",
+                value=f"**Amount Of Games?**\n {gamecount}",
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"Amount Of Friends? {len(await user.friends())}",
+                value=f"**Amount Of Friends?**\n {len(await user.friends())}",
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"Amount Of Followers? {await user.following_count()}",
+                value=f"**Amount Of Followers?**\n {await user.following_count()}",
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days",
+                value=f"**Account Age?**\n {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days",
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"Description? {description}",
+                value=f"**Description?**\n {description}",
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"Number Of Games? {gamecount}",
+                value=f"**Number Of Games?**\n {gamecount}",
                 inline=False)
             e.add_field(
                 name=f"\u200b",
-                value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)",
+                value=f"[**Direct Link**](https://www.roblox.com/users/{id}/profile)",
                 inline=False)
             e.set_author(
                 name=f"{user.name}",
