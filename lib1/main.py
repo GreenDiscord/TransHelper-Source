@@ -61,7 +61,7 @@ bot.hypixel = f"{hypixel}"
 bot.topken = f"{topastoken}"
 bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
 bot.dagpi = Client(dagpitoken)
-bot.start_time = datetime.now()
+bot.start_time = time.time()
 bot.thresholds = (10, 25, 50, 100)
 
 
