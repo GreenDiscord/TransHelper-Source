@@ -93,8 +93,8 @@ class Random(commands.Cog):
                 avatar = await user.avatar()
                 games = await user.get_public_games()
                 gamecount = len(games)
-                if lendec > 1080:
-                    description = "I can't send this, it's to big!"
+                if lendec > 500:
+                    description = "I can't send this, it's to big! (or looks ugly in a embed)"
                 isprem = await user.is_premium()
                 if isprem is True:
                     e.add_field(name=f"Trade Link?", value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)")
