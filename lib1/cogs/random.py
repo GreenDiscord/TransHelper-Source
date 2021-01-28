@@ -1,38 +1,44 @@
+# Discord Imports
 import discord
 from discord.ext import commands
-import datetime
-import random
-from datetime import  timedelta
-import hypixelaPY
-from platform import python_version
-from time import time
-import platform
-import asyncio
-from apscheduler.triggers.cron import CronTrigger
-import time
-from discord import Activity, ActivityType, Embed
-from discord import __version__ as discord_version
-from PIL import Image
-import io
 from discord.ext.commands import Cog
 from discord.ext.commands import command
-from psutil import Process, virtual_memory
 from discord.utils import get
+from discord import Activity, ActivityType, Embed
+from discord import __version__ as discord_version
+
+# Time Imports
+import datetime
+from datetime import timedelta
+import time
+from time import sleep as bedtime
+
+
+# Platform Imports
+import platform
+
+
+
+
+
+# Roblox.py
 import roblox_py
 from roblox_py import Client
+
+ # Others
+ 
 import asyncio
 import os
-import time
 from gtts import gTTS
-from time import sleep as bedtime
-from apscheduler.triggers.cron import CronTrigger
-from discord import Activity, ActivityType, Embed
-from discord import __version__ as discord_version
-from discord.ext.commands import Cog
-from discord.ext.commands import command
-from psutil import Process, virtual_memory 
-import random
+import io
+from PIL import Image
+
+
+
+# Hypixel Api Wrapper
+import hypixelaPY
 from hypixelaPY import Hypixel
+
 
 class Random(commands.Cog):
     def __init__(self, bot):
@@ -45,79 +51,89 @@ class Random(commands.Cog):
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
     async def feedback(self, ctx, *, feed):
-      channel = self.bot.get_channel(794164790368796672)
-      e = discord.Embed(title="Sent Feedback!", description=f"Your feedback '{feed}' has been sent!")
-      await ctx.send(embed=e)
-      e2 = discord.Embed(title=f"Oh no, is it bad or good? ({ctx.author} has sent feedback)", description=f"{feed}")
-      await channel.send(embed=e2)
-    
+        channel = self.bot.get_channel(794164790368796672)
+        e = discord.Embed(title="Sent Feedback!",
+                          description=f"Your feedback '{feed}' has been sent!")
+        await ctx.send(embed=e)
+        e2 = discord.Embed(
+            title=f"Oh no, is it bad or good? ({ctx.author} has sent feedback)", description=f"{feed}")
+        await channel.send(embed=e2)
+
     @feedback.error
     async def feedback_handler(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             l = self.bot.get_command("feedback")
             left = l.get_cooldown_retry_after(ctx)
-            e = discord.Embed(title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
+            e = discord.Embed(
+                title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
             await ctx.send(embed=e)
-            
-            
-    
-        
+
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
-      e = discord.Embed(title="I will remind you!", descripition=f"I will you remind you in {time} seconds!")
-      await ctx.send(embed=e)
-      await asyncio.sleep(int(time))
-      e2 = discord.Embed(title=f"Hello {ctx.author}", description=f"I have come to remind you to {reminder}!")
-      await ctx.message.reply(embed=e2)
-      
+        e = discord.Embed(title="I will remind you!",
+                          descripition=f"I will you remind you in {time} seconds!")
+        await ctx.send(embed=e)
+        await asyncio.sleep(int(time))
+        e2 = discord.Embed(
+            title=f"Hello {ctx.author}", description=f"I have come to remind you to {reminder}!")
+        await ctx.message.reply(embed=e2)
+
     @command(pass_context=True, usage="ar <role>")
     async def ar(self, ctx, *, role1):
-      member = ctx.message.author
-      role = discord.utils.get(member.guild.roles, name=f"{role1}")
-      await member.add_roles(role)
-      e = discord.Embed(title="Added Roles", description=f"I have added the roles '{role1}' for you!")
-      await ctx.send(embed=e)
-    
+        member = ctx.message.author
+        role = discord.utils.get(member.guild.roles, name=f"{role1}")
+        await member.add_roles(role)
+        e = discord.Embed(
+            title="Added Roles", description=f"I have added the roles '{role1}' for you!")
+        await ctx.send(embed=e)
+
     @command(usage="ru <user>")
     async def ru(self, ctx, name):
-            try:
-                msg = await ctx.send("Getting Info Now!")
-                user = await self.roblox.get_user_by_name(name)
-                id = int(user.id)  
-                gameid = await user.latest_public_game()
-                e = discord.Embed(title=f"ID? {user.id}", description=f"Latest Game? {gameid.name}", color = discord.Color.red())
-                description = user.description
-                if description is None:
-                   description = "None"
-                lendec = len(description)
-                avatar = await user.avatar()
-                games = await user.get_public_games()
-                gamecount = len(games)
-                if lendec > 350:
-                    description = "I can't send this, it's to big! (or looks ugly in a embed)"
-                isprem = await user.is_premium()
-                if isprem is True:
-                    e.add_field(name=f"Trade Link?", value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)")
-                e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value = f"Amount Of Followers? {await user.following_count()}")
-                e.add_field(name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value = f"Description? {description}")
-                e.add_field(name=f"Number Of Games? {gamecount}", value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
-                e.set_author(name=f"{user.name}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
-                e.set_thumbnail(url=f"{avatar}")
-                e.set_footer(text=f"Is banned? {user.is_banned}")
-                await msg.edit(content="", embed=e)
+        try:
+            msg = await ctx.send("Getting Info Now!")
+            user = await self.roblox.get_user_by_name(name)
+            id = int(user.id)
+            gameid = await user.latest_public_game()
+            e = discord.Embed(
+                title=f"ID? {user.id}", description=f"Latest Game? {gameid.name}", color=discord.Color.red())
+            description = user.description
+            if description is None:
+                description = "None"
+            lendec = len(description)
+            avatar = await user.avatar()
+            games = await user.get_public_games()
+            gamecount = len(games)
+            if lendec > 350:
+                description = "I can't send this, it's to big! (or looks ugly in a embed)"
+            isprem = await user.is_premium()
+            if isprem is True:
+                e.add_field(
+                    name=f"Trade Link?", value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)")
+            e.add_field(name="Ammount Of Games?", value=f"{gamecount}")
+            e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value=f"Amount Of Followers? {await user.following_count()}")
+            e.add_field(
+                name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value=f"Description? {description}")
+            e.add_field(name=f"Number Of Games? {gamecount}",
+                        value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
+            e.set_author(
+                name=f"{user.name}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
+            e.set_thumbnail(url=f"{avatar}")
+            e.set_footer(text=f"Is banned? {user.is_banned}")
+            await msg.edit(content="", embed=e)
 
-            except roblox_py.PlayerNotFound:
-                e2 = discord.Embed(title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
-                await msg.edit(content="", embed=e2)
+        except roblox_py.PlayerNotFound:
+            e2 = discord.Embed(
+                title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
+            await msg.edit(content="", embed=e2)
 
     @command(usage="sn <name>")
-    async def sn(self, ctx, *, name):       
+    async def sn(self, ctx, *, name):
         tts = gTTS(text=f"Hi! {name} is really cool!", lang='en')
         tts.save("announce.mp3")
         await ctx.send(file=discord.File("announce.mp3"))
         await asyncio.sleep(5)
         os.remove("announce.mp3")
-   
+
     @command(usage="tts <text>")
     async def tts(self, ctx, *, text):
         lol = gTTS(text=f"{text}")
@@ -148,7 +164,8 @@ class Random(commands.Cog):
         embed.add_field(name="Bot Developers:", value="<@787800565512929321>")
 
         embed.set_footer(text=f"{ctx.author} | {self.bot.user.name}")
-        embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
+        embed.set_author(name=self.bot.user.name,
+                         icon_url=self.bot.user.avatar_url)
 
         await ctx.send(embed=embed)
 
@@ -161,28 +178,32 @@ class Random(commands.Cog):
         em = discord.Embed(color=color, title=f'Showing Color: {str(color)}')
         em.set_image(url='attachment://color.png')
         await ctx.send(file=discord.File(file, 'color.png'), embed=em)
-        
+
     @command()
     async def hi(self, ctx):
         await ctx.send("hi.")
-        
+
     @command()
     async def level(self, ctx, name):
-                        """This command shows stats for hypixel/minecraft"""
-                        hypixel = await Hypixel(self.API_KEY)    
-                        try:
-                            player = await hypixel.player.get(name=f"{name}")
-                            e2 = discord.Embed(title=f"Level For Player {player.name}",description=f"{player.level.level}")
-                            e2.add_field(name="Click Below for a link for some simple info", value=f"[This Link](https://minecraftuuid.com/?search={name})")
-                            await ctx.send(embed=e2)
-                        except hypixelaPY.NoPlayerFoundError:
-                            e = discord.Embed(title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
-                            await ctx.send(embed=e)
-      
+        """This command shows stats for hypixel/minecraft"""
+        hypixel = await Hypixel(self.API_KEY)
+        try:
+            player = await hypixel.player.get(name=f"{name}")
+            e2 = discord.Embed(
+                title=f"Level For Player {player.name}", description=f"{player.level.level}")
+            e2.add_field(name="Click Below for a link for some simple info",
+                         value=f"[This Link](https://minecraftuuid.com/?search={name})")
+            await ctx.send(embed=e2)
+        except hypixelaPY.NoPlayerFoundError:
+            e = discord.Embed(
+                title="Not Found!", description=f"Player {name} was not found, remember to use their/your **Minecraft** User Name")
+            await ctx.send(embed=e)
+
     @command()
     async def gay(self, ctx):
-      lis = ["1%", "58%", "32%", "85%", "37%", "48%", "50%"]
-      await ctx.send(f"You are {random.choice(lis)} gay")
+        lis = ["1%", "58%", "32%", "85%", "37%", "48%", "50%"]
+        await ctx.send(f"You are {random.choice(lis)} gay")
+
 
 def setup(bot):
     bot.add_cog(Random(bot))
