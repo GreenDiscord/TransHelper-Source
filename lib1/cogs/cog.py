@@ -25,22 +25,6 @@ class Info(commands.Cog):
                           description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color=discord.Colour.from_hsv(random.random(), 1, 1))
         await ctx.send(embed=e)
 
-    @commands.command()
-    async def spotify(self, ctx, user: discord.Member = None):
-        if user is None:
-            user = ctx.author
-        for activity in user.activities:
-            if isinstance(activity, Spotify):
-                embed = discord.Embed(
-                    title=f"{user.name}'s Spotify",
-                    description="Listening to {}".format(activity.title),
-                    color=0xC902FF)
-                embed.set_thumbnail(url=activity.album_cover_url)
-                embed.add_field(name="Artist", value=activity.artist)
-                embed.add_field(name="Album", value=activity.album)
-                embed.set_footer(text="Song started at {}".format(activity.created_at.strftime("%H:%M")))
-                await ctx.send(embed=embed)
-            else:
                 await ctx.send("You have no songs playing")
 
     @commands.command()
