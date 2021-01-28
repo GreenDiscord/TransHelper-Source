@@ -92,7 +92,7 @@ class Random(commands.Cog):
             gameid = await user.latest_public_game()
             e = discord.Embed(
                 title=f"ID? {user.id}",
-                description=f"Latest Game? {gameid.name}",
+                description=f"**Latest Game?**\n {gameid.name}",
                 color=discord.Color.red())
             description = user.description
             if description is None:
@@ -107,7 +107,7 @@ class Random(commands.Cog):
             if isprem is True:
                 e.add_field(
                     name=f"\u200b",
-                    value=f"Trade Link? [Click Here!](https://www.roblox.com/users/{id}/trade)",
+                    value=f"**Trade Link?** [Click Here!](https://www.roblox.com/users/{id}/trade)",
                     inline=False)
             e.add_field(
                 name="\u200b",
