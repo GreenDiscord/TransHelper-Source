@@ -93,7 +93,7 @@ class Random(commands.Cog):
                 avatar = await user.avatar()
                 games = await user.get_public_games()
                 gamecount = len(games)
-                if lendec > 500:
+                if lendec > 400:
                     description = "I can't send this, it's to big! (or looks ugly in a embed)"
                 isprem = await user.is_premium()
                 if isprem is True:
@@ -115,7 +115,7 @@ class Random(commands.Cog):
         tts = gTTS(text=f"Hi! {name} is really cool!", lang='en')
         tts.save("announce.mp3")
         await ctx.send(file=discord.File("announce.mp3"))
-        bedtime(5)
+        await asyncio.sleep(5)
         os.remove("announce.mp3")
    
     @command(usage="tts <text>")
@@ -123,7 +123,7 @@ class Random(commands.Cog):
         lol = gTTS(text=f"{text}")
         lol.save("tts.mp3")
         await ctx.send(file=discord.File("tts.mp3"))
-        bedtime(5)
+        await asyncio.sleep(5)
         os.remove("tts.mp3")
 
     @command(name="stats", description="A usefull command that displays bot statistics.", usage="stats")
