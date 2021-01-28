@@ -48,7 +48,7 @@ class Moderation(commands.Cog):
             return await ctx.send(f"Sorry, But this channel already has {seconds} set as the delay! (I don't want to waste my api calls lmao)")
         message = f"Set the slowmode delay in this channel to {seconds} seconds!"
         if seconds == 0:
-            message = f"Reset Slowmdoe of channel {ctx.channel.name}"
+            message = f"Reset Slowmode of channel {ctx.channel.name}"
         await ctx.channel.edit(slowmode_delay=seconds)
         await ctx.send(f"{message}")
 
