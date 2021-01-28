@@ -43,7 +43,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def setdelay(self, ctx, seconds: int):
         """Sets Slowmode Of A Channel"""
-        currentslow = await ctx.channel.slowmode_delay()
+        currentslow = await ctx.channel.slowmode_delay
         if currentslow == seconds:
             return await ctx.send(f"Sorry, But this channel already has {seconds} set as the delay! (I don't want to waste my api calls lmao)")
         message = f"Set the slowmode delay in this channel to {seconds} seconds!"
