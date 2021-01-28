@@ -109,7 +109,7 @@ class Random(commands.Cog):
             if isprem is True:
                 e.add_field(
                     name=f"Trade Link?", value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)")
-            e.add_field(name="Ammount Of Games?", value=f"{gamecount}")
+            e.add_field(name="Amount Of Games?", value=f"{gamecount}")
             e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value=f"Amount Of Followers? {await user.following_count()}")
             e.add_field(
                 name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value=f"Description? {description}")
