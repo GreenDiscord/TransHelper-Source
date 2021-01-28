@@ -38,6 +38,7 @@ class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.db = bot.db
+
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def setdelay(self,ctx, seconds: int):
