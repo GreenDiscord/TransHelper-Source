@@ -100,9 +100,7 @@ async def on_ready():
   await cursor.execute("""CREATE TABLE IF NOT EXISTS warns1(num INTEGER NOT NULL PRIMARY KEY, warns INTEGER, user_id INTEGER)""")
   await bot.db.commit()
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
-  print('| | . |---|  \        /
-         |-| | |   |   \  /\  /
-         | | | |___|    \/  \/ ner')
+  print('|bot ready|')
 
 @bot.event
 async def on_message(message):
