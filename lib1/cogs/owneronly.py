@@ -14,7 +14,17 @@ from discord.ext import commands
 from discord.shard import ShardInfo
 from discord.ext.commands import bot
 
-import os, io, json, psutil, aiohttp, collections, time, datetime, random, requests, asyncio
+import os
+import io
+import json
+import psutil
+import aiohttp
+import collections
+import time
+import datetime
+import random
+import requests
+import asyncio
 
 from datetime import datetime
 
@@ -42,6 +52,7 @@ import aiohttp
 import collections
 import ast
 
+
 def insert_returns(body):
     # insert return stmt if the last expression is a expression statement
     if isinstance(body[-1], ast.Expr):
@@ -58,8 +69,6 @@ def insert_returns(body):
         insert_returns(body[-1].body)
 
 
-        
-        
 async def copy_context_with(ctx: commands.Context, *, author=None, channel=None, **kwargs):
 
     alt_message: discord.Message = copy.copy(ctx.message)
@@ -77,10 +86,10 @@ async def copy_context_with(ctx: commands.Context, *, author=None, channel=None,
 class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
+
     def owners(ctx):
-      return ctx.author.id == 787800565512929321
-   
+        return ctx.author.id == 787800565512929321
+
     @commands.group(invoke_without_command=True)
     async def dev(self, ctx, command=None):
         command2 = self.bot.get_command(f"{command}")
@@ -88,24 +97,24 @@ class OwnerOnly(commands.Cog):
             await ctx.send_help(ctx.command)
         else:
             if command is None:
-                 await ctx.send_help(ctx.command)
+                await ctx.send_help(ctx.command)
             else:
-                 pass
+                pass
 
-    
     @commands.is_owner()
-    @dev.group(aliases = ["ss"])
+    @dev.group(aliases=["ss"])
     async def screenshot(self, ctx, url):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
-        embed = discord.Embed(title = f"Screenshot of {url}")
+        embed = discord.Embed(title=f"Screenshot of {url}")
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://image.thum.io/get/width/1920/crop/675/maxAge/1/noanimate/{url}') as r:
                 res = await r.read()
             embed.set_image(url="attachment://ss.png")
-            embed.set_footer(text=f"{ctx.author} | TransHelper | {current_time} ")
+            embed.set_footer(
+                text=f"{ctx.author} | TransHelper | {current_time} ")
             await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
-    
+
     @commands.is_owner()
     @dev.group()
     async def leaveguildbecauseimmad(self, ctx):
@@ -122,7 +131,7 @@ class OwnerOnly(commands.Cog):
         await asyncio.sleep(1)
         await msg.edit(content="I'm bored now, good bye suckers lmao")
         await owner.send("Finnaly. You have escaped level one")
-        
+
     @commands.is_owner()
     @dev.group()
     async def load(self, ctx, name: str):
@@ -154,7 +163,7 @@ class OwnerOnly(commands.Cog):
         except Exception as e:
             return await ctx.send(f"```py\n{e}```")
         await ctx.send(f"📤 Unloaded extension **`cogs/{name}.py`**")
-    
+
     @commands.is_owner()
     @dev.group(name="as")
     async def foddd(self, ctx: commands.Context, target: discord.User, *, command_string: str):
@@ -177,7 +186,7 @@ class OwnerOnly(commands.Cog):
             return await ctx.send(f'Command "{alt_ctx.invoked_with}" is not found')
 
         return await alt_ctx.command.invoke(alt_ctx)
-    
+
     @commands.is_owner()
     @dev.group(aliases=['ra'])
     async def reloadall(self, ctx):
@@ -192,7 +201,8 @@ class OwnerOnly(commands.Cog):
                     return await ctx.send(f"```py\n{e}```")
 
         if error_collection:
-            output = "\n".join([f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
+            output = "\n".join(
+                [f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
             return await ctx.send(
                 f"Attempted to reload all extensions, was able to reload, "
                 f"however the following failed...\n\n{output}"
@@ -204,12 +214,14 @@ class OwnerOnly(commands.Cog):
     @commands.is_owner()
     async def sync(self, ctx):
         """Sync with GitHub and reload all the cogs"""
-        embed = discord.Embed(title="Syncing...", description="<a:lol:798600720470507600> Syncing and reloading cogs.")
+        embed = discord.Embed(
+            title="Syncing...", description="<a:lol:798600720470507600> Syncing and reloading cogs.")
         embed.set_footer(text=f"{ctx.author} | TransHelper")
         msg = await ctx.send(embed=embed)
         async with ctx.channel.typing():
             output = sp.getoutput('git pull')
-        embed = discord.Embed(title="Synced", description="Synced with GitHub and reloaded all the cogs.")
+        embed = discord.Embed(
+            title="Synced", description="Synced with GitHub and reloaded all the cogs.")
         # Reload Cogs as well
         error_collection = []
         for file in os.listdir("cogs"):
@@ -221,21 +233,21 @@ class OwnerOnly(commands.Cog):
                     return await ctx.send(f"```py\n{e}```")
 
         if error_collection:
-            err = "\n".join([f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
+            err = "\n".join(
+                [f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
             return await ctx.send(
                 f"Attempted to reload all extensions, was able to reload, "
                 f"however the following failed...\n\n{err}"
             )
 
         await msg.edit(embed=embed)
-    
-    
+
     @dev.group(name='eval')
     @commands.is_owner()
     async def _eval(self, ctx, *, body):
         """Evaluates python code"""
         env = {
-            'self' : self,
+            'self': self,
             'ctx': ctx,
             'bot': self.bot,
             'channel': ctx.channel,
@@ -275,7 +287,7 @@ class OwnerOnly(commands.Cog):
             if appd_index != len(text)-1:
                 pages.append(text[last:curr])
             return list(filter(lambda a: a != '', pages))
-        
+
         try:
             exec(to_compile, env)
         except Exception as e:
@@ -294,7 +306,7 @@ class OwnerOnly(commands.Cog):
             if ret is None:
                 if value:
                     try:
-                        
+
                         out = await ctx.send(f'```py\n{value}\n```')
                     except:
                         paginated_text = paginate(value)
@@ -320,68 +332,44 @@ class OwnerOnly(commands.Cog):
             await ctx.message.add_reaction('\u2049')  # x
         else:
             await ctx.message.add_reaction('\u2705')
-      
- 
 
-    
     @dev.group(invoke_without_command=True)
     @commands.check(owners)
-    async def chnick(self,ctx,*,name):
-      me3 = ctx.guild.me
-      await me3.edit(nick=name)
-      word1 = "Nickname Changed To"
-      await ctx.send(f"{word1} {name}")
-    
-    
-    
-    
+    async def chnick(self, ctx, *, name):
+        me3 = ctx.guild.me
+        await me3.edit(nick=name)
+        word1 = "Nickname Changed To"
+        await ctx.send(f"{word1} {name}")
+
     @dev.group(invoke_without_command=True)
     @commands.check(owners)
     async def changestat(self, ctx):
-      await ctx.send(f"Hi yeah")
-      
+        await ctx.send(f"Hi yeah")
+
     @changestat.group(invoke_without_command=True)
     @commands.check(owners)
     async def stream(self, ctx, *, activity='placeholder (owner to lazy lol)'):
-      await self.bot.change_presence(activity=discord.Streaming(name=activity, url="http://www.twitch.tv/transhelperdiscordbot"))
-      await ctx.send(f'Changed activity to {activity} using Stream status.')
-       
-        
+        await self.bot.change_presence(activity=discord.Streaming(name=activity, url="http://www.twitch.tv/transhelperdiscordbot"))
+        await ctx.send(f'Changed activity to {activity} using Stream status.')
+
     @changestat.group(invoke_without_command=True)
     @commands.check(owners)
     async def game(self, ctx, *, activity='placeholder (owner to lazy lol)'):
-      await self.bot.change_presence(activity=discord.Game(name=activity))
-      await ctx.send(f'Changed activity to {activity} using Game status.')
-                                     
+        await self.bot.change_presence(activity=discord.Game(name=activity))
+        await ctx.send(f'Changed activity to {activity} using Game status.')
+
     @changestat.group(invoke_without_command=True)
     @commands.check(owners)
     async def watching(self, ctx, *, activity='placeholder (owner to lazy lol)'):
-      await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=activity))
-      await ctx.send(f'Changed activity to {activity} using Watching status.')
-                                     
+        await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=activity))
+        await ctx.send(f'Changed activity to {activity} using Watching status.')
+
     @changestat.group(invoke_without_command=True)
     @commands.check(owners)
     async def listening(self, ctx, *, activity='placeholder (owner to lazy lol)'):
-      await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=activity))
-      await ctx.send(f'Changed activity to {activity} using Listening status.')
-    
+        await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=activity))
+        await ctx.send(f'Changed activity to {activity} using Listening status.')
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
- 
-    
-  
-    
     @dev.group(invoke_without_command=True)
     @commands.check(owners)
     async def stop_bot(self, ctx):
@@ -389,12 +377,10 @@ class OwnerOnly(commands.Cog):
         message = ctx.message
         await message.add_reaction(emoji)
         await ctx.bot.logout()
-        
-        
-    
+
     @dev.group()
     @commands.check(owners)
-    async def send(self, ctx, id : typing.Optional[int] = None, *, message):
+    async def send(self, ctx, id: typing.Optional[int] = None, *, message):
         if id is None:
             id = message
             channel2 = ctx.channel
@@ -404,10 +390,6 @@ class OwnerOnly(commands.Cog):
             channel = self.bot.get_channel(int(id))
             await channel.send(f"{message}")
             await ctx.author.send("Sent your message :)")
-
-
-
-    
 
 
 def setup(bot):

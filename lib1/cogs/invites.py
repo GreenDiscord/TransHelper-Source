@@ -1,12 +1,15 @@
 # Code provided by git repo provide here : https://github.com/cyrus01337/invites/blob/master/invites.py
 
+# Discord Imports
+import discord
+from discord.ext import commands, tasks
+
+# Other Imports
 import asyncio
 import datetime
 import time
 from typing import Dict, Optional
 
-import discord
-from discord.ext import commands, tasks
 
 # poll period in minutes for the
 # update_invite_expiry task
@@ -67,7 +70,8 @@ class Invites(commands.Cog):
     @tasks.loop(minutes=POLL_PERIOD)
     async def update_invite_expiry(self):
         # flatten all the invites in the cache into one single list
-        flattened = [invite for inner in self.bot.invites.values() for invite in inner.values()]
+        flattened = [invite for inner in self.bot.invites.values()
+                     for invite in inner.values()]
         # get current posix time
         current = time.time()
         self.bot.expiring_invites = {
@@ -80,7 +84,8 @@ class Invites(commands.Cog):
         # so we can compare it with invites
         # that were just created
         try:  # self.bot.shortest_invite might not exist
-            self.bot.shortest_invite = self.bot.shortest_invite - int(time.time() - self.bot.last_update)
+            self.bot.shortest_invite = self.bot.shortest_invite - \
+                int(time.time() - self.bot.last_update)
         except AttributeError:
             exists = False
 
@@ -222,12 +227,14 @@ class Invites(commands.Cog):
         if not invites:
             # if there is no invites send this information
             # in an embed and return
-            embed = discord.Embed(colour=discord.Colour.red(), description='No invites found...')
+            embed = discord.Embed(
+                colour=discord.Colour.red(), description='No invites found...')
             await ctx.send(embed=embed)
             return
 
         # if you got here there are invites in the cache
-        embed = discord.Embed(colour=discord.Colour.green(), title='Most used invites')
+        embed = discord.Embed(colour=discord.Colour.green(),
+                              title='Most used invites')
         # sort the invites by the amount of uses
         # by default this would make it in increasing
         # order so we pass True to the reverse kwarg
@@ -238,15 +245,16 @@ class Invites(commands.Cog):
         amount = 10 if len(invites) >= 10 else len(invites)
         # list comp on the sorted invites and then
         # join it into one string with str.join
-        description = '\n'.join([f'{i + 1}. {invites[i].code} - {invites[i].uses}' for i in range(amount)])
+        description = '\n'.join(
+            [f'{i + 1}. {invites[i].code} - {invites[i].uses}' for i in range(amount)])
         embed.description = description
         # if there are more than 10 invites
         # add a footer saying how many more
         # invites there are
         if amount > 10:
-            embed.set_footer(text=f'There are {len(invites) - 10} more invites in this guild.')
+            embed.set_footer(
+                text=f'There are {len(invites) - 10} more invites in this guild.')
         await ctx.send(embed=embed)
-
 
 
 def setup(bot: commands.Bot):

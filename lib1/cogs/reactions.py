@@ -15,8 +15,7 @@ class Reactions(commands.Cog):
   
 
   
-#breaking bot
-
+#breaking bot hehe, pull and change this one :)
     
 
 def setup(bot):

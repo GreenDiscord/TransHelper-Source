@@ -1,6 +1,7 @@
-import discord, datetime, time
+import discord
+import datetime
+import time
 from discord.ext import commands
-
 
 
 class Uptime(commands.Cog):

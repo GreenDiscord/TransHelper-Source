@@ -18,9 +18,6 @@ from time import sleep as bedtime
 import platform
 
 
-
-
-
 # Roblox.py
 import roblox_py
 from roblox_py import Client
@@ -32,7 +29,6 @@ import os
 from gtts import gTTS
 import io
 from PIL import Image
-
 
 
 # Hypixel Api Wrapper
@@ -95,8 +91,8 @@ class Random(commands.Cog):
             id = int(user.id)
             gameid = await user.latest_public_game()
             e = discord.Embed(
-                title=f"ID? {user.id}", 
-                description=f"Latest Game? {gameid.name}", 
+                title=f"ID? {user.id}",
+                description=f"Latest Game? {gameid.name}",
                 color=discord.Color.red())
             description = user.description
             if description is None:
@@ -110,15 +106,15 @@ class Random(commands.Cog):
             isprem = await user.is_premium()
             if isprem is True:
                 e.add_field(
-                    name=f"Trade Link?", 
+                    name=f"Trade Link?",
                     value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)",
                     inline=True)
             e.add_field(
-                name="Ammount Of Games?", 
+                name="Ammount Of Games?",
                 value=f"{gamecount}",
                 inline=True)
             e.add_field(
-                name=f"Amount Of Friends? {len(await user.friends())}", 
+                name=f"Amount Of Friends? {len(await user.friends())}",
                 value="\u200b",
                 inline=True)
             e.add_field(
@@ -127,7 +123,7 @@ class Random(commands.Cog):
                 inline=True
             )
             e.add_field(
-                name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", 
+                name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days",
                 value="\u200b",
                 inline=True)
             e.add_field(
@@ -143,7 +139,7 @@ class Random(commands.Cog):
                 value="\u200b",
                 inline=True)
             e.set_author(
-                name=f"{user.name}", 
+                name=f"{user.name}",
                 icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
             e.set_thumbnail(url=f"{avatar}")
             e.set_footer(text=f"Is banned? {user.is_banned}")
@@ -151,7 +147,7 @@ class Random(commands.Cog):
 
         except roblox_py.PlayerNotFound:
             e2 = discord.Embed(
-                title="User Not Found!", 
+                title="User Not Found!",
                 description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
             await msg.edit(content="", embed=e2)
 
