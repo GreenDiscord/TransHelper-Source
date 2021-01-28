@@ -52,9 +52,11 @@ bot.load_extension("jishaku")
 hce = bot.get_command("help")
 hce.hidden = True
 dagpitoken = open("asy.txt", "r").read()
+robloxcookie = open("roblox.txt", "r").read()
 topastoken = open("top.txt", "r").read()
 chatbottoken = open("chat.txt", "r").read()
 hypixel = open("hypixel.txt", "r").read()
+bot.robloxc = f"{robloxcookie}"
 bot.hypixel = f"{hypixel}"
 bot.topken = f"{topastoken}"
 bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
