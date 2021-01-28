@@ -25,10 +25,9 @@ class Info(commands.Cog):
     @commands.command()
     async def spotify(self, ctx, user: discord.Member = None):
         if user is None:
-            user = ctx.author
-        if user.activities:
-            for activity in user.activities:
-                if isinstance(activity, Spotify):
+            user = ctx.author          
+        for activity in user.activities:
+            if isinstance(activity, Spotify):
                     embed = discord.Embed(
                         title = f"{user.name}'s Spotify",
                         description = "Listening to {}".format(activity.title),
