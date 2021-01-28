@@ -141,7 +141,7 @@ class Random(commands.Cog):
                 name=f"{user.name}",
                 icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
             e.set_thumbnail(url=f"{avatar}")
-            e.set_footer(text=f"**Is banned?** {user.is_banned}")
+            e.set_footer(text=f"Is banned? {user.is_banned}")
             await msg.edit(content="", embed=e)
 
         except roblox_py.PlayerNotFound:
