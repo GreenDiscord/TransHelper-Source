@@ -119,14 +119,29 @@ class Random(commands.Cog):
                 inline=True)
             e.add_field(
                 name=f"Amount Of Friends? {len(await user.friends())}", 
-                value=f"Amount Of Followers? {await user.following_count()}",
+                value="",
                 inline=True)
             e.add_field(
+                name=f"Amount Of Followers? {await user.following_count()}",
+                value="",
+                inline=True
+            )
+            e.add_field(
                 name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", 
-                value=f"Description? {description}",
+                value="",
                 inline=True)
-            e.add_field(name=f"Number Of Games? {gamecount}",
-                        value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
+            e.add_field(
+                name=f"Description? {description}",
+                value="",
+                inline=True)
+            e.add_field(
+                name=f"Number Of Games? {gamecount}",
+                value="",
+                inline=True)
+            e.add_field(
+                name=f"[Direct Link](https://www.roblox.com/users/{id}/profile)",
+                value="",
+                inline=True)
             e.set_author(
                 name=f"{user.name}", 
                 icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
