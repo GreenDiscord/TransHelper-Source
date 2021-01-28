@@ -93,7 +93,7 @@ class Random(commands.Cog):
                 avatar = await user.avatar()
                 games = await user.get_public_games()
                 gamecount = len(games)
-                if lendec > 400:
+                if lendec > 350:
                     description = "I can't send this, it's to big! (or looks ugly in a embed)"
                 isprem = await user.is_premium()
                 if isprem is True:
