@@ -23,13 +23,23 @@ class Info(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.command()
-    async def spotify(self, ctx, user: discord.Member=None):
-        user = user or ctx.author
-        for activity in user.activities:
-            if isinstance(activity, Spotify):
-                await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
-            else:
-                await ctx.send("*vibing* Oh sorry, this person isn't listening to spotify")
+    async def spotify(self, ctx, user: discord.Member = None):
+        if user is None:
+            user = ctx.author
+        if user.activities:
+            for activity in user.activities:
+                if isinstance(activity, Spotify):
+                    embed = discord.Embed(
+                        title = f"{user.name}'s Spotify",
+                        description = "Listening to {}".format(activity.title),
+                        color = 0xC902FF)
+                    embed.set_thumbnail(url=activity.album_cover_url)
+                    embed.add_field(name="Artist", value=activity.artist)
+                    embed.add_field(name="Album", value=activity.album)
+                    embed.set_footer(text="Song started at {}".format(activity.created_at.strftime("%H:%M")))
+                    await ctx.send(embed=embed)
+                else:
+                    await ctx.send("You have no songs playing")
     
     @commands.command()
     async def source(self, ctx):
