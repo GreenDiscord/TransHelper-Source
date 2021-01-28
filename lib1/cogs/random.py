@@ -95,7 +95,9 @@ class Random(commands.Cog):
             id = int(user.id)
             gameid = await user.latest_public_game()
             e = discord.Embed(
-                title=f"ID? {user.id}", description=f"Latest Game? {gameid.name}", color=discord.Color.red())
+                title=f"ID? {user.id}", 
+                description=f"Latest Game? {gameid.name}", 
+                color=discord.Color.red())
             description = user.description
             if description is None:
                 description = "None"
@@ -108,22 +110,34 @@ class Random(commands.Cog):
             isprem = await user.is_premium()
             if isprem is True:
                 e.add_field(
-                    name=f"Trade Link?", value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)")
-            e.add_field(name="Amount Of Games?", value=f"{gamecount}")
-            e.add_field(name=f"Amount Of Friends? {len(await user.friends())}", value=f"Amount Of Followers? {await user.following_count()}")
+                    name=f"Trade Link?", 
+                    value=f"[Click Here!](https://www.roblox.com/users/{id}/trade)",
+                    inline=True)
             e.add_field(
-                name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", value=f"Description? {description}")
+                name="Ammount Of Games?", 
+                value=f"{gamecount}",
+                inline=True)
+            e.add_field(
+                name=f"Amount Of Friends? {len(await user.friends())}", 
+                value=f"Amount Of Followers? {await user.following_count()}",
+                inline=True)
+            e.add_field(
+                name=f"Account Age? {user.account_age().years} Years, {user.account_age().months} Months, {user.account_age().days} Days", 
+                value=f"Description? {description}",
+                inline=True)
             e.add_field(name=f"Number Of Games? {gamecount}",
                         value=f"[Direct Link](https://www.roblox.com/users/{id}/profile)")
             e.set_author(
-                name=f"{user.name}", icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
+                name=f"{user.name}", 
+                icon_url=f"https://www.roblox.com/headshot-thumbnail/image?userId={id}&width=150&height=150&format=png")
             e.set_thumbnail(url=f"{avatar}")
             e.set_footer(text=f"Is banned? {user.is_banned}")
             await msg.edit(content="", embed=e)
 
         except roblox_py.PlayerNotFound:
             e2 = discord.Embed(
-                title="User Not Found!", description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
+                title="User Not Found!", 
+                description=f"I have looked everywhere, but can't find user {name}, remember to use their/your **roblox** name!")
             await msg.edit(content="", embed=e2)
 
     @command(usage="sn <name>")
