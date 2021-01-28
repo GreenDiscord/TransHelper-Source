@@ -39,7 +39,8 @@ class Random(commands.Cog):
         self.bot = bot
         self.bot.hypixel = bot.hypixel
         self.API_KEY = f"{self.bot.hypixel}"
-        self.roblox = Client()
+        self.bot.robloxc = bot.robloxc
+        self.roblox = Client(cookies=f"{self.bot.robloxc}")
 
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
