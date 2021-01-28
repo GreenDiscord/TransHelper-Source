@@ -41,11 +41,11 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def setdelay(self,ctx, seconds: int):
+    async def setdelay(self, ctx, seconds: int):
         """Sets Slowmode Of A Channel"""
+        message = f"Set the slowmode delay in this channel to {seconds} seconds!"
         if seconds == 0:
             message = f"Reset Slowmdoe of channel {ctx.channel.name}"
-        message = f"Set the slowmode delay in this channel to {seconds} seconds!"
         await ctx.channel.edit(slowmode_delay=seconds)
         await ctx.send(f"{message}")
 
