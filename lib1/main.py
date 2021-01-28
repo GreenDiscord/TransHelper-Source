@@ -63,6 +63,7 @@ bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
 bot.dagpi = Client(dagpitoken)
 bot.start_time = time.time()
 bot.thresholds = (10, 25, 50, 100)
+bot.stats = bot.get_channel(804496786038980618)
 
 
 
@@ -101,6 +102,7 @@ async def on_ready():
   await bot.db.commit()
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
   print('|bot ready|')
+  await bot.stats.send("Bot ready, loaded all cogs perfectly!")
 
 @bot.event
 async def on_message(message):
