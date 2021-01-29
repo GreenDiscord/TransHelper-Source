@@ -65,8 +65,8 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
     
     @command()
-    async def qr(self, ctx, url, colour="0-0-0"):
-        colours = dict([("0-0-0", "0-0-0"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
+    async def qr(self, ctx, url, colour="255-255-255"):
+        colours = dict([("255-255-255", "255-255-255"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
         col = ["black", "red", "blue"]
         if colour is "0-0-0":
            col = ["0-0-0", "red", "blue"]
