@@ -29,6 +29,16 @@ class Info(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.command()
+    async def ping(self, ctx):
+        starttime = time.time()
+        msg = await ctx.send("Ping...")
+        e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)}")
+        endtime = time.time()
+        difference = int(round(starttime - endtime))
+        e.add_field(name="Script Speed", description=f"{difference}")
+        await msg.edit(content="", embed=e)
+
+    @commands.command()
     async def source(self, ctx):
         """ Displays source code """
         source_url = 'https://github.com/GreenDiscord/TransHelper-Source'
