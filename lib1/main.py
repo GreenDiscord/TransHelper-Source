@@ -212,7 +212,7 @@ async def on_command_error(ctx, error):
             await bot.stats.send(embed=e7)
         else:
             raise error
-            await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
+            await bot.stat.send(f"Guild {guild} has had a error, here it is! `{error}`")
       
       
 
