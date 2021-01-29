@@ -63,7 +63,7 @@ bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
 bot.dagpi = Client(dagpitoken)
 bot.start_time = time.time()
 bot.thresholds = (10, 25, 50, 100)
-bot.stats = bot.get_channel(804496786038980618)
+
 
 
 
@@ -91,6 +91,7 @@ async def on_connect():
 
 @bot.event
 async def on_ready():
+  bot.stats = bot.get_channel(804496786038980618)
   for filename in os.listdir('./cogs'):
       if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
