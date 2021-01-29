@@ -52,13 +52,7 @@ import aiohttp
 import collections
 import ast
 
-class CustomContext(commands.Context):
-    async def tick(self, value):
-        emoji = '\N{WHITE HEAVY CHECK MARK}' if value else '\N{CROSS MARK}'
-        try:
-            await self.message.add_reaction(emoji)
-        except discord.HTTPException:
-            pass
+
 
 
 
@@ -96,8 +90,7 @@ class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def get_context(self, message, *, cls=CustomContext):
-        return await super().get_context(message, cls=cls)
+  
 
     def owners(ctx):
         return ctx.author.id == 787800565512929321
@@ -144,7 +137,7 @@ class OwnerOnly(commands.Cog):
         await msg.edit(content="3")
         await asyncio.sleep(1)
         await msg.edit(content="I'm bored now, good bye suckers lmao")
-        await ctx.tick(value=1)
+        
         await owner.send("Finnaly. You have escaped level one")
 
     @commands.is_owner()
