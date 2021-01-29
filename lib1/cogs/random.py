@@ -63,7 +63,15 @@ class Random(commands.Cog):
             e = discord.Embed(
                 title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
             await ctx.send(embed=e)
-
+    
+    @command()
+    async def raise(self, raise):
+        t = True
+        if t is True:
+           raise commands.CommandInvokeError("yes")
+        else:
+           return await ctx.send("how.....")
+    
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
         e = discord.Embed(title="I will remind you!",
