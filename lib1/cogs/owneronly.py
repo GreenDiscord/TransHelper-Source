@@ -111,7 +111,7 @@ class OwnerOnly(commands.Cog):
             if command is None:
                 await ctx.send_help(ctx.command)
             else:
-                await ctx.tick(value=1)
+                
                 pass
 
     @commands.is_owner()
@@ -127,7 +127,7 @@ class OwnerOnly(commands.Cog):
             embed.set_footer(
                 text=f"{ctx.author} | TransHelper | {current_time} ")
             await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
-            
+            await ctx.tick(value=1)
 
     @commands.is_owner()
     @dev.group()
