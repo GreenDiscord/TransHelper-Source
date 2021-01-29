@@ -77,7 +77,7 @@ class Random(commands.Cog):
            
         else:
            if not colour in col:
-              colour = colour + url
+              colour = f"{colour} {url}"
               colour1 = colour.replace(" ", "+")
               await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={colour1}")
            else:
