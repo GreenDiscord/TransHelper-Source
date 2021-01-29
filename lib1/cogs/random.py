@@ -65,7 +65,7 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
     
     @command()
-    async def qr(self, ctx, url, colour="255-255-255"):
+    async def qr(self, ctx, colour="255-255-255",*, url):
         colours = dict([("255-255-255", "255-255-255"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
         col = ["black", "red", "blue"]
         if colour is "255-255-255":
@@ -76,7 +76,11 @@ class Random(commands.Cog):
            await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url}&bgcolor={yes}")
            
         else:
-           return await ctx.send("how.....")
+           if not colour in col:
+              colour = url
+              await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url}")
+           else:
+              pass
     
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
