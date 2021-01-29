@@ -52,6 +52,10 @@ import aiohttp
 import collections
 import ast
 
+from utils import CustomContext
+
+async def get_context(self, message, *, cls=CustomContext()):
+        return await super().get_context(message, cls=cls)
 
 def insert_returns(body):
     # insert return stmt if the last expression is a expression statement
@@ -114,6 +118,7 @@ class OwnerOnly(commands.Cog):
             embed.set_footer(
                 text=f"{ctx.author} | TransHelper | {current_time} ")
             await ctx.send(file=discord.File(io.BytesIO(res), filename="ss.png"), embed=embed)
+            await ctx.tick(value=1)
 
     @commands.is_owner()
     @dev.group()
