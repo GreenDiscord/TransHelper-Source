@@ -6,7 +6,7 @@ import json
 import random
 import os
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-my_file = os.path.join(THIS_FOLDER, './username.json')
+my_file = os.path.join(THIS_FOLDER, 'lib1/username.json')
 
 class Verify(commands.Cog):
     def __init__(self,bot):
