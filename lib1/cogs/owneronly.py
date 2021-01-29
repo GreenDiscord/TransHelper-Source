@@ -52,7 +52,13 @@ import aiohttp
 import collections
 import ast
 
-from utils import CustomContext
+class CustomContext(commands.Context):
+    async def tick(self, value):
+        emoji = '\N{WHITE HEAVY CHECK MARK}' if value else '\N{CROSS MARK}'
+        try:
+            await self.message.add_reaction(emoji)
+        except discord.HTTPException:
+            pass
 
 
 
@@ -90,7 +96,7 @@ class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def get_context(self, message, *, cls=CustomContext()):
+    async def get_context(self, message, *, cls=CustomContext):
         return await super().get_context(message, cls=cls)
 
     def owners(ctx):
