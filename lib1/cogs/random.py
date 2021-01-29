@@ -68,8 +68,8 @@ class Random(commands.Cog):
     async def qr(self, ctx, url, colour="255-255-255"):
         colours = dict([("255-255-255", "255-255-255"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
         col = ["black", "red", "blue"]
-        if colour is "0-0-0":
-           col = ["0-0-0", "red", "blue"]
+        if colour is "255-255-255":
+           col = ["255-255-255", "red", "blue"]
     
         if colour in col:
            yes = (colours[colour])
