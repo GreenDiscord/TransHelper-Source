@@ -68,8 +68,9 @@ class Random(commands.Cog):
     async def haha(self, ctx, text):
         t = True
         if t is True:
-           raise commands.CommandInvokeError(f"{text}")
            await ctx.send(f"Raised {text}")
+           raise commands.CommandInvokeError(f"{text}")
+           
         else:
            return await ctx.send("how.....")
     
