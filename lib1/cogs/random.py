@@ -65,11 +65,13 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
     
     @command()
-    async def haha(self, ctx, text):
-        t = True
-        if t is True:
-           await ctx.send(f"Raised {text}")
-           raise commands.CommandInvokeError(f"{text}")
+    async def qr(self, ctx, url, colour="0-0-0"):
+        colours = dict([("red", "FF0000"), ("blue", "00f")])
+        col = ["black", "red", "blue")
+
+        if colour in col:
+           yes = (colours[colour])
+           await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url}&bgcolor={yes}")
            
         else:
            return await ctx.send("how.....")
