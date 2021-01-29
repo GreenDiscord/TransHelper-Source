@@ -27,7 +27,6 @@ class Info(commands.Cog):
         e = discord.Embed(title=f"Hi, You can vote for me using the link below!",
                           description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color=discord.Colour.from_hsv(random.random(), 1, 1))
         await ctx.send(embed=e)
-        await asyncio
 
     @commands.command()
     async def source(self, ctx):
