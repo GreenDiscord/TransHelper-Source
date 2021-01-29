@@ -66,7 +66,7 @@ class Random(commands.Cog):
     
     @command()
     async def qr(self, ctx, url, colour="0-0-0"):
-        colours = dict([("red", "FF0000"), ("blue", "00f")])
+        colours = dict([("0-0-0", "0-0-0"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
         col = ["black", "red", "blue"]
         if colour is "0-0-0":
            col = ["0-0-0", "red", "blue"]
