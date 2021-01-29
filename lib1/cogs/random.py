@@ -73,7 +73,8 @@ class Random(commands.Cog):
     
         if colour in col:
            yes = (colours[colour])
-           await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url}&bgcolor={yes}")
+           url1 = url.replace(" ", "+")
+           await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url1}&bgcolor={yes}")
            
         else:
            if not colour in col:
