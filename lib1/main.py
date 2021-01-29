@@ -208,7 +208,7 @@ async def on_command_error(ctx, error):
             e7.set_thumbnail(url=f"{ctx.author.avatar}")
             e7.set_footer(text=f"{ctx.author.name}")
             await ctx.send("New Error, Sending to devs straight away!")
-            await bot.stats.send(embed=e7
+            await bot.stats.send(embed=e7)
         else:
             raise error
             await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
