@@ -32,7 +32,7 @@ class Info(commands.Cog):
     async def ping(self, ctx):
         starttime = time.time()
         msg = await ctx.send("Ping...")
-        e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)}")
+        e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)} ms")
         endtime = time.time()
         difference = int(round(starttime - endtime))
         e.add_field(name="Script Speed", value=f"{difference}")
