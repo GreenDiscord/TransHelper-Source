@@ -65,10 +65,11 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
     
     @command()
-    async def raise(self, raise):
+    async def raise(self, ctx, text):
         t = True
         if t is True:
-           raise commands.CommandInvokeError("yes")
+           raise commands.CommandInvokeError(f"{text}")
+           await ctx.send(f"Raised {text}")
         else:
            return await ctx.send("how.....")
     
