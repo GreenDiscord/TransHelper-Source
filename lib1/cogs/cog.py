@@ -34,7 +34,7 @@ class Info(commands.Cog):
         msg = await ctx.send("Ping...")
         e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)} ms")
         endtime = time.time()
-        difference = int(round(starttime - endtime))
+        difference = int(starttime - endtime)
         e.add_field(name="Script Speed", value=f"{difference}")
         await msg.edit(content="", embed=e)
 
