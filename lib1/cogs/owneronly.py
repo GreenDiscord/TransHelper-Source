@@ -54,8 +54,7 @@ import ast
 
 from utils import CustomContext
 
-async def get_context(self, message, *, cls=CustomContext()):
-        return await super().get_context(message, cls=cls)
+
 
 def insert_returns(body):
     # insert return stmt if the last expression is a expression statement
@@ -91,6 +90,9 @@ class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def get_context(self, message, *, cls=CustomContext()):
+        return await super().get_context(message, cls=cls)
+
     def owners(ctx):
         return ctx.author.id == 787800565512929321
 
@@ -103,6 +105,7 @@ class OwnerOnly(commands.Cog):
             if command is None:
                 await ctx.send_help(ctx.command)
             else:
+                await ctx.tick(value=1)
                 pass
 
     @commands.is_owner()
