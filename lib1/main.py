@@ -203,11 +203,11 @@ async def on_command_error(ctx, error):
               # print(f"Why cant they use help :( {error}")
         elif isinstance(error, commands.CommandInvokeError):
             print("g")
-            haha = await ctx.author.avatar
+            haha = ctx.author.avatar_url
             e7 = discord.Embed(title="Oh no green you fucked up", description=f"`{error}`")
             e7.add_field(name="Command Caused By?", value=f"{ctx.command}")
             e7.add_field(name="By?", value=f"ID : {ctx.author.id}, Name : {ctx.author.name}")
-            e7.set_thumbnail(url=haha)
+            e7.set_thumbnail(url=f"{haha}")
             e7.set_footer(text=f"{ctx.author.name}")
             await ctx.send("New Error, Sending to devs straight away!")
             await bot.stats.send(embed=e7)
