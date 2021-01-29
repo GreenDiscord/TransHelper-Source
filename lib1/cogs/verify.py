@@ -12,9 +12,11 @@ class Verify(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
         self.client = roblox_py.Client()
+        
     @commands.Cog.listener()
     async def on_ready(self):
         print("Verify Cog Ready")
+        
     @commands.command()
     @commands.guild_only()
     @commands.bot_has_permissions(manage_nicknames=True)
@@ -24,7 +26,7 @@ class Verify(commands.Cog):
         with open(my_file,"r") as f:
             data1 = json.load(f)
         if str(ctx.author.id) in data1.keys():
-            await ctx.send("You are already verified\n You can re-verify by `b!reverify` ")
+            await ctx.send("You are already verified\n You can re-verify by `th,reverify` ")
             return
         try:
             embed = discord.Embed(timestamp=ctx.message.created_at, title="Verification",
@@ -40,7 +42,7 @@ class Verify(commands.Cog):
             except asyncio.TimeoutError:
                 return await ctx.send(f"You did'nt answer in time {ctx.author.mention}")
             username = str(username.content)
-            sentences1 = [f"glasses or soda and soda and key or vase", "lego or soda and pants or book or bus",
+            sentences1 = [f"transhelper is the best", "i like choclate",
                           "glasses or book or bus or nothing or vase", "book or vase or poo or human or something",
                           "vase bus or nothing or nothing", "sorry or nothing", "thank or bus or bus",
                           "nothing or bus and vase", "bye vase or bus", "bus vase and nothing ",
@@ -114,12 +116,12 @@ class Verify(commands.Cog):
             except asyncio.TimeoutError:
                 return await ctx.send(f"You did'nt answer in time {ctx.author.mention}")
             username = str(username.content)
-            sentences1 = [f"glasses or soda and soda and key or vase", "lego or soda and pants or book or bus",
+            sentences1 = [f"transhelper is the best", "i like choclate",
                           "glasses or book or bus or nothing or vase", "book or vase or poo or human or something",
                           "vase bus or nothing or nothing", "sorry or nothing", "thank or bus or bus",
                           "nothing or bus and vase", "bye vase or bus", "bus vase and nothing ",
                           "soda or vase nothing ", "roblox cola bus vase ok", "vase or okay", "soda lemon or buy",
-                          "cya", "its okay or nothing", "pee poo sodaa ee", "human vase or bye"]
+                          "cya", "its okay or nothing","pee poo sodaa ee","human vase or bye"]
             sentences = random.choice(sentences1)
             sentences = sentences.strip()
             sentences = str(sentences)
@@ -158,6 +160,7 @@ class Verify(commands.Cog):
             return await ctx.send(f"{fs}")
         except Exception as err:
             await ctx.send(f"`{err}`")
+            
     @commands.command()
     @commands.guild_only()
     async def whois(self,ctx,user:discord.Member=None):
@@ -171,5 +174,6 @@ class Verify(commands.Cog):
             noob  = l[str(user.id)]
             await ctx.send(f"{user.name}'s Roblox name is `{noob}`")
             f.close()
+            
 def setup(bot):
     bot.add_cog(Verify(bot))
