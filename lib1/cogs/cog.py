@@ -35,7 +35,7 @@ class Info(commands.Cog):
         e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)}")
         endtime = time.time()
         difference = int(round(starttime - endtime))
-        e.add_field(name="Script Speed", description=f"{difference}")
+        e.add_field(name="Script Speed", value=f"{difference}")
         await msg.edit(content="", embed=e)
 
     @commands.command()
