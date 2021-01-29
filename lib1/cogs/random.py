@@ -65,7 +65,7 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
     
     @command()
-    async def raise(self, ctx, text):
+    async def haha(self, ctx, text):
         t = True
         if t is True:
            raise commands.CommandInvokeError(f"{text}")
