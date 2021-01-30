@@ -68,13 +68,18 @@ class Random(commands.Cog):
     async def qr(self, ctx, colour="255-255-255",*, url=None):
         colours = dict([("255-255-255", "255-255-255"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
         col = ["black", "red", "blue"]
-        if colour is "255-255-255":
+        if colour == "255-255-255":
            col = ["255-255-255", "red", "blue"]
+        e = discord.Embed(title="Here you go, Made qr code!")
+        msg = await ctx.send("Creating!")
     
         if colour in col:
            yes = (colours[colour])
            url1 = url.replace(" ", "+")
-           await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url1}&bgcolor={yes}")
+           qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url1}&bgcolor={yes}"
+           e.set_image(url=qr)
+           await msg.edit(content="", embed=e)
+            
            
         else:
            if not colour in col:
@@ -82,7 +87,9 @@ class Random(commands.Cog):
                  url = ""
               colour = f"{colour} {url}"
               colour1 = colour.replace(" ", "+")
-              await ctx.send(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={colour1}")
+              qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={colour1}"
+              e.set_image(url=qr)
+              await msg.edit(content="", embed=e)
            else:
               pass
     
