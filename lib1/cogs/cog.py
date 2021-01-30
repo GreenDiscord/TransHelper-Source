@@ -32,7 +32,7 @@ class Info(commands.Cog):
     async def ping(self, ctx):
         starttime = time.time()
         msg = await ctx.send("Ping...")
-        async with ctx.typing()
+        async with ctx.channel.typing():
             e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)} ms")
             endtime = time.time()
             difference = float(int(starttime - endtime))
