@@ -22,11 +22,11 @@ class Info(commands.Cog):
     async def lp(self, ctx, member : discord.Member = None):
         if member is None:
             starttext = "Maybe you should learn python first"
-            embed2 = discord.Embed(title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) a exercises for beginners")
+            embed2 = discord.Embed(title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) exercises for beginners")
             return await ctx.send(embed=embed2)
         else:
             starttext = f"Maybe you should learn python first {member.name}"
-            embed = discord.Embed(title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) a exercises for beginners")
+            embed = discord.Embed(title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) exercises for beginners")
             return await ctx.send(embed=embed)
 
     @commands.command()
