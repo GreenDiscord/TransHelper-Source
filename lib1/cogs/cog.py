@@ -17,8 +17,13 @@ class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.start_time = bot.start_time
+    
+    @commands.command()
+    async def lp(self, ctx, member : discord.Member):
+        embed = discord.Embed(title=f"Maybe you should learn python first {member.name}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) a exercises for beginners")
+        await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def uptime(self, ctx):
         current_time = time.time()
         difference = int(round(current_time - self.bot.start_time))
