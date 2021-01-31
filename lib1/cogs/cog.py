@@ -19,7 +19,10 @@ class Info(commands.Cog):
         self.bot.start_time = bot.start_time
     
     @commands.command()
-    async def lp(self, ctx, member : discord.Member):
+    async def lp(self, ctx, member : discord.Member = None):
+        starttext = f"Maybe you should learn python first {member.name}"
+        if member is None:
+            starttext = "Maybe you should learn python first"
         embed = discord.Embed(title=f"Maybe you should learn python first {member.name}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) a exercises for beginners")
         await ctx.send(embed=embed)
 
