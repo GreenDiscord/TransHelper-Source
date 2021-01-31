@@ -247,7 +247,7 @@ class Random(commands.Cog):
         await ctx.send("hi.")
 
     @command()
-    async def level(self, ctx, name):
+    async def info(self, ctx, name):
         """This command shows stats for hypixel/minecraft"""
         hypixel = await Hypixel(self.API_KEY)
         try:
@@ -264,8 +264,7 @@ class Random(commands.Cog):
 
     @command()
     async def gay(self, ctx):
-        lis = ["1%", "58%", "32%", "85%", "37%", "48%", "50%"]
-        await ctx.send(f"You are {random.choice(lis)} gay")
+        await ctx.send(f"You are {random.int(1, 100)}% gay")
 
 
 def setup(bot):
