@@ -1,6 +1,7 @@
 # Discord Imports
 import discord
 from discord.ext import commands
+from discord import Spotify
 
 # Time Imports
 from datetime import datetime
@@ -17,6 +18,20 @@ class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.start_time = bot.start_time
+    from discord import Spotify
+
+    @commands.command()
+    async def spotify(self, ctx, user: discord.Member=None):
+        user = user or ctx.author
+        for activity in user.activities:
+            if isinstance(activity, Spotify):
+                w = discord.Embed(title="Oooo, what a party!", description=f"{user.name} is listening to Spotify, let's see what!")
+                w.add_field(name="Listening to?", description=f"{activity.title}")
+                w.add_field(name="By?", value=f"{activity.artist}")
+                return await ctx.send(embed=w)
+            else:
+                e = discord.Embed(title="❌ Nope, the user (you or another) aren't listening to Spotify", description=f"User {user.name} isn't listening to Spotify")
+                return await ctx.send(embed=e)
 
     @commands.command()
     async def lp(self, ctx, member: discord.Member = None):
