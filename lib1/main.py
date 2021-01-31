@@ -105,7 +105,7 @@ async def on_ready():
   await bot.db.commit()
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
   print('|bot ready|')
-  await bot.stats.send(f"Bot ready, loaded all cogs perfectly! Time to load is {difference} :)")
+  await bot.stats.send(f"Bot ready, loaded all cogs perfectly! Time to load is {difference}secs :)")
 
 @bot.event
 async def on_message(message):
