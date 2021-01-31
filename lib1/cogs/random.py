@@ -65,6 +65,7 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
 
     @command()
+    @commands.cooldown(1, 40, commands.BucketType.guild)
     async def qr(self, ctx, colour="255-255-255", *, url=None):
         colours = dict([("255-255-255", "255-255-255"),
                         ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])

@@ -17,16 +17,18 @@ class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.start_time = bot.start_time
-    
+
     @commands.command()
-    async def lp(self, ctx, member : discord.Member = None):
+    async def lp(self, ctx, member: discord.Member = None):
         if member is None:
             starttext = "Maybe you should learn python first"
-            embed2 = discord.Embed(title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) exercises for beginners")
+            embed2 = discord.Embed(
+                title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) exercises for beginners")
             return await ctx.send(embed=embed2)
         else:
             starttext = f"Maybe you should learn python first {member.name}"
-            embed = discord.Embed(title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) exercises for beginners")
+            embed = discord.Embed(
+                title=f"{starttext}", description="Here's some tutorials! \n [Click Here For](https://automatetheboringstuff.com/) complete beginners to programming \n [Click Here For](https://learnxinyminutes.com/docs/python3/) people who know programming already \n [Click Here For](https://docs.python.org/3/tutorial/) the official tutorial\n [Click Here For](http://python.swaroopch.com/) a useful book\n [See Also For](http://www.codeabbey.com/) exercises for beginners")
             return await ctx.send(embed=embed)
 
     @commands.command()
@@ -40,8 +42,8 @@ class Info(commands.Cog):
         try:
             await ctx.send(embed=embed)
         except discord.HTTPException:
-            await ctx.send("Current uptime: " + text) 
-            
+            await ctx.send("Current uptime: " + text)
+
     @commands.command()
     async def who(self, ctx):
         e = discord.Embed(
