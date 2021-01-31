@@ -93,6 +93,15 @@ class Random(commands.Cog):
                 await msg.edit(content="", embed=e)
             else:
                 pass
+    @qr.error
+    async def qr_handler(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            l = self.bot.get_command("feedback")
+            left = l.get_cooldown_retry_after(ctx)
+            msg = await ctx.send("Just Getting The Cooldown")
+            e = discord.Embed(
+                title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
+            await ctx.send(embed=e)
 
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
