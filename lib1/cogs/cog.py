@@ -15,7 +15,21 @@ import os
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.bot.start_time = bot.start_time
 
+    @commands.command(pass_context=True)
+    async def uptime(self, ctx):
+        current_time = time.time()
+        difference = int(round(current_time - self.bot.start_time))
+        text = str(datetime.timedelta(seconds=difference))
+        embed = discord.Embed(colour=ctx.message.author.top_role.colour)
+        embed.add_field(name="Uptime", value=text)
+        embed.set_footer(text=f"{ctx.author} | {self.bot.user}")
+        try:
+            await ctx.send(embed=embed)
+        except discord.HTTPException:
+            await ctx.send("Current uptime: " + text) 
+            
     @commands.command()
     async def who(self, ctx):
         e = discord.Embed(
@@ -33,7 +47,8 @@ class Info(commands.Cog):
         starttime = time.time()
         msg = await ctx.send("Ping...")
         async with ctx.channel.typing():
-            e = discord.Embed(title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)} ms")
+            e = discord.Embed(
+                title="Pong!", description=f"Heartbeat : {round(self.bot.latency * 1000, 2)} ms")
             endtime = time.time()
             difference = float(int(starttime - endtime))
             e.add_field(name="Script Speed", value=f"{difference}ms")

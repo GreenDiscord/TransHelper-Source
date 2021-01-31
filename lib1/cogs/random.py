@@ -63,36 +63,36 @@ class Random(commands.Cog):
             e = discord.Embed(
                 title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
             await ctx.send(embed=e)
-    
+
     @command()
-    async def qr(self, ctx, colour="255-255-255",*, url=None):
-        colours = dict([("255-255-255", "255-255-255"), ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
+    async def qr(self, ctx, colour="255-255-255", *, url=None):
+        colours = dict([("255-255-255", "255-255-255"),
+                        ("black", "0-0-0"), ("red", "FF0000"), ("blue", "00f")])
         col = ["black", "red", "blue"]
         if colour == "255-255-255":
-           col = ["255-255-255", "red", "blue"]
+            col = ["255-255-255", "red", "blue"]
         e = discord.Embed(title="Here you go, Made qr code!")
         msg = await ctx.send("Creating!")
-    
+
         if colour in col:
-           yes = (colours[colour])
-           url1 = url.replace(" ", "+")
-           qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url1}&bgcolor={yes}"
-           e.set_image(url=qr)
-           await msg.edit(content="", embed=e)
-            
-           
+            yes = (colours[colour])
+            url1 = url.replace(" ", "+")
+            qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url1}&bgcolor={yes}"
+            e.set_image(url=qr)
+            await msg.edit(content="", embed=e)
+
         else:
-           if not colour in col:
-              if url is None:
-                 url = ""
-              colour = f"{colour} {url}"
-              colour1 = colour.replace(" ", "+")
-              qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={colour1}"
-              e.set_image(url=qr)
-              await msg.edit(content="", embed=e)
-           else:
-              pass
-    
+            if not colour in col:
+                if url is None:
+                    url = ""
+                colour = f"{colour} {url}"
+                colour1 = colour.replace(" ", "+")
+                qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={colour1}"
+                e.set_image(url=qr)
+                await msg.edit(content="", embed=e)
+            else:
+                pass
+
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
         e = discord.Embed(title="I will remind you!",
