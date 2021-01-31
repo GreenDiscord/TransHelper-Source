@@ -101,7 +101,7 @@ class Random(commands.Cog):
             msg = await ctx.send("Just Getting The Cooldown")
             e = discord.Embed(
                 title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
-            await ctx.send(embed=e)
+            await msg.edit(content="", embed=e)
 
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
     async def remind(self, ctx, time, *, reminder):
