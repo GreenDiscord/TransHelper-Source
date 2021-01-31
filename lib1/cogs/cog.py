@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 
 # Time Imports
-from datetime import date
+from datetime import datetime
 import time
 
 # Other Imports
