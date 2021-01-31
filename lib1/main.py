@@ -91,6 +91,8 @@ async def on_connect():
 
 @bot.event
 async def on_ready():
+  current_time = time.time()
+  difference = int(round(current_time - bot.start_time))
   bot.stats = bot.get_channel(804496786038980618)
   for filename in os.listdir('./cogs'):
       if filename.endswith('.py'):
@@ -103,7 +105,7 @@ async def on_ready():
   await bot.db.commit()
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
   print('|bot ready|')
-  await bot.stats.send(f"Bot ready, loaded all cogs perfectly! Time to load is {bot.start_time} :)")
+  await bot.stats.send(f"Bot ready, loaded all cogs perfectly! Time to load is {difference} :)")
 
 @bot.event
 async def on_message(message):
