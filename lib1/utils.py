@@ -1,13 +1,16 @@
 from discord.ext import menus
+import discord
 from asyncio import sleep as sl
 
 class VotingMenu(menus.Menu):
     async def send_initial_message(self, ctx, channel):
-        return await channel.send(f'I see you would maybe like to vote {ctx.author.mention}, maybe react with your choice :)')
+        e = discord.embed(title="I see you want vote!", description=f"{ctx.author.mention}, maybe react with your choice :)")
+        return await channel.send(embed=e)
 
     @menus.button('\N{WHITE HEAVY CHECK MARK}')
     async def on_check_mark(self, payload):
-        await self.message.edit(content=f"Thanks {self.ctx.author.mention}! Here's the [link](https://top.gg/bot/787820448913686539/vote)")
+        e1 = discord.Embed(title="Thanks!", description=f"Thanks {self.ctx.author.mention}! Here's the [link](https://top.gg/bot/787820448913686539/vote)")
+        await self.message.edit(content="", embed=e1)
 
 
     @menus.button('\N{BLACK SQUARE FOR STOP}\ufe0f')
