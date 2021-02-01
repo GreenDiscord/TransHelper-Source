@@ -18,7 +18,6 @@ class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.start_time = bot.start_time
-    from discord import Spotify
 
     @commands.command()
     async def spotify(self, ctx, user: discord.Member=None):
