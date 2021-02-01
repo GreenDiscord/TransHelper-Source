@@ -10,7 +10,7 @@ import asyncio
 from datetime import datetime
 import aiosqlite
 from discord.ext.buttons import Paginator
-from helpe import NewHelp
+from helpe import Help
 from asyncdagpi import Client
 import time
 import mystbin
@@ -42,7 +42,7 @@ async def get_prefix(bot, message):
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
-bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=NewHelp(),  allowed_mentions=discord.AllowedMentions(users=True, roles=False, everyone=False, replied_user=True), case_insenstive=True)
+bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=Help(),  allowed_mentions=discord.AllowedMentions(users=True, roles=False, everyone=False, replied_user=True), case_insenstive=True)
 bot.db = aiosqlite.connect("main.sqlite")
 bot.mystbin_client = mystbin.Client()
 bot.version = "15"
