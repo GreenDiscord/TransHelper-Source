@@ -4,7 +4,7 @@ from asyncio import sleep as sl
 
 class VotingMenu(menus.Menu):
     async def send_initial_message(self, ctx, channel):
-        e = discord.embed(title="I see you want vote!", description=f"{ctx.author.mention}, maybe react with your choice :)")
+        e = discord.Embed(title="I see you want vote!", description=f"{ctx.author.mention}, maybe react with your choice :)")
         return await channel.send(embed=e)
 
     @menus.button('\N{WHITE HEAVY CHECK MARK}')
