@@ -12,6 +12,7 @@ import time
 import random
 import inspect
 import os
+from utils import VotingMenu
 
 
 class Info(commands.Cog):
@@ -68,9 +69,8 @@ class Info(commands.Cog):
 
     @commands.command()
     async def vote(self, ctx):
-        e = discord.Embed(title=f"Hi, You can vote for me using the link below!",
-                          description=f"[Click Here!](https://top.gg/bot/787820448913686539/vote \"Vote\")", color=discord.Colour.from_hsv(random.random(), 1, 1))
-        await ctx.send(embed=e)
+        m = VotingMenu()
+        await m.start(ctx)
 
     @commands.command()
     async def ping(self, ctx):
