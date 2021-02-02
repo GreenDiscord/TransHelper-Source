@@ -69,21 +69,7 @@ bot.thresholds = (10, 25, 50, 100)
 
   
 
-@bot.event
-async def on_reaction_add(reaction, member):
-    schannel = bot.get_channel(802489970165153812)
-    
-    if (reaction.emoji == '⭐') and (reaction.count >= 3):
-        embed = discord.Embed(color = 15105570)
-        embed.set_author(name = reaction.message.author.name, icon_url = reaction.message.author.avatar_url)
-        embed.add_field(name = "Message Content", value = f"[{reaction.message.content}]({reaction.message.jump_url})")
-        
-        if len(reaction.message.attachments) > 0:
-            embed.set_image(url = reaction.message.attachments[0].url)
-        
-        embed.set_footer(text = f" ⭐ {reaction.count} | # {reaction.message.channel.name} | {reaction.message.guild}")
-        embed.timestamp = datetime.utcnow()
-        await schannel.send(embed = embed)
+
 
 @bot.event
 async def on_connect():
@@ -104,8 +90,9 @@ async def on_ready():
   await cursor.execute("""CREATE TABLE IF NOT EXISTS warns1(num INTEGER NOT NULL PRIMARY KEY, warns INTEGER, user_id INTEGER)""")
   await bot.db.commit()
   bot.description = f"Multi-Purpose Discord.py bot used in {len(bot.guilds)} guilds!"
-  print('|bot ready|')
-  await bot.stats.send(f"Bot ready, loaded all cogs perfectly! Time to load is {difference}secs :)")
+  print(f'Bot ready, running on {discord.__version__} and connected to {len(bot.guilds)}')
+  e = discord.Embed(title=f"Bot Loaded!", description=f"Bot ready, loaded all cogs perfectly! Time to load is {difference} secs :)")
+  await bot.stats.send(embed=e)
 
 @bot.event
 async def on_message(message):
@@ -114,18 +101,8 @@ async def on_message(message):
     elif bot.user.mentioned_in(message) and message.mention_everyone is False:
         if 'prefix' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
-        else:
-            pass
-    elif 'Im a pro coder' in message.clean_content.lower():
-        await message.add_reaction('❌')
-    elif 'Im a pro coder' in message.clean_content.lower():
-        await message.add_reaction('✅')
-        
-    elif 'instagram is good' in message.clean_content.lower():
-        await message.add_reaction('❌')
-    elif 'instagram is spyware' in message.clean_content.lower():
-        await message.add_reaction('✅')
     await bot.process_commands(message)
+
     
 @bot.listen()
 async def on_invite_update(member, invite):
