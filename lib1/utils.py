@@ -28,8 +28,9 @@ class VotingMenu(menus.Menu):
         await self.message.delete()
         
 class WhoMenu(menus.Menu):
-    def __init__(self):
+    def __init__(self, bot):
         super().__init__(timeout=30.0, clear_reactions_after=True)
+        self.bot = bot
 
 
     async def send_initial_message(self, ctx, channel):
