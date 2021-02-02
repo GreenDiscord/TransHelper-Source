@@ -71,8 +71,6 @@ class Info(commands.Cog):
     async def vote(self, ctx):
         m = VotingMenu()
         await m.start(ctx)
-        if m.stop is True:
-            await m.message.clear_reactions()
         
 
     @commands.command()
