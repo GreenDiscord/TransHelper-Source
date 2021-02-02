@@ -72,7 +72,7 @@ class Info(commands.Cog):
         m = VotingMenu()
         await m.start(ctx)
         if m.stop is True:
-            await ctx.message.clear_reactions()
+            await m.message.clear_reactions()
         
 
     @commands.command()
