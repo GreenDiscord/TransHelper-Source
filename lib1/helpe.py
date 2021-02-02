@@ -15,4 +15,10 @@ class Help(commands.MinimalHelpCommand):
         destination = self.get_destination()
         embed=discord.Embed(title="Help Error", description=f"Command '{command}' Not Found!")
         await destination.send(embed=embed)
+    
+    async def subcommand_not_found(self, command):
+        destination = self.get_destination()
+        embed=discord.Embed(title="Help Error", description=f"Command '{command}' Not Found!")
+        await destination.send(embed=embed)
+
         
