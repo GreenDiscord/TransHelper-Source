@@ -50,7 +50,5 @@ class WhoMenu(menus.Menu):
         e2 = discord.Embed(title="Hey!", description=f"Hi, I'm {self.bot.user}, I am developed by {user.name}, I have been running since the 10/12/20 :)", color=discord.Colour.from_hsv(random.random(), 1, 1))
         self.stop()
         await self.message.edit(content="", embed=e2)
-        await sl(5)
-        await self.message.delete()
        
        
