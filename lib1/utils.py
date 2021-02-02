@@ -1,5 +1,6 @@
 from discord.ext import menus
 import discord
+import traceback
 from asyncio import sleep as sl
 
 class VotingMenu(menus.Menu):
@@ -14,7 +15,7 @@ class VotingMenu(menus.Menu):
         try:
             await self.message.clear_reactions()
         except:
-            print("there is a error")
+            traceback.print_exc()
 
     @menus.button('\N{BLACK SQUARE FOR STOP}\ufe0f')
     async def on_stop(self, payload):
