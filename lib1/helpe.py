@@ -6,11 +6,13 @@ class Help(commands.MinimalHelpCommand):
     async def send_pages(self):
         destination = self.get_destination()
         ctx = self.context
-        channel = ctx.bot.get_channel(destination.id)
+        mes = ctx.message
         for page in self.paginator.pages:
             embed = discord.Embed(description=page)
-            msg = await channel.send(embed=embed)
+            msg = await destination.send(embed=embed)
+            await mes.add_reaction("👍")
             await asyncio.sleep(33)
+            await mes.remove_reaction("👍")
             await msg.delete()
     
     async def command_not_found(self, command):
