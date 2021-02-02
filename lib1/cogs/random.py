@@ -91,8 +91,7 @@ class Random(commands.Cog):
         user = user or ctx.author
         file = await self.bot.se.braille(f'{user.avatar_url}')
         di = discord.Embed(title="Woah, Zane api is cool :sunglasses:",  description="I just got you a filter, you like?")
-        di.set_image(url="attachment://floor.gif")
-        await ctx.send(file=filea, embed=di)
+        await ctx.send(embed=di)
         
     @braille.error
     async def braille_handler(self, ctx, error):
