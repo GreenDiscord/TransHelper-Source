@@ -6,7 +6,7 @@ from asyncio import sleep as sl
 
 class VotingMenu(menus.Menu):
     def __init__(self, bot):
-        super().__init__(timeout=30.0, clear_reactions_after=True)
+        super().__init__()
         self.bot = bot
 
 
@@ -30,7 +30,7 @@ class VotingMenu(menus.Menu):
         
 class WhoMenu(menus.Menu):
     def __init__(self, bot):
-        super().__init__(timeout=30.0, clear_reactions_after=True)
+        super().__init__()
         self.bot = bot
 
 
