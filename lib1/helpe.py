@@ -12,7 +12,7 @@ class Help(commands.MinimalHelpCommand):
             msg = await destination.send(embed=embed)
             await mes.add_reaction("👍")
             await asyncio.sleep(33)
-            await mes.remove_reaction("👍")
+            await mes.remove_reaction("👍", ctx.author)
             await msg.delete()
     
     async def command_not_found(self, command):
