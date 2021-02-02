@@ -6,6 +6,7 @@ import async_cleverbot as ac
 import cogs
 from discord.ext import commands
 import os
+import aiozaneapi
 import asyncio
 from datetime import datetime
 import aiosqlite
@@ -51,6 +52,8 @@ token = open("toke.txt", "r").read()
 bot.load_extension("jishaku")
 hce = bot.get_command("help")
 hce.hidden = True
+hcee = bot.get_command("prefix")
+hcee.hidden = True
 dagpitoken = open("asy.txt", "r").read()
 robloxcookie = open("roblox.txt", "r").read()
 topastoken = open("top.txt", "r").read()
@@ -60,9 +63,11 @@ bot.robloxc = f"{robloxcookie}"
 bot.hypixel = f"{hypixel}"
 bot.topken = f"{topastoken}"
 bot.chatbot = ac.Cleverbot(f"{chatbottoken}")
+bot.client = aiozaneapi.Client(f'{open("zane.txt", "r").read()}')
 bot.dagpi = Client(dagpitoken)
 bot.start_time = time.time()
 bot.thresholds = (10, 25, 50, 100)
+
 
 
 
@@ -77,13 +82,13 @@ async def on_connect():
 
 @bot.event
 async def on_ready():
-  current_time = time.time()
-  difference = int(round(current_time - bot.start_time))
-  bot.stats = bot.get_channel(804496786038980618)
   for filename in os.listdir('./cogs'):
       if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
   await bot.db
+  current_time = time.time()
+  difference = int(round(current_time - bot.start_time))
+  bot.stats = bot.get_channel(804496786038980618)
   cursor = await bot.db.cursor()   
   await cursor.execute("""CREATE TABLE IF NOT EXISTS mail(num INTEGER NOT NULL PRIMARY KEY,     user_name TEXT, balance INTEGER, user_id INTEGER)""")
   await bot.db.commit()
@@ -96,9 +101,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if isinstance(message.channel, discord.DMChannel):
-        pass
-    elif bot.user.mentioned_in(message) and message.mention_everyone is False:
+    if bot.user.mentioned_in(message) and message.mention_everyone is False:
         if 'prefix' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
     await bot.process_commands(message)
@@ -139,7 +142,9 @@ async def on_member_join(member : discord.Member):
 async def on_guild_join(guild):
     await guild.system_channel.send(f'Hey there! do th,help or <@787820448913686539> help for commands!')
  
-
+@bot.command()
+async def prefix(ctx):
+    pass
 
 
 
@@ -150,38 +155,28 @@ async def on_guild_join(guild):
 @bot.event
 async def on_command_error(ctx, error):
   guild = ctx.guild
-  member = bot.get_user(787800565512929321)
   if ctx.guild.id == 336642139381301249:
     pass
-  if member.id == ctx.author.id:
+  if 787800565512929321 == ctx.author.id:
     pass
   else:
         if isinstance(error, commands.CommandOnCooldown):
             e1 = discord.Embed(title="Command Error!", description=f"`{error}`")
             e1.set_footer(text=f"{ctx.author.name}")
             await ctx.send(embed=e1)
-            # await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-            # print("They not patient")
         elif isinstance(error, commands.CommandNotFound):
               e2 = discord.Embed(title="Command Error!", description=f"`{error}`")
               e2.set_footer(text=f"{ctx.author.name}")
               await ctx.send(embed=e2)
-              # print(f"again, use help")
-              # await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
         elif isinstance(error, commands.MissingPermissions):
               e3 = discord.Embed(title="Command Error!", description=f"`{error}`")
               e3.set_footer(text=f"{ctx.author.name}")
               await ctx.send(embed=e3)
-              # await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-              # print(f"your probley dead, so heres the error, {error}")
         elif isinstance(error, commands.MissingRequiredArgument):
               e4 = discord.Embed(title="Command Error!", description=f"`{error}`")
               e4.set_footer(text=f"{ctx.author.name}")
               await ctx.send(embed=e4)
-              # await member.send(f"Guild {guild} has had a error, here it is! `{error}`")
-              # print(f"Why cant they use help :( {error}")
         elif isinstance(error, commands.CommandInvokeError):
-            print("g")
             haha = ctx.author.avatar_url
             e7 = discord.Embed(title="Oh no green you fucked up", description=f"`{error}`")
             e7.add_field(name="Command Caused By?", value=f"{ctx.command}")
@@ -191,8 +186,15 @@ async def on_command_error(ctx, error):
             await ctx.send("New Error, Sending to devs straight away!")
             await bot.stats.send(embed=e7)
         else:
-            raise error
-            await bot.stat.send(f"Guild {guild} has had a error, here it is! `{error}`")
+            haaha = ctx.author.avatar_url
+            e9 = discord.Embed(title="Oh no green you fucked up", description=f"`{error}`")
+            e9.add_field(name="Command Caused By?", value=f"{ctx.command}")
+            e9.add_field(name="By?", value=f"ID : {ctx.author.id}, Name : {ctx.author.name}")
+            e9.set_thumbnail(url=f"{haaha}")
+            e9.set_footer(text=f"{ctx.author.name}")
+            await ctx.send("New Error, Sending to devs straight away!")
+            await bot.stats.send(embed=e9)
+            
       
       
 
