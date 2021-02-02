@@ -52,8 +52,6 @@ token = open("toke.txt", "r").read()
 bot.load_extension("jishaku")
 hce = bot.get_command("help")
 hce.hidden = True
-hcee = bot.get_command("prefix")
-hcee.hidden = True
 dagpitoken = open("asy.txt", "r").read()
 robloxcookie = open("roblox.txt", "r").read()
 topastoken = open("top.txt", "r").read()
