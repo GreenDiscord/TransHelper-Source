@@ -74,8 +74,8 @@ class Random(commands.Cog):
         di.set_image(url="attachment://floor.gif")
         await ctx.send(file=filea, embed=di)
         
-   @magic.error
-   async def magic_handler(self, ctx, error):
+    @magic.error
+    async def magic_handler(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             l = self.bot.get_command("magic")
             left = l.get_cooldown_retry_after(ctx)
