@@ -4,7 +4,7 @@ import traceback
 from asyncio import sleep as sl
 
 class VotingMenu(menus.Menu):
-    def __init__(self, msg):
+    def __init__(self):
         super().__init__(timeout=30.0, delete_message_after=True)
 
     async def send_initial_message(self, ctx, channel):
