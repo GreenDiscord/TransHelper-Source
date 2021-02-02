@@ -63,7 +63,17 @@ class Random(commands.Cog):
             e = discord.Embed(
                 title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
             await ctx.send(embed=e)
-
+            
+    @command()
+    @commands.cooldown(1, 40, commands.BucketType.guild)
+    async def magic(self, ctx, user: discord.Member=None):
+        user = user or ctx.author
+        file = await self.bot.se.magic(f'{user.avatar_url}')
+        filea = discord.File(file, "floor.gif")
+        di = discord.Embed(title="Woah, Zane api is cool :sunglasses:",  description="I just got you a filter, you like?")
+        di.set_image(url="attachment://floor.gif")
+        await ctx.send(file=filea, embed=di)
+        
     @command()
     @commands.cooldown(1, 40, commands.BucketType.guild)
     async def qr(self, ctx, colour="255-255-255", *, url=None):
