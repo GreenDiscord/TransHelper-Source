@@ -4,6 +4,9 @@ import traceback
 from asyncio import sleep as sl
 
 class VotingMenu(menus.Menu):
+    def __init__(self, msg):
+        super().__init__(timeout=30.0, delete_message_after=True)
+
     async def send_initial_message(self, ctx, channel):
         e = discord.Embed(title="I see you want vote!", description=f"{ctx.author.mention}, maybe react with your choice :)")
         return await channel.send(embed=e)
@@ -12,10 +15,6 @@ class VotingMenu(menus.Menu):
     async def on_check_mark(self, payload):
         e1 = discord.Embed(title="Thanks!", description=f"Thanks {self.ctx.author.mention}! Here's the [link](https://top.gg/bot/787820448913686539/vote)")
         await self.message.edit(content="", embed=e1)
-        try:
-            await self.message.clear_reactions()
-        except:
-            traceback.print_exc()
 
     @menus.button('\N{BLACK SQUARE FOR STOP}\ufe0f')
     async def on_stop(self, payload):
