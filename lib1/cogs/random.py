@@ -74,6 +74,17 @@ class Random(commands.Cog):
         di.set_image(url="attachment://floor.gif")
         await ctx.send(file=filea, embed=di)
         
+   @magic.error
+   async def magic_handler(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            l = self.bot.get_command("magic")
+            left = l.get_cooldown_retry_after(ctx)
+            msg = await ctx.send("Just Getting The Cooldown")
+            e = discord.Embed(
+                title=f"Cooldown left - {round(left)}", color=discord.colour.Color.from_rgb(231, 84, 128))
+            await msg.edit(content="", embed=e)
+    
+        
     @command()
     @commands.cooldown(1, 40, commands.BucketType.guild)
     async def qr(self, ctx, colour="255-255-255", *, url=None):
