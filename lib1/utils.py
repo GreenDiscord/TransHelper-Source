@@ -1,10 +1,10 @@
-from discord.ext import menus
+from discord.ext import green
 import discord
 import random
 import traceback
 from asyncio import sleep as sl
 
-class VotingMenu(menus.Menu):
+class VotingMenu(green.Menu):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
@@ -28,7 +28,7 @@ class VotingMenu(menus.Menu):
         await sl(5)
         await self.message.delete()
         
-class WhoMenu(menus.Menu):
+class WhoMenu(green.Menu):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
@@ -51,7 +51,7 @@ class WhoMenu(menus.Menu):
         
         await self.message.edit(content="", embed=e2)
        
-class MenuSource(menus.ListPageSource):
+class MenuSource(green.ListPageSource):
    def __init__(self, data):
        super().__init__(data, per_page=1)
 
