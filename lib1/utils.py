@@ -51,12 +51,12 @@ class WhoMenu(menus.Menu):
         
         await self.message.edit(content="", embed=e2)
        
- class MenuSource(menus.ListPageSource):
-    def __init__(self, data):
-        super().__init__(data, per_page=1)
+class MenuSource(menus.ListPageSource):
+   def __init__(self, data):
+       super().__init__(data, per_page=1)
 
-    async def format_page(self, menu, data):
-        embed = discord.Embed(description="\n".join(item for item in data))
-        return embed 
+   async def format_page(self, menu, data):
+       embed = discord.Embed(description="\n".join(item for item in data))
+       return embed 
 
 
