@@ -287,7 +287,7 @@ class PaginatorSource(green.ListPageSource):
     def __init__(self, entries, *, per_page=8):
         super().__init__(entries, per_page=per_page)
 
-    async def format_page(self, menu: menus.Menu, page):
+    async def format_page(self, menu: green.Menu, page):
         embed = discord.Embed(title='Coming Up...', colour=0x4f0321)
         embed.description = '\n'.join(
             f'`{index}. {title}`' for index, title in enumerate(page, 1))
@@ -700,7 +700,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
         entries = [track.title for track in player.queue._queue]
         pages = PaginatorSource(entries=entries)
-        paginator = menus.MenuPages(
+        paginator = green.MenuPages(
             source=pages, timeout=None, delete_message_after=True)
 
         await paginator.start(ctx)
