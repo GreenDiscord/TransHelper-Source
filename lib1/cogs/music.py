@@ -166,7 +166,7 @@ class Player(wavelink.Player):
             pass
 
 
-class InteractiveController(menus.Menu):
+class InteractiveController(green.Menu):
     """The Players interactive controller menu class."""
 
     def __init__(self, *, embed: discord.Embed, player: Player):
@@ -200,7 +200,7 @@ class InteractiveController(menus.Menu):
     async def send_initial_message(self, ctx: commands.Context, channel: discord.TextChannel) -> discord.Message:
         return await channel.send(embed=self.embed)
 
-    @menus.button(emoji='\u25B6')
+    @green.button(emoji='\u25B6')
     async def resume_command(self, payload: discord.RawReactionActionEvent):
         """Resume button."""
         ctx = self.update_context(payload)
@@ -210,7 +210,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\u23F8')
+    @green.button(emoji='\u23F8')
     async def pause_command(self, payload: discord.RawReactionActionEvent):
         """Pause button"""
         ctx = self.update_context(payload)
@@ -220,7 +220,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\u23F9')
+    @green.button(emoji='\u23F9')
     async def stop_command(self, payload: discord.RawReactionActionEvent):
         """Stop button."""
         ctx = self.update_context(payload)
@@ -230,7 +230,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\u23ED')
+    @green.button(emoji='\u23ED')
     async def skip_command(self, payload: discord.RawReactionActionEvent):
         """Skip button."""
         ctx = self.update_context(payload)
@@ -240,7 +240,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\U0001F500')
+    @green.button(emoji='\U0001F500')
     async def shuffle_command(self, payload: discord.RawReactionActionEvent):
         """Shuffle button."""
         ctx = self.update_context(payload)
@@ -250,7 +250,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\u2795')
+    @green.button(emoji='\u2795')
     async def volup_command(self, payload: discord.RawReactionActionEvent):
         """Volume up button"""
         ctx = self.update_context(payload)
@@ -260,7 +260,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\u2796')
+    @green.button(emoji='\u2796')
     async def voldown_command(self, payload: discord.RawReactionActionEvent):
         """Volume down button."""
         ctx = self.update_context(payload)
@@ -270,7 +270,7 @@ class InteractiveController(menus.Menu):
 
         await self.bot.invoke(ctx)
 
-    @menus.button(emoji='\U0001F1F6')
+    @green.button(emoji='\U0001F1F6')
     async def queue_command(self, payload: discord.RawReactionActionEvent):
         """Player queue button."""
         ctx = self.update_context(payload)
@@ -281,7 +281,7 @@ class InteractiveController(menus.Menu):
         await self.bot.invoke(ctx)
 
 
-class PaginatorSource(menus.ListPageSource):
+class PaginatorSource(green.ListPageSource):
     """Player queue paginator class."""
 
     def __init__(self, entries, *, per_page=8):
