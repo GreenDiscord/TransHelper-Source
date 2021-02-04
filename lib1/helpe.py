@@ -17,13 +17,15 @@ class Help(commands.MinimalHelpCommand):
     def get_command_signature(self, command: commands.Command):
         ctx = self.context
         aliases = "|".join(command.aliases)
-        if aliases is None:
-            aliases = "None"
         cmd_invoke = f"[{command.name}|{aliases}]" if command.aliases else command.name
 
         full_invoke = command.qualified_name.replace(command.name, "")
-
-        signature = f"{ctx.prefix}{full_invoke}{cmd_invoke} {command.signature}"
+        
+        prefix = ctx.prefix
+        if ctx.prefix = "":
+            prefix = "th,"
+ 
+        signature = f"{prefix}{full_invoke}{cmd_invoke} {command.signature}"
         return signature
     
     def get_opening_note(self):
