@@ -17,6 +17,8 @@ class Help(commands.MinimalHelpCommand):
     def get_command_signature(self, command: commands.Command):
         ctx = self.context
         aliases = "|".join(command.aliases)
+        if aliases is None:
+            aliases = "None"
         cmd_invoke = f"[{command.name}|{aliases}]" if command.aliases else command.name
 
         full_invoke = command.qualified_name.replace(command.name, "")
