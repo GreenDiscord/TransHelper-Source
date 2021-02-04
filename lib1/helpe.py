@@ -24,7 +24,7 @@ class Help(commands.MinimalHelpCommand):
         prefix = ctx.prefix
         if prefix == "":
             prefix = "th,"
- 
+            cmd_invoke.upper.replace(command.name, "")
         signature = f"{prefix}{full_invoke}{cmd_invoke} {command.signature}"
         return signature
     
