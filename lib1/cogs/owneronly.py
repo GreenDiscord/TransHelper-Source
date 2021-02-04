@@ -88,7 +88,7 @@ async def copy_context_with(ctx: commands.Context, *, author=None, channel=None,
 class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.appleapi = True
+        self.appleapiisbad = True
 
   
 
