@@ -18,7 +18,7 @@ class Help(commands.MinimalHelpCommand):
         prefixe = f"{command.name}" 
         prefix = f"{command.aliases}"
         prefixes = f"{command.description}"
-        return prefixes + prefix + prefixe
+        return prefixe + prefix + prefixs
     
     def get_opening_note(self):
         ctx = self.context
