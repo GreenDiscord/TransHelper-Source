@@ -14,15 +14,6 @@ class Help(commands.MinimalHelpCommand):
             await mes.remove_reaction("👍", ctx.guild.me)
             await msg.delete()
     
-    def get_command_signature(self, command):
-        prefixe = f"{command.name}" 
-        prefi3 = f"{command.aliases}"
-        if prefi3 is None:
-            return "ㅤ"
-        pre = f"{command.description}"
-        if pre is None:
-            return "ㅤ"
-        return prefixe + prefi3 + pre
     
     def get_opening_note(self):
         ctx = self.context
