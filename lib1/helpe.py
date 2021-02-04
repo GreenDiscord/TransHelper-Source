@@ -14,7 +14,7 @@ class Help(commands.MinimalHelpCommand):
             await mes.remove_reaction("👍", ctx.guild.me)
             await msg.delete()
     
-    async def get_opening_note(self):
+    def get_opening_note(self):
         return "yes"
 
     async def command_not_found(self, command):
