@@ -13,7 +13,15 @@ class Help(commands.MinimalHelpCommand):
             await asyncio.sleep(33)
             await mes.remove_reaction("👍", ctx.guild.me)
             await msg.delete()
-    
+            
+    def get_command_signature(self, command: commands.Command, ctx: commands.Context):
+        aliases = "|".join(command.aliases)
+        cmd_invoke = f"[{command.name}|{aliases}]" if command.aliases else command.name
+
+        full_invoke = command.qualified_name.replace(command.name, "")
+
+        signature = f"{ctx.prefix}{full_invoke}{cmd_invoke} {command.signature}"
+        return signature
     
     def get_opening_note(self):
         ctx = self.context
