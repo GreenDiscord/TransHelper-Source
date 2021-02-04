@@ -14,6 +14,9 @@ class Help(commands.MinimalHelpCommand):
             await mes.remove_reaction("👍", ctx.guild.me)
             await msg.delete()
     
+    async def get_command_signature(self, command):
+        return ["th,", "th ", "th."]
+    
     def get_opening_note(self):
         ctx = self.context
         return f"Thank's for using {ctx.guild.me.mention}, the list below shows all commands in their respective groups :)"
