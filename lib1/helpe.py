@@ -22,7 +22,7 @@ class Help(commands.MinimalHelpCommand):
         full_invoke = command.qualified_name.replace(command.name, "")
         
         prefix = ctx.prefix
-        if prefix is "":
+        if prefix == "":
             prefix = "th,"
  
         signature = f"{prefix}{full_invoke}{cmd_invoke} {command.signature}"
