@@ -15,8 +15,10 @@ class Help(commands.MinimalHelpCommand):
             await msg.delete()
     
     def get_command_signature(self, command):
-        prefixes = f"{command.name}" f"{command.aliases}" f"{command.description}"
-        return prefixes 
+        prefixe = f"{command.name}" 
+        prefix = f"{command.aliases}"
+        prefixes = f"{command.description}"
+        return prefixes + prefix + prefixe
     
     def get_opening_note(self):
         ctx = self.context
