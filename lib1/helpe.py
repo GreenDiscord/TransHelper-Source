@@ -14,7 +14,8 @@ class Help(commands.MinimalHelpCommand):
             await mes.remove_reaction("👍", ctx.guild.me)
             await msg.delete()
             
-    def get_command_signature(self, command: commands.Command, ctx : self.context):
+    def get_command_signature(self, command: commands.Command):
+        ctx = self.context
         aliases = "|".join(command.aliases)
         cmd_invoke = f"[{command.name}|{aliases}]" if command.aliases else command.name
 
