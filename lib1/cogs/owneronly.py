@@ -18,7 +18,6 @@ import os
 import io
 import json
 import psutil
-import aiohttp
 import collections
 import time
 import datetime
@@ -89,6 +88,7 @@ async def copy_context_with(ctx: commands.Context, *, author=None, channel=None,
 class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.appleapi = True
 
   
 
