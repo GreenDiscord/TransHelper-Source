@@ -16,9 +16,13 @@ class Help(commands.MinimalHelpCommand):
     
     def get_command_signature(self, command):
         prefixe = f"{command.name}" 
-        prefix = f"{command.aliases}"
-        prefixes = f"{command.description}"
-        return prefixe + prefix + prefixs
+        prefi3 = f"{command.aliases}"
+        if prefi3 is None:
+            return "ㅤ"
+        pre = f"{command.description}"
+        if pre is None:
+            return "ㅤ"
+        return prefixe + prefi3 + pre
     
     def get_opening_note(self):
         ctx = self.context
