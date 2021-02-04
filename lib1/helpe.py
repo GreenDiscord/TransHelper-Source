@@ -15,7 +15,8 @@ class Help(commands.MinimalHelpCommand):
             await msg.delete()
     
     def get_opening_note(self):
-        return "yes"
+        ctx = self.context
+        return f"Thank's for using {ctx.guild.me.mention}, the list below shows all commands in their respective groups :)"
 
     async def command_not_found(self, command):
         destination = self.get_destination()
