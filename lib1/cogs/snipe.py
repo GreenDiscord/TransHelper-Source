@@ -44,7 +44,6 @@ class Snipe(commands.Cog):
             return await ctx.send('No snipes in this channel!')
         if snipe is None:
             return await ctx.send('No snipes in this channel!')
-        # there's gonna be a snipe after this point
         emb = discord.Embed()
         if type(snipe) == list:  # edit snipe
             emb.set_author(
