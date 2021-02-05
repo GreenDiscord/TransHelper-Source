@@ -43,7 +43,7 @@ async def get_prefix(bot, message):
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
-bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=Help(),  allowed_mentions=discord.AllowedMentions(users=True, roles=False, everyone=False, replied_user=True), case_insenstive=True)
+bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=Help(),  allowed_mentions=discord.AllowedMentions(users=True, roles=False, everyone=False, replied_user=True),case_insensitive=True)
 bot.db = aiosqlite.connect("main.sqlite")
 bot.mystbin_client = mystbin.Client()
 bot.version = "15"
