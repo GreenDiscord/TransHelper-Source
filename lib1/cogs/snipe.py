@@ -10,8 +10,7 @@ invitere = r"(?:https?:\/\/)?discord(?:\.gg|app\.com\/invite)?\/(?:#\/)([a-zA-Z0
 invitere2 = r"(http[s]?:\/\/)*discord((app\.com\/invite)|(\.gg))\/(invite\/)?(#\/)?([A-Za-z0-9\-]+)(\/)?"
 
 
-class Snipe:
-
+class Snipe(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.snipes = {}
