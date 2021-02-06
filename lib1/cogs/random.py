@@ -1,6 +1,6 @@
 # Discord Imports
 import discord
-from discord.ext import commands
+from discord.ext import commands, owoify
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 from discord.utils import get
@@ -43,7 +43,11 @@ class Random(commands.Cog):
         self.API_KEY = f"{self.bot.hypixel}"
         self.bot.robloxc = bot.robloxc
         self.roblox = Client(cookies=f"{self.bot.robloxc}")
-
+    @command
+    async def owoify(self, ctx, text):
+        lol = await owoify.owoify(f"{text}")
+        await ctx.send(lol)
+        
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
     async def feedback(self, ctx, *, feed):
