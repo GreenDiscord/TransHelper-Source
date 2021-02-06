@@ -43,7 +43,8 @@ class Random(commands.Cog):
         self.API_KEY = f"{self.bot.hypixel}"
         self.bot.robloxc = bot.robloxc
         self.roblox = Client(cookies=f"{self.bot.robloxc}")
-    @command
+        
+    @command()
     async def owoify(self, ctx, text):
         lol = await owoify.owoify(f"{text}")
         await ctx.send(lol)
