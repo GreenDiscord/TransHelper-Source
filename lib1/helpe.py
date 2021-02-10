@@ -3,6 +3,18 @@ import asyncio
 from discord.ext import commands
 
 class Help(commands.MinimalHelpCommand):
+
+    async def send_pages(self):
+         ctx = self.context
+         mes = ctx.message
+         for page in self.paginator.pages:
+             embed = discord.Embed(description=page)
+             msg = await ctx.send(embed=embed)
+             await mes.add_reaction("👍")
+             await asyncio.sleep(33)
+             await mes.remove_reaction("👍", ctx.guild.me)
+             await msg.delete()
+
     async def send_command_help(self, command):
         embed = discord.Embed(title=self.get_command_signature(command))
         embed.add_field(name="Help", value=command.help)
