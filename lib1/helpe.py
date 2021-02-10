@@ -4,26 +4,22 @@ from discord.ext import commands
 
 class Help(commands.MinimalHelpCommand):
     async def send_pages(self):
-        ctx = self.context
-        mes = ctx.message
-        for page in self.paginator.pages:
-            embed = discord.Embed(description=page)
-            msg = await ctx.send(embed=embed)
-            await mes.add_reaction("👍")
-            await asyncio.sleep(33)
-            await mes.remove_reaction("👍", ctx.guild.me)
-            await msg.delete()
-            
-    def get_command_signature(self, command: commands.Command):
-        ctx = self.context
-        aliases = "|".join(command.aliases)
-        cmd_invoke = f"[{command.name}|{aliases}]" if command.aliases else command.name
+        async def send_command_help(self, command):
+        embed = discord.Embed(title=self.get_command_signature(command))
+        embed.add_field(name="Help", value=command.help)
+        alias = command.aliases
 
-        full_invoke = command.qualified_name.replace(command.name, "")
-        
-        prefix = ctx.prefix
-        signature = f"{prefix}{full_invoke}{cmd_invoke} {command.signature}"
-        return signature
+        if alias:
+            embed.add_field(name="Aliases", value=", ".join(alias), inline=False)
+
+        channel = self.get_destination()
+        mess = ctx.message
+        mess.add_reaction("👍")
+        mes = await channel.send(embed=embed)
+        await asyncio.sleep(40)
+        await mess.remove_reaction("👍", ctx.guild.me)
+        await mes.delete()
+            
     
     def get_opening_note(self):
         ctx = self.context
