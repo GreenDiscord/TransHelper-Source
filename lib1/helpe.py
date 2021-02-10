@@ -17,7 +17,7 @@ class Help(commands.MinimalHelpCommand):
 
     async def send_command_help(self, command):
         embed = discord.Embed(title=self.get_command_signature(command))
-        embed.add_field(name="Help", value=command.help)
+        embed.add_field(name="Help", value=command.help or "No Description")
         alias = command.aliases
 
         if alias:
