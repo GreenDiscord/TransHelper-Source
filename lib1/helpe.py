@@ -3,7 +3,7 @@ import asyncio
 from discord.ext import commands
 
 class Help(commands.MinimalHelpCommand):
-    async def send_pages(self, command):
+    async def send_command_help(self, command):
         embed = discord.Embed(title=self.get_command_signature(command))
         embed.add_field(name="Help", value=command.help)
         alias = command.aliases
