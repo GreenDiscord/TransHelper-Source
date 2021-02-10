@@ -12,11 +12,10 @@ class Help(commands.MinimalHelpCommand):
             embed.add_field(name="Aliases", value=", ".join(alias), inline=False)
 
         channel = self.get_destination()
-        mess = ctx.message
-        mess.add_reaction("👍")
+  
         mes = await channel.send(embed=embed)
         await asyncio.sleep(40)
-        await mess.remove_reaction("👍", ctx.guild.me)
+        
         await mes.delete()
             
     
