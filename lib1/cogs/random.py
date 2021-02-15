@@ -55,7 +55,7 @@ class Random(commands.Cog):
             lol = owoify.owo(f"{number}")
             await ctx.send(lol)
         except:
-            await ctx.send(f"{number} isn't a valid choice, please pick between 1-8)"£
+            await ctx.send(f"{number} isn't a valid choice, please pick between 1-8")
         
     @command()
     @commands.cooldown(1, 120, commands.BucketType.guild)
