@@ -46,7 +46,7 @@ class Random(commands.Cog):
         
     @command()
     async def owoify(self, ctx, text):
-        lol = await owoify.owoify(f"{text}")
+        lol = owoify.owoify(f"{text}")
         await ctx.send(lol)
         
     @command()
