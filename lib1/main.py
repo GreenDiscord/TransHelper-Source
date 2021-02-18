@@ -100,7 +100,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if bot.user.mentioned_in(message) and message.mention_everyone is False:
-        if 'prefix' in message.content.lower():
+        if '' in message.content.lower():
             await  message.channel.send('A full list of all commands is available by typing ```th,help```')
     await bot.process_commands(message)
 
