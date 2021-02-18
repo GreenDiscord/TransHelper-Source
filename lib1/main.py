@@ -200,7 +200,6 @@ async def on_command(ctx):
         if ctx.author.id == 787800565512929321:
             pass
         else:
-            break
             return await ctx.send("Maintenance Mode Is On")
     else:
         pass
