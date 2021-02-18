@@ -110,7 +110,7 @@ class OwnerOnly(commands.Cog):
 
     @commands.is_owner()
     @dev.group()
-    async def maintenance(self, ctx, set):
+    async def maintenance(self, ctx, set=None):
         if set == "false":
             self.bot.maintenance = False
         elif set == "true":
