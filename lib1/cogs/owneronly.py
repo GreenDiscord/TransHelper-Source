@@ -89,6 +89,7 @@ class OwnerOnly(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.appleapiisbad = True
+        self.bot.maintenance = bot.maintenance
 
   
 
@@ -107,6 +108,20 @@ class OwnerOnly(commands.Cog):
                 
                 pass
 
+    @commands.is_owner()
+    @dev.group()
+    async def maintenance(self, ctx, set):
+        if set == "false":
+            self.bot.maintenance = False
+        elif set == "true":
+            self.bot.maintenance = True
+        else:
+            if self.bot.maintenance is True:
+                self.bot.maintenance = False
+                
+            else:
+                self.bot.maintenance = True
+        
     @commands.is_owner()
     @dev.group(aliases=["ss"])
     async def screenshot(self, ctx, url):
