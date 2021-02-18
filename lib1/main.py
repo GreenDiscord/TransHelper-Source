@@ -65,7 +65,7 @@ bot.se = aiozaneapi.Client(f'{open("zane.txt", "r").read()}')
 bot.dagpi = Client(dagpitoken)
 bot.start_time = time.time()
 bot.thresholds = (10, 25, 50, 100)
-
+bot.maintenance = False
 
 
 
@@ -194,6 +194,11 @@ async def on_command_error(ctx, error):
             await bot.stats.send(embed=e9)
             
       
-      
+@bot.event
+async def on_command(ctx):
+    if bot.maintenance is True:
+        return await ctx.send("Maintenance Mode Is On")
+    else:
+        await ctx.invoke(ctx.command)
 
 bot.run(token)
