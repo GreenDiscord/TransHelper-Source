@@ -199,6 +199,6 @@ async def on_command(ctx):
     if bot.maintenance is True:
         return await ctx.send("Maintenance Mode Is On")
     else:
-        await ctx.invoke(ctx.command)
+        pass
 
 bot.run(token)
