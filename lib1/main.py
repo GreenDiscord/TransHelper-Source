@@ -197,7 +197,10 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_command(ctx):
     if bot.maintenance is True:
-        return await ctx.send("Maintenance Mode Is On")
+        if ctx.author.id == 787800565512929321:
+            pass
+        else:
+            return await ctx.send("Maintenance Mode Is On")
     else:
         pass
 
