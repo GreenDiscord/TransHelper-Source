@@ -113,15 +113,18 @@ class OwnerOnly(commands.Cog):
     async def maintenance(self, ctx, set=None):
         if set == "false":
             self.bot.maintenance = False
+            await ctx.send("Maintenance is now False")
         elif set == "true":
             self.bot.maintenance = True
+            await ctx.send("Maintenance is now True")
         else:
             if self.bot.maintenance is True:
                 self.bot.maintenance = False
+                await ctx.send("Maintenance is now False")
                 
             else:
                 self.bot.maintenance = True
-        
+                await ctx.send("Maintenance is TRUEEE")
     @commands.is_owner()
     @dev.group(aliases=["ss"])
     async def screenshot(self, ctx, url):
