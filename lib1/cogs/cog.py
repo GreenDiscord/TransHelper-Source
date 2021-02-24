@@ -44,7 +44,7 @@ class Info(commands.Cog):
                 return await ctx.send(embed=e)
 
     @commands.command()
-    @mycheck
+    @mycheck()
     async def lp(self, ctx, member: discord.Member = None):
         if member is None:
             starttext = "Maybe you should learn python first"
