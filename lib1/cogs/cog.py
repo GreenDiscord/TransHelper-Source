@@ -26,7 +26,8 @@ class Info(commands.Cog):
             if self.bot.maintenance == True:
                 return False
             else:
-                return commands.check(predicate)
+                return True
+        return commands.check(predicate)
 
     @commands.command()
     async def spotify(self, ctx, user: discord.Member=None):
