@@ -18,7 +18,17 @@ import utils
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.bot.maintenance = bot.maintenance
         self.bot.start_time = bot.start_time
+
+    def mycheck():
+        def predicate(ctx):
+            if self.bot.maintenance == True:
+                return False
+            else:
+                return True
+
+    return commands.check(predicate)
 
     @commands.command()
     async def spotify(self, ctx, user: discord.Member=None):
@@ -36,6 +46,7 @@ class Info(commands.Cog):
                 return await ctx.send(embed=e)
 
     @commands.command()
+    @mycheck
     async def lp(self, ctx, member: discord.Member = None):
         if member is None:
             starttext = "Maybe you should learn python first"
