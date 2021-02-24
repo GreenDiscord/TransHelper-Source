@@ -22,8 +22,8 @@ class Info(commands.Cog):
         self.bot.start_time = bot.start_time
 
     def mycheck():
-        def predicate(self, ctx):
-            if self.bot.maintenance == True:
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
                 return False
             else:
                 return True
