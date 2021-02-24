@@ -21,8 +21,8 @@ class Info(commands.Cog):
         self.bot.maintenance = bot.maintenance
         self.bot.start_time = bot.start_time
 
-    def mycheck():
-        def predicate(ctx):
+    def mycheck(self):
+        def predicate(self, ctx):
             if self.bot.maintenance == True:
                 return False
             else:
@@ -44,7 +44,7 @@ class Info(commands.Cog):
                 return await ctx.send(embed=e)
 
     @commands.command()
-    @mycheck()
+    @mycheck
     async def lp(self, ctx, member: discord.Member = None):
         if member is None:
             starttext = "Maybe you should learn python first"
