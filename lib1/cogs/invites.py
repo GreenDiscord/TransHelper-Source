@@ -31,7 +31,19 @@ class Invites(commands.Cog):
         self.bot.wait_for_invites = self.wait_for_invites
 
         self.bot.loop.create_task(self.__ainit__())
-
+        
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
+    
     async def __ainit__(self):
         # wait until the bots internal cache is ready
         await self.bot.wait_until_ready()
@@ -218,6 +230,7 @@ class Invites(commands.Cog):
     # to handle commands.NoPrivateMessage
     @commands.guild_only()
     @commands.command()
+    @mycheck()
     async def invitestats(self, ctx):
         """Displays the top 10 most used invites in the guild."""
         # PEP8 + same code, more readability
