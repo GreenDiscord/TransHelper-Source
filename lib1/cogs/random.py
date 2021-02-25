@@ -43,13 +43,27 @@ class Random(commands.Cog):
         self.API_KEY = f"{self.bot.hypixel}"
         self.bot.robloxc = bot.robloxc
         self.roblox = Client(cookies=f"{self.bot.robloxc}")
-        
+    
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
+    
     @command()
+    @mycheck()
     async def owoify(self, ctx, text):
         lol = owoify.owoify(f"{text}")
         await ctx.send(lol)
 
     @command()
+    @mycheck()
     async def owo(self, ctx, number):
         try:
             lol = owoify.owo(f"{number}")
@@ -58,6 +72,7 @@ class Random(commands.Cog):
             await ctx.send(f"{number} isn't a valid choice, please pick between 1-8")
         
     @command()
+    @mycheck()
     @commands.cooldown(1, 120, commands.BucketType.guild)
     async def feedback(self, ctx, *, feed):
         channel = self.bot.get_channel(794164790368796672)
@@ -78,6 +93,7 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
             
     @command()
+    @mycheck()
     @commands.cooldown(1, 40, commands.BucketType.guild)
     async def magic(self, ctx, user: discord.Member=None):
         user = user or ctx.author
@@ -99,6 +115,7 @@ class Random(commands.Cog):
             
     
     @command()
+    @mycheck()
     @commands.cooldown(1, 40, commands.BucketType.guild)
     async def braille(self, ctx, user: discord.Member=None):
         user = user or ctx.author
@@ -116,6 +133,7 @@ class Random(commands.Cog):
             await msg.edit(content="", embed=e)
             
     @command()
+    @mycheck()
     @commands.cooldown(1, 40, commands.BucketType.guild)
     async def qr(self, ctx, colour="255-255-255", *, url=None):
         colours = dict([("255-255-255", "255-255-255"),
@@ -155,6 +173,7 @@ class Random(commands.Cog):
             await msg.edit(content="", embed=e)
 
     @command(usage="remind <time> <reminder> (Time needs to be in seconds...)")
+    @mycheck()
     async def remind(self, ctx, time, *, reminder):
         e = discord.Embed(title="I will remind you!",
                           descripition=f"I will you remind you in {time} seconds!")
@@ -165,6 +184,7 @@ class Random(commands.Cog):
         await ctx.message.reply(embed=e2)
 
     @command(pass_context=True, usage="ar <role>")
+    @mycheck()
     async def ar(self, ctx, *, role1):
         member = ctx.message.author
         role = discord.utils.get(member.guild.roles, name=f"{role1}")
@@ -174,6 +194,7 @@ class Random(commands.Cog):
         await ctx.send(embed=e)
 
     @command(usage="ru <user>")
+    @mycheck()
     async def ru(self, ctx, name):
         try:
             msg = await ctx.send("Getting Info Now!")
@@ -241,6 +262,7 @@ class Random(commands.Cog):
             await msg.edit(content="", embed=e2)
 
     @command(usage="sn <name>")
+    @mycheck()
     async def sn(self, ctx, *, name):
         tts = gTTS(text=f"Hi! {name} is really cool!", lang='en')
         tts.save("announce.mp3")
@@ -249,6 +271,7 @@ class Random(commands.Cog):
         os.remove("announce.mp3")
 
     @command(usage="tts <text>")
+    @mycheck()
     async def tts(self, ctx, *, text):
         lol = gTTS(text=f"{text}")
         lol.save("tts.mp3")
@@ -257,6 +280,7 @@ class Random(commands.Cog):
         os.remove("tts.mp3")
 
     @command(name="stats", description="A usefull command that displays bot statistics.", usage="stats")
+    @mycheck()
     async def stats(self, ctx):
         pythonVersion = platform.python_version()
         dpyVersion = discord.__version__
@@ -284,6 +308,7 @@ class Random(commands.Cog):
         await ctx.send(embed=embed)
 
     @command(aliases=['color', 'colour', 'sc'])
+    @mycheck()
     async def show_color(self, ctx, *, color: discord.Colour):
         '''Enter a color and you will see it!'''
         file = io.BytesIO()
@@ -294,10 +319,12 @@ class Random(commands.Cog):
         await ctx.send(file=discord.File(file, 'color.png'), embed=em)
 
     @command()
+    @mycheck()
     async def hi(self, ctx):
         await ctx.send("hi.")
 
     @command()
+    @mycheck()
     async def info(self, ctx, name):
         """This command shows stats for hypixel/minecraft"""
         hypixel = await Hypixel(self.API_KEY)
@@ -314,6 +341,7 @@ class Random(commands.Cog):
             await ctx.send(embed=e)
 
     @command()
+    @mycheck()
     async def gay(self, ctx):
         await ctx.send(f"You are {random.randint(1, 100)}% gay")
 
