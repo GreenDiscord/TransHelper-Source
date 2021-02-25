@@ -14,6 +14,18 @@ class Snipe(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.snipes = {}
+        
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
 
         @bot.listen('on_message_delete')
         async def on_message_delete(msg):
@@ -36,6 +48,7 @@ class Snipe(commands.Cog):
         return string
 
     @commands.command()
+    @mycheck()
     async def snipe(self, ctx):
         '"Snipes" someone\'s message that\'s been edited or deleted.'
         try:
