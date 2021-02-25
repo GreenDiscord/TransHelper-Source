@@ -16,8 +16,22 @@ class ImageManipulation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.dagpi = bot.dagpi
+       
+        
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
 
     @commands.group(invoke_without_command=True)
+    @mycheck()
     async def img(self, ctx, command=None):
         command2 = self.bot.get_command(f"{command}")
         if command2 is None:
@@ -29,6 +43,7 @@ class ImageManipulation(commands.Cog):
                 pass
 
     @img.command()
+    @mycheck()
     async def wni(self, ctx, *, name):
         text = f"{name} was not the imposter"
         img = Image.open("amongus.png")
@@ -41,6 +56,7 @@ class ImageManipulation(commands.Cog):
         os.remove("wni.png")
 
     @img.command()
+    @mycheck()
     async def wi(self, ctx, *, name):
         text = f"{name} was the imposter"
         img = Image.open("amongus.png")
@@ -53,6 +69,7 @@ class ImageManipulation(commands.Cog):
         os.remove("wi.png")
 
     @img.command()
+    @mycheck()
     async def triggered(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
@@ -65,6 +82,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
 
     @img.command(cooldown_after_parsing=True)
+    @mycheck()
     async def message(self, ctx, member: discord.Member = None, *, text):
         if member is None:
             member = ctx.author
@@ -82,6 +100,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
 
     @img.command(cooldown_after_parsing=True)
+    @mycheck()
     async def captcha(self, ctx, member: discord.Member = None, *, text):
         if member is None:
             member = ctx.author
@@ -102,6 +121,7 @@ class ImageManipulation(commands.Cog):
             await ctx.send(file=e2file, embed=e)
 
     @img.command()
+    @mycheck()
     async def pixel(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
@@ -114,6 +134,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
 
     @img.command()
+    @mycheck()
     async def jail(self, ctx, member: discord.Member = None):
         """Yes."""
         if member is None:
@@ -126,6 +147,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
 
     @img.command()
+    @mycheck()
     async def magik(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
@@ -138,6 +160,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
 
     @img.command()
+    @mycheck()
     async def wanted(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
@@ -150,6 +173,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(file=e2file, embed=e)
 
     @img.command()
+    @mycheck()
     async def rainbow(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
@@ -162,6 +186,7 @@ class ImageManipulation(commands.Cog):
         await ctx.send(embed=e, file=e2file)
 
     @img.command()
+    @mycheck()
     async def pan(self, ctx, *, name):
         text = f"Yay! {name} Has come out as pan! :)"
         img = Image.open("pan1.jpg")
@@ -174,6 +199,7 @@ class ImageManipulation(commands.Cog):
         os.remove("enby.png")
 
     @img.command()
+    @mycheck()
     async def enby(self, ctx, *, name):
         text = f"Yay! {name} Has come out as enby!"
         img = Image.open("enby1.png")
@@ -186,6 +212,7 @@ class ImageManipulation(commands.Cog):
         os.remove("enby.png")
 
     @img.command()
+    @mycheck()
     async def bi(self, ctx, *, name):
         text = f"Yay! {name} Has come out as bisexual! Well done!"
         img = Image.open("bi1.jfif")
