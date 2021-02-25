@@ -11,8 +11,21 @@ class MystbinApi(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.mystbin_client = bot.mystbin_client
+        
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
 
     @commands.command(aliases=["myst"])
+    @mycheck()
     async def mystbin(self, ctx, *, text):
         paste = await self.bot.mystbin_client.post(f"{text}", syntax="python")
         e = discord.Embed(title="I have created a mystbin link for you!",
@@ -20,6 +33,7 @@ class MystbinApi(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.command(aliases=["getmyst"])
+    @mycheck()
     async def getmystbin(self, ctx, id):
         try:
             get_paste = await self.bot.mystbin_client.get(f"https://mystb.in/{id}")
