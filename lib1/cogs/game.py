@@ -18,9 +18,22 @@ class Games(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.chatbot = bot.chatbot
+        
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
 
     @commands.max_concurrency(1, per=BucketType.channel, wait=False)
     @commands.command(aliases=['cb'])
+    @mycheck()
     async def chatbot(self, ctx):
         '''Talk to chatbot'''
         lis = "cancel"
@@ -44,6 +57,7 @@ class Games(commands.Cog):
 
     @commands.max_concurrency(1, per=commands.BucketType.channel)
     @commands.command()
+    @mycheck()
     async def reaction(self, ctx):
         """
         Yum Yum or Yuck Yuck?
