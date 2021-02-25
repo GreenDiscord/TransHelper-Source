@@ -38,9 +38,23 @@ class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.db = bot.db
-
+    
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
+    
+    
     @commands.command()
     @commands.has_permissions(manage_messages=True)
+    @mycheck()
     async def setdelay(self, ctx, seconds: int):
         """Sets Slowmode Of A Channel"""
         currentslow = ctx.channel.slowmode_delay
@@ -53,6 +67,7 @@ class Moderation(commands.Cog):
         await ctx.send(f"{message}")
 
     @commands.command(name="warns", description="A command which gets warns from a given user")
+    @mycheck()
     async def _warns(self, ctx, member: discord.Member = None):
         tewq = "They"
         if member is None:
@@ -84,6 +99,7 @@ class Moderation(commands.Cog):
         description="A command which warns a given user",
         usage="<user> [reason]",
     )
+    @mycheck()
     @commands.bot_has_permissions(kick_members=True)
     @commands.guild_only()
     @commands.has_guild_permissions(kick_members=True)
@@ -128,6 +144,7 @@ class Moderation(commands.Cog):
         description="A command which kicks a given user",
         usage="<user> [reason]",
     )
+    @mycheck()
     @commands.bot_has_permissions(kick_members=True)
     @commands.guild_only()
     @commands.has_guild_permissions(kick_members=True)
@@ -151,6 +168,7 @@ class Moderation(commands.Cog):
         description="A command which bans a given user",
         usage="<user> [reason]",
     )
+    @mycheck()
     @commands.bot_has_permissions()
     @commands.guild_only()
     @commands.has_guild_permissions(ban_members=True)
@@ -177,6 +195,7 @@ class Moderation(commands.Cog):
     )
     @commands.guild_only()
     @commands.has_guild_permissions(ban_members=True)
+    @mycheck()
     async def unban(self, ctx, member, *, reason=None):
         member = await self.bot.fetch_user(int(member))
         await ctx.guild.unban(member, reason=reason)
@@ -191,6 +210,7 @@ class Moderation(commands.Cog):
         description="A command which purges the channel it is called in",
         usage="[amount]",
     )
+    @mycheck()
     @commands.guild_only()
     @commands.has_guild_permissions(ban_members=True)
     async def purge(self, ctx, amount=5):
