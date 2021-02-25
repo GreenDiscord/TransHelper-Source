@@ -12,7 +12,20 @@ class Economy(commands.Cog):
         self.bot.db = bot.db
         self.START_BAL = 250
 
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)    
+        
     @commands.command()
+    @mycheck()
     async def shop(self, ctx):
         e = discord.Embed(title="**Shop**",
                           description="Items In The Shop Today:")
@@ -23,6 +36,7 @@ class Economy(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.command()
+    @mycheck()
     async def balance(self, ctx, member: discord.Member = None):
         tewq = "They"
         if member is None:
@@ -83,6 +97,7 @@ class Economy(commands.Cog):
         await ctx.reply(embed=e)
 
     @commands.command()
+    @mycheck()
     async def buy(self, ctx, item):
         cursor = await self.bot.db.cursor()
         USER_ID = ctx.message.author.id
@@ -113,6 +128,7 @@ class Economy(commands.Cog):
                 await ctx.send(embed=e2)
 
     @commands.command()
+    @mycheck()
     async def createaccount(self, ctx):
         cursor = await self.bot.db.cursor()
         USER_ID = ctx.message.author.id
@@ -136,6 +152,7 @@ class Economy(commands.Cog):
             await ctx.send(embed=e2)
 
     @commands.command()
+    @mycheck()
     async def beg(self, ctx):
         cursor = await self.bot.db.cursor()
         USER_ID = ctx.message.author.id
