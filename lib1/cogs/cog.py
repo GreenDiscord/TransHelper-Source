@@ -24,12 +24,17 @@ class Info(commands.Cog):
     def mycheck():
         def predicate(ctx):
             if ctx.bot.maintenance == True:
-                return False
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
             else:
                 return True
         return commands.check(predicate)
 
     @commands.command()
+    @mycheck()
     async def spotify(self, ctx, user: discord.Member=None):
         if user is None:
             user = ctx.author
@@ -59,6 +64,7 @@ class Info(commands.Cog):
             return await ctx.send(embed=embed)
 
     @commands.command()
+    @mycheck()
     async def uptime(self, ctx):
         current_time = time.time()
         difference = int(round(current_time - self.bot.start_time))
@@ -72,17 +78,20 @@ class Info(commands.Cog):
             await ctx.send("Current uptime: " + text)
 
     @commands.command()
+    @mycheck()
     async def who(self, ctx):
         m = utils.WhoMenu(bot=self.bot)
         await m.start(ctx)
 
     @commands.command()
+    @mycheck()
     async def vote(self, ctx):
         m = utils.VotingMenu(bot=self.bot)
         await m.start(ctx)
         
 
     @commands.command()
+    @mycheck()
     async def ping(self, ctx):
         starttime = time.time()
         msg = await ctx.send("Ping...")
@@ -95,6 +104,7 @@ class Info(commands.Cog):
             await msg.edit(content="", embed=e)
 
     @commands.command()
+    @mycheck()
     async def source(self, ctx):
         """ Displays source code """
         source_url = 'https://github.com/GreenDiscord/TransHelper-Source'
@@ -104,6 +114,7 @@ class Info(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @mycheck()
     async def avatar(self, ctx, *, user: discord.Member = None):
         """ Get the avatar of you or someone else """
         user = user or ctx.author
@@ -124,6 +135,7 @@ class Info(commands.Cog):
        # await ctx.send(content=f"Roles in **{ctx.guild.name}**", file=discord.File(data, filename=f"Roles"))
 
     @commands.command()
+    @mycheck()
     @commands.guild_only()
     async def joinedat(self, ctx, *, user: discord.Member = None):
         """ Check when a user joined the current server """
@@ -137,6 +149,7 @@ class Info(commands.Cog):
 
     @commands.group()
     @commands.guild_only()
+    @mycheck()
     async def server(self, ctx):
         """ Check info about current server """
         if ctx.invoked_subcommand is None:
@@ -162,6 +175,7 @@ class Info(commands.Cog):
 
     @server.command(name="server_icon", aliases=["icon"])
     @commands.guild_only()
+    @mycheck()
     async def server_icon(self, ctx):
         """ Get the current server icon """
         if not ctx.guild.icon:
@@ -170,6 +184,7 @@ class Info(commands.Cog):
 
     @server.command(name="banner")
     @commands.guild_only()
+    @mycheck()
     async def server_banner(self, ctx):
         """ Get the current banner image """
         if not ctx.guild.banner:
@@ -180,6 +195,7 @@ class Info(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @mycheck()
     async def user(self, ctx, *, user: discord.Member = None):
         """ Get user information """
         user = user or ctx.author
