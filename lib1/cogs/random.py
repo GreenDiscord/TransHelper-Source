@@ -50,7 +50,7 @@ class Random(commands.Cog):
                 if ctx.author.id == 787800565512929321:
                     return commands.check(predicate)
                 else:
-                    await ctx.send("Commands are of due to maintance mode!")
+                    ctx.send("Commands are of due to maintance mode!")
                     return False
             else:
                 return True
