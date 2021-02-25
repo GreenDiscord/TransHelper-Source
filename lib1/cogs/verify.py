@@ -12,12 +12,26 @@ class Verify(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
         self.client = roblox_py.Client()
-        
+    
+    def mycheck():
+        def predicate(ctx):
+            if ctx.bot.maintenance == True:
+                if ctx.author.id == 787800565512929321:
+                    return commands.check(predicate)
+                else:
+                    await ctx.send("Commands are of due to maintance mode!")
+                    return False
+            else:
+                return True
+        return commands.check(predicate)
+    
+    
     @commands.Cog.listener()
     async def on_ready(self):
         print("Verify Cog Ready")
         
     @commands.command()
+    @mycheck()
     @commands.guild_only()
     @commands.bot_has_permissions(manage_nicknames=True)
     async def verify(self,ctx):
@@ -93,6 +107,7 @@ class Verify(commands.Cog):
     @commands.command()
     @commands.bot_has_permissions(manage_nicknames=True)
     @commands.guild_only()
+    @mycheck()
     async def reverify(self, ctx):
         if ctx.guild.me.top_role.position < ctx.author.top_role.position:
             return await ctx.send("Please make sure my role is higher than you ")
@@ -162,6 +177,7 @@ class Verify(commands.Cog):
             await ctx.send(f"`{err}`")
             
     @commands.command()
+    @mycheck()
     @commands.guild_only()
     async def whois(self,ctx,user:discord.Member=None):
         if user  == None:
